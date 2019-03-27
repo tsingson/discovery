@@ -1,32 +1,26 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
+# Build and Release Folders
+bin/
+bin-debug/
+bin-release/
+[Oo]bj/ # FlashDevelop obj
+[Bb]in/ # FlashDevelop bin
+vender/
+golang/vender/
+# Other files and folders
+.settings/
+node_modules/
+vod-ts-data/
+vod-test/
+.idea/
+vendor/
+deployment/
+test/
+vod-ts-data/
 # Executables
-*.exe
-*.out
-*.app
+*.swf
+*.air
+*.ipa
+*.apk
+
+
+
