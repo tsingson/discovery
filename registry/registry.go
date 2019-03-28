@@ -6,6 +6,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/sanity-io/litter"
+
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/model"
@@ -25,7 +27,7 @@ type Registry struct {
 
 	conns     map[string]map[string]*conn // region.zone.env.appid-> host
 	cLock     sync.RWMutex
-	scheduler *scheduler
+	scheduler *Scheduler
 	gd        *Guard
 }
 
@@ -43,14 +45,14 @@ func newConn(ch chan map[string]*model.InstanceInfo, latestTime int64, arg *mode
 }
 
 // NewRegistry new register.
-func NewRegistry(conf *conf.Config) (r *Registry) {
+func NewRegistry(cfg *conf.Config) (r *Registry) {
 	r = &Registry{
 		appm:  make(map[string]*model.Apps),
 		conns: make(map[string]map[string]*conn),
 		gd:    new(Guard),
 	}
-	r.scheduler = newScheduler(r)
-	r.scheduler.Load(conf.Scheduler)
+	r.scheduler = NewScheduler(r)
+	r.scheduler.LoadConfig(cfg)
 	go r.proc()
 	return
 }
@@ -160,6 +162,8 @@ func (r *Registry) FetchAll() (im map[string][]*model.Instance) {
 // Fetch fetch all instances by appid.
 func (r *Registry) Fetch(zone, env, appid string, latestTime int64, status uint32) (info *model.InstanceInfo, err error) {
 	key := appsKey(appid, env)
+	log.Info("------------------>  registry--> Fetch call ********  ")
+	litter.Dump("key:   " + key)
 	r.aLock.RLock()
 	a, ok := r.appm[key]
 	r.aLock.RUnlock()
@@ -175,6 +179,8 @@ func (r *Registry) Fetch(zone, env, appid string, latestTime int64, status uint3
 	if sch != nil {
 		info.Scheduler = sch.Zones
 	}
+	log.Info("------------------>  registry--> Fetch call ********  ")
+	litter.Dump(info.Scheduler)
 	return
 }
 
@@ -184,6 +190,9 @@ func (r *Registry) Polls(arg *model.ArgPolls) (ch chan map[string]*model.Instanc
 		ins = make(map[string]*model.InstanceInfo, len(arg.AppID))
 		in  *model.InstanceInfo
 	)
+	log.Info("------------------>  Registry--> Polls call ********  ")
+	litter.Dump(arg)
+
 	if len(arg.AppID) != len(arg.LatestTimestamp) {
 		arg.LatestTimestamp = make([]int64, len(arg.AppID))
 	}
