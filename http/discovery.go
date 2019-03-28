@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/sanity-io/litter"
-
 	"github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/model"
 
@@ -41,7 +39,7 @@ func register(c *gin.Context) {
 	if arg.DirtyTimestamp > 0 {
 		i.DirtyTimestamp = arg.DirtyTimestamp
 	}
-	litter.Dump(arg)
+
 	dis.Register(c, i, arg.LatestTimestamp, arg.Replication)
 
 	result(c, nil, nil)
@@ -78,11 +76,9 @@ func fetch(c *gin.Context) {
 		result(c, nil, errors.ParamsErr)
 		return
 	}
-	log.Info("------------------>  gin--> Fetch call ********  ")
-	litter.Dump(arg)
+
 	insInfo, err := dis.Fetch(c, arg)
-	log.Info("------------------>  gin--> Fetch call ********  ")
-	litter.Dump(insInfo)
+
 	result(c, insInfo, err)
 }
 
@@ -92,7 +88,7 @@ func fetchs(c *gin.Context) {
 		result(c, nil, errors.ParamsErr)
 		return
 	}
-	litter.Dump(arg)
+
 	ins, err := dis.Fetchs(c, arg)
 	result(c, ins, err)
 }
@@ -103,8 +99,6 @@ func poll(c *gin.Context) {
 		result(c, nil, errors.ParamsErr)
 		return
 	}
-	log.Info("------------------>  gin--> pool call ********  ")
-	litter.Dump(arg)
 
 	ch, new, err := dis.Polls(c, arg)
 	if err != nil && err != errors.NotModified {
@@ -134,13 +128,12 @@ func polls(c *gin.Context) {
 		result(c, nil, errors.ParamsErr)
 		return
 	}
-	log.Info("------------------>>>>>>>>>>>>>>>  gin--> pools call ********  ")
-	litter.Dump(arg)
+
 	// if len(arg.AppID) != len(arg.LatestTimestamp) {
 	// 	result(c, nil, errors.ParamsErr)
 	// 	return
 	// }
-	ch, new, err := dis.Polls(c, arg)
+	ch, news, err := dis.Polls(c, arg)
 	if err != nil && err != errors.NotModified {
 		result(c, nil, err)
 		return
@@ -149,7 +142,7 @@ func polls(c *gin.Context) {
 	select {
 	case e := <-ch:
 		result(c, e, nil)
-		if !new {
+		if !news {
 			dis.DelConns(arg) // broadcast will delete all connections of appid
 		}
 		return
