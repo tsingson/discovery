@@ -19,22 +19,22 @@ type Nodes struct {
 }
 
 // NewNodes new nodes and return.
-func NewNodes(c *conf.Config) *Nodes {
-	nodes := make([]*Node, 0, len(c.Nodes))
-	for _, addr := range c.Nodes {
-		n := newNode(c, addr)
-		n.zone = c.Env.Zone
-		n.pRegisterURL = fmt.Sprintf("http://%s%s", c.HTTPServer.Addr, _registerURL)
+func NewNodes(cfg *conf.Config) *Nodes {
+	nodes := make([]*Node, 0, len(cfg.Nodes))
+	for _, addr := range cfg.Nodes {
+		n := newNode(cfg, addr)
+		n.zone = cfg.Env.Zone
+		n.pRegisterURL = fmt.Sprintf("http://%s%s", cfg.HTTPServer.Addr, _registerURL)
 		nodes = append(nodes, n)
 	}
 	zones := make(map[string][]*Node)
-	for name, addrs := range c.Zones {
+	for name, addrs := range cfg.Zones {
 		var znodes []*Node
 		for _, addr := range addrs {
-			n := newNode(c, addr)
+			n := newNode(cfg, addr)
 			n.otherZone = true
 			n.zone = name
-			n.pRegisterURL = fmt.Sprintf("http://%s%s", c.HTTPServer.Addr, _registerURL)
+			n.pRegisterURL = fmt.Sprintf("http://%s%s", cfg.HTTPServer.Addr, _registerURL)
 			znodes = append(znodes, n)
 		}
 		zones[name] = znodes
@@ -42,7 +42,7 @@ func NewNodes(c *conf.Config) *Nodes {
 	return &Nodes{
 		nodes:    nodes,
 		zones:    zones,
-		selfAddr: c.HTTPServer.Addr,
+		selfAddr: cfg.HTTPServer.Addr,
 	}
 }
 

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"os"
 	"os/signal"
 	"syscall"
@@ -32,7 +31,7 @@ func main() {
 	// litter.Dump(cfg)
 
 	svr, cancel := discovery.New(cfg)
-	svr.Register(context.Background(), defRegDiscovery(), time.Now().UnixNano(), false)
+	// svr.Register(context.Background(), defRegDiscovery(), time.Now().UnixNano(), false)
 	http.Init(cfg, svr)
 
 	// init signal
@@ -67,4 +66,3 @@ func defRegDiscovery() *model.Instance {
 		LatestTimestamp: time.Now().UnixNano(),
 	}
 }
-

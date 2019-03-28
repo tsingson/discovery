@@ -19,13 +19,13 @@ type Discovery struct {
 }
 
 // New get a discovery.
-func New(c *conf.Config) (d *Discovery, cancel context.CancelFunc) {
+func New(cfg *conf.Config) (d *Discovery, cancel context.CancelFunc) {
 	d = &Discovery{
-		c:        c,
-		client:   http.NewClient(c.HTTPClient),
-		registry: registry.NewRegistry(c),
+		c:        cfg,
+		client:   http.NewClient(cfg.HTTPClient),
+		registry: registry.NewRegistry(cfg),
 	}
-	d.nodes.Store(registry.NewNodes(c))
+	d.nodes.Store(registry.NewNodes(cfg))
 	d.syncUp()
 	cancel = d.regSelf()
 	go d.nodesproc()

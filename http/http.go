@@ -2,10 +2,14 @@ package http
 
 import (
 	"fmt"
+	"net"
+	"net/http"
 	"net/http/httputil"
 	"os"
 	"runtime"
 	"time"
+
+	"github.com/oklog/run"
 
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
@@ -30,11 +34,21 @@ func Init(c *conf.Config, d *discovery.Discovery) {
 	engine := gin.New()
 	engine.Use(loggerHandler, recoverHandler)
 	innerRouter(engine)
-	go func() {
-		if err := engine.Run(c.HTTPServer.Addr); err != nil {
-			panic(err)
-		}
-	}()
+
+	var g run.Group
+	{
+		ln, _ := net.Listen("tcp", c.HTTPServer.Addr)
+		g.Add(func() error {
+			defer fmt.Printf("http.Serve returned\n")
+			return http.Serve(ln, engine)
+		}, func(error) {
+			ln.Close()
+		})
+	}
+	err := g.Run()
+	if err != nil {
+		panic(err)
+	}
 }
 
 // innerRouter init local router api path.
