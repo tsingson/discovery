@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"io"
 	"net"
-	xhttp "net/http"
+	"net/http"
 	"net/url"
 	"strings"
 	xtime "time"
@@ -27,8 +27,8 @@ type ClientConfig struct {
 
 // Client is http client.
 type Client struct {
-	client    *xhttp.Client
-	transport xhttp.RoundTripper
+	client    *http.Client
+	transport http.RoundTripper
 }
 
 // NewClient new a http client.
@@ -38,22 +38,22 @@ func NewClient(c *ClientConfig) *Client {
 		Timeout:   xtime.Duration(c.Dial),
 		KeepAlive: xtime.Duration(c.KeepAlive),
 	}
-	client.transport = &xhttp.Transport{
+	client.transport = &http.Transport{
 		DialContext:     dialer.DialContext,
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
-	client.client = &xhttp.Client{
+	client.client = &http.Client{
 		Transport: client.transport,
 	}
 	return client
 }
 
 // NewRequest new http request with method, uri, ip, values and headers.
-func (client *Client) NewRequest(method, uri, realIP string, params url.Values) (req *xhttp.Request, err error) {
-	if method == xhttp.MethodGet {
-		req, err = xhttp.NewRequest(xhttp.MethodGet, uri+"?"+params.Encode(), nil)
+func (client *Client) NewRequest(method, uri, realIP string, params url.Values) (req *http.Request, err error) {
+	if method == http.MethodGet {
+		req, err = http.NewRequest(http.MethodGet, uri+"?"+params.Encode(), nil)
 	} else {
-		req, err = xhttp.NewRequest(xhttp.MethodPost, uri, strings.NewReader(params.Encode()))
+		req, err = http.NewRequest(http.MethodPost, uri, strings.NewReader(params.Encode()))
 	}
 	if err != nil {
 		return
@@ -62,7 +62,7 @@ func (client *Client) NewRequest(method, uri, realIP string, params url.Values) 
 		_contentType = "Content-Type"
 		_urlencoded  = "application/x-www-form-urlencoded"
 	)
-	if method == xhttp.MethodPost {
+	if method == http.MethodPost {
 		req.Header.Set(_contentType, _urlencoded)
 	}
 	return
@@ -70,7 +70,7 @@ func (client *Client) NewRequest(method, uri, realIP string, params url.Values) 
 
 // Get issues a GET to the specified URL.
 func (client *Client) Get(c context.Context, uri, ip string, params url.Values, res interface{}) (err error) {
-	req, err := client.NewRequest(xhttp.MethodGet, uri, ip, params)
+	req, err := client.NewRequest(http.MethodGet, uri, ip, params)
 	if err != nil {
 		return
 	}
@@ -79,7 +79,7 @@ func (client *Client) Get(c context.Context, uri, ip string, params url.Values, 
 
 // Post issues a Post to the specified URL.
 func (client *Client) Post(c context.Context, uri, ip string, params url.Values, res interface{}) (err error) {
-	req, err := client.NewRequest(xhttp.MethodPost, uri, ip, params)
+	req, err := client.NewRequest(http.MethodPost, uri, ip, params)
 	if err != nil {
 		return
 	}
@@ -87,13 +87,13 @@ func (client *Client) Post(c context.Context, uri, ip string, params url.Values,
 }
 
 // Raw sends an HTTP request and returns bytes response
-func (client *Client) Raw(c context.Context, req *xhttp.Request, v ...string) (bs []byte, err error) {
+func (client *Client) Raw(c context.Context, req *http.Request, v ...string) (bs []byte, err error) {
 	resp, err := client.client.Do(req.WithContext(c))
 	if err != nil {
 		return
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode >= xhttp.StatusBadRequest {
+	if resp.StatusCode >= http.StatusBadRequest {
 		return
 	}
 	bs, err = readAll(resp.Body, _minRead)
@@ -101,13 +101,13 @@ func (client *Client) Raw(c context.Context, req *xhttp.Request, v ...string) (b
 }
 
 // SetTransport set client transport
-func (client *Client) SetTransport(t xhttp.RoundTripper) {
+func (client *Client) SetTransport(t http.RoundTripper) {
 	client.transport = t
 	client.client.Transport = t
 }
 
 // Do sends an HTTP request and returns an HTTP json response.
-func (client *Client) Do(c context.Context, req *xhttp.Request, res interface{}, v ...string) (err error) {
+func (client *Client) Do(c context.Context, req *http.Request, res interface{}, v ...string) (err error) {
 	var bs []byte
 	if bs, err = client.Raw(c, req, v...); err != nil {
 		return

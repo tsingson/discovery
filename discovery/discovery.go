@@ -7,6 +7,7 @@ import (
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/lib/http"
 	"github.com/tsingson/discovery/registry"
+	// 	log "github.com/tsingson/zaplogger"
 )
 
 // Discovery discovery.

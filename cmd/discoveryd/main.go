@@ -2,46 +2,37 @@ package main
 
 import (
 	"context"
-	"flag"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
+	"github.com/BurntSushi/toml"
 	log "github.com/tsingson/zaplogger"
 
+	"github.com/tsingson/discovery/lib/file"
 	"github.com/tsingson/discovery/model"
 
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
-	xhttp "github.com/tsingson/discovery/lib/http"
-	xtime "github.com/tsingson/discovery/lib/time"
 )
 
 func main() {
 
-	flag.Parse()
+	var cfg = conf.Conf
+	path, _ := file.GetCurrentExecDir()
+	path = "/Users/qinshen/git/linksmart/bin"
+	configToml := path + "/discoveryd-config.toml"
 
-	cfg := &conf.Config{
-		Env: &conf.Env{
-			Region:    "test",
-			Zone:      "test",
-			DeployEnv: "test",
-			Host:      "test_server",
-		},
-		Nodes: []string{"127.0.0.1:7171"},
-		HTTPServer: &conf.ServerConfig{
-			Addr: "127.0.0.1:7171",
-		},
-		HTTPClient: &xhttp.ClientConfig{
-			Dial:      xtime.Duration(time.Second),
-			KeepAlive: xtime.Duration(time.Second * 30),
-		},
+	if _, err := toml.DecodeFile(configToml, &cfg); err != nil {
+		log.Info("done")
 	}
-	_ = cfg.Fix()
+
+	// litter.Dump(cfg)
+
 	svr, cancel := discovery.New(cfg)
-	 	svr.Register(context.Background(), defRegDiscovery(), time.Now().UnixNano(), false)
+	svr.Register(context.Background(), defRegDiscovery(), time.Now().UnixNano(), false)
 	http.Init(cfg, svr)
 
 	// init signal
@@ -66,12 +57,14 @@ func main() {
 
 func defRegDiscovery() *model.Instance {
 	return &model.Instance{
+		Region:          "sh1",
 		AppID:           "infra.discovery",
-		Hostname:        "test_server",
-		Zone:            "test",
-		Env:             "test",
+		Hostname:        "test-host",
+		Zone:            "sh1",
+		Env:             "dev",
 		Status:          1,
-		Addrs:           []string{"http://10.0.0.111:7171"},
+		Addrs:           []string{"http://127.0.0.1:7171"},
 		LatestTimestamp: time.Now().UnixNano(),
 	}
 }
+

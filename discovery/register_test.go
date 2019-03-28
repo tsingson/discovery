@@ -14,7 +14,7 @@ import (
 	"github.com/tsingson/discovery/model"
 
 	. "github.com/smartystreets/goconvey/convey"
-	gock "gopkg.in/h2non/gock.v1"
+	"gopkg.in/h2non/gock.v1"
 )
 
 var (

@@ -3,6 +3,8 @@ package discovery
 import (
 	"context"
 
+	"github.com/sanity-io/litter"
+
 	"github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/model"
 	"github.com/tsingson/discovery/registry"
@@ -12,6 +14,9 @@ import (
 
 // Register a new instance.
 func (d *Discovery) Register(c context.Context, ins *model.Instance, latestTimestamp int64, replication bool) {
+	log.Info("------------------>>>>>>>>>>>>>>>  gin--> pools call ********  ")
+	litter.Dump(ins)
+
 	_ = d.registry.Register(ins, latestTimestamp)
 	if replication {
 		_ = d.nodes.Load().(*registry.Nodes).Replicate(c, model.Register, ins, ins.Zone != d.c.Env.Zone)
@@ -59,6 +64,9 @@ func (d *Discovery) FetchAll(c context.Context) (im map[string][]*model.Instance
 
 // Fetch fetch all instances by appid.
 func (d *Discovery) Fetch(c context.Context, arg *model.ArgFetch) (info *model.InstanceInfo, err error) {
+	log.Info("------------------>  Discovery--> Fetch call ********  ")
+	litter.Dump(arg)
+
 	return d.registry.Fetch(arg.Zone, arg.Env, arg.AppID, 0, arg.Status)
 }
 
@@ -78,6 +86,8 @@ func (d *Discovery) Fetchs(c context.Context, arg *model.ArgFetchs) (is map[stri
 
 // Polls hangs request and then write instances when that has changes, or return NotModified.
 func (d *Discovery) Polls(c context.Context, arg *model.ArgPolls) (ch chan map[string]*model.InstanceInfo, new bool, err error) {
+	log.Info("------------------>  Discovery--> Polls call ********  ")
+	litter.Dump(arg)
 	return d.registry.Polls(arg)
 }
 

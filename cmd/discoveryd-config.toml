@@ -1,0 +1,50 @@
+Nodes = ["127.0.0.1:7171"]
+
+[HTTPServer]
+  Addr = "127.0.0.1:7171"
+
+[HTTPClient]
+  Dial = "1s"
+  KeepAlive = "120s"
+
+[Env]
+  Region = "sh"
+  Zone = "sh001"
+  Host = "test1"
+  DeployEnv = "dev"
+
+[Schedulers]
+  [Schedulers."test.service1-uat"]
+    AppID = "test.service1"
+    Env = "uat"
+    Remark = "te22st"
+
+    [[Schedulers."test.service1-uat".Zones]]
+      Src = "sh001"
+      [Schedulers."test.service1-uat".Zones.Dst]
+        sh0001 = 3
+        sh0002 = 1
+
+    [[Schedulers."test.service1-uat".Zones]]
+      Src = "sh002"
+      [Schedulers."test.service1-uat".Zones.Dst]
+        hs0001 = 1
+        sh0002 = 3
+        sh0003 = 4
+  [Schedulers."test.service2-uat"]
+    AppID = "test.service2"
+    Env = "uat"
+    Remark = "te22st"
+
+    [[Schedulers."test.service2-uat".Zones]]
+      Src = "sh001"
+      [Schedulers."test.service2-uat".Zones.Dst]
+        sh0001 = 3
+        sh0002 = 1
+
+    [[Schedulers."test.service2-uat".Zones]]
+      Src = "sh002"
+      [Schedulers."test.service2-uat".Zones.Dst]
+        hs0001 = 1
+        sh0002 = 3
+        sh0003 = 4
