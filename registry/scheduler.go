@@ -5,7 +5,6 @@ import (
 	"sync"
 
 	"github.com/BurntSushi/toml"
-	"github.com/sanity-io/litter"
 	"golang.org/x/xerrors"
 
 	"github.com/tsingson/discovery/conf"
@@ -74,7 +73,5 @@ func (s *Scheduler) Get(appid, env string) *model.Scheduler {
 	s.mutex.RLock()
 	sch := s.Schedulers[appsKey(appid, env)]
 	s.mutex.RUnlock()
-	log.Info("-------------> call scheduler->GET       >>> ")
-	litter.Dump(s.Schedulers)
 	return sch
 }

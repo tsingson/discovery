@@ -6,7 +6,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/BurntSushi/toml"
 	log "github.com/tsingson/zaplogger"
 
 	"github.com/tsingson/discovery/lib/file"
@@ -24,9 +23,7 @@ func main() {
 	path = "/Users/qinshen/git/linksmart/bin"
 	configToml := path + "/discoveryd-config.toml"
 
-	if _, err := toml.DecodeFile(configToml, &cfg); err != nil {
-		log.Info("done")
-	}
+	cfg = conf.LoadConfig(configToml)
 
 	// litter.Dump(cfg)
 

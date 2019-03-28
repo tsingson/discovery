@@ -1,6 +1,9 @@
 package conf
 
 import (
+	"flag"
+	"os"
+
 	"github.com/BurntSushi/toml"
 	"github.com/fsnotify/fsnotify"
 	log "github.com/tsingson/zaplogger"
@@ -20,18 +23,18 @@ var (
 	Conf = &Config{}
 )
 
-// func init() {
-// 	var err error
-// 	if hostname, err = os.Hostname(); err != nil || hostname == "" {
-// 		hostname = os.Getenv("HOSTNAME")
-// 	}
-// 	flag.StringVar(&confPath, "conf", "discovery-example.toml", "config path")
-// 	flag.StringVar(&region, "region", os.Getenv("REGION"), "avaliable region. or use REGION env variable, value: sh etc.")
-// 	flag.StringVar(&zone, "zone", os.Getenv("ZONE"), "avaliable zone. or use ZONE env variable, value: sh001/sh002 etc.")
-// 	flag.StringVar(&deployEnv, "deploy.env", os.Getenv("DEPLOY_ENV"), "deploy env. or use DEPLOY_ENV env variable, value: dev/fat1/uat/pre/prod etc.")
-// 	flag.StringVar(&hostname, "hostname", hostname, "machine hostname")
-// 	flag.StringVar(&schedulerPath, "scheduler", "scheduler.json", "scheduler info")
-// }
+func init() {
+	var err error
+	if hostname, err = os.Hostname(); err != nil || hostname == "" {
+		hostname = os.Getenv("HOSTNAME")
+	}
+	flag.StringVar(&confPath, "conf", "discovery-example.toml", "config path")
+	flag.StringVar(&region, "region", os.Getenv("REGION"), "avaliable region. or use REGION env variable, value: sh etc.")
+	flag.StringVar(&zone, "zone", os.Getenv("ZONE"), "avaliable zone. or use ZONE env variable, value: sh001/sh002 etc.")
+	flag.StringVar(&deployEnv, "deploy.env", os.Getenv("DEPLOY_ENV"), "deploy env. or use DEPLOY_ENV env variable, value: dev/fat1/uat/pre/prod etc.")
+	flag.StringVar(&hostname, "hostname", hostname, "machine hostname")
+	flag.StringVar(&schedulerPath, "scheduler", "scheduler.json", "scheduler info")
+}
 
 // Config config.
 type Config struct {
@@ -121,4 +124,14 @@ func ConfigWalther(fp string) {
 		log.Fatal(err)
 	}
 	<-done
+}
+
+// LoadConfig load config from file toml
+func LoadConfig(fh string) *Config {
+
+	if _, err := toml.DecodeFile(fh, &Conf); err != nil {
+		log.Info("done")
+	}
+	return Conf
+
 }

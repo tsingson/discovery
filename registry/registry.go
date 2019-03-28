@@ -162,8 +162,6 @@ func (r *Registry) FetchAll() (im map[string][]*model.Instance) {
 // Fetch fetch all instances by appid.
 func (r *Registry) Fetch(zone, env, appid string, latestTime int64, status uint32) (info *model.InstanceInfo, err error) {
 	key := appsKey(appid, env)
-	log.Info("------------------>  registry--> Fetch call ********  ")
-	litter.Dump("key:   " + key)
 	r.aLock.RLock()
 	a, ok := r.appm[key]
 	r.aLock.RUnlock()
@@ -190,8 +188,6 @@ func (r *Registry) Polls(arg *model.ArgPolls) (ch chan map[string]*model.Instanc
 		ins = make(map[string]*model.InstanceInfo, len(arg.AppID))
 		in  *model.InstanceInfo
 	)
-	log.Info("------------------>  Registry--> Polls call ********  ")
-	litter.Dump(arg)
 
 	if len(arg.AppID) != len(arg.LatestTimestamp) {
 		arg.LatestTimestamp = make([]int64, len(arg.AppID))

@@ -2,7 +2,9 @@ package naming
 
 import (
 	"context"
+	"flag"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 	"testing"
@@ -17,12 +19,12 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-// func TestMain(m *testing.M) {
-// 	flag.Parse()
-// 	go mockDiscoverySvr()
-// 	time.Sleep(time.Second)
-// 	os.Exit(m.Run())
-// }
+func TestMain(m *testing.M) {
+	flag.Parse()
+	go mockDiscoverySvr()
+	time.Sleep(time.Second)
+	os.Exit(m.Run())
+}
 
 func mockDiscoverySvr() {
 	c := &conf.Config{
@@ -67,9 +69,9 @@ func TestDiscovery(t *testing.T) {
 		}
 		_, err := dis.Register(instance)
 		So(err, ShouldBeNil)
-		dis.node.Store([]string{"127.0.0.1:7171"})
+		dis.node.Store([]string{"127.0.0.1:7172"})
 		instance.AppID = "test2"
-		//instance.Metadata = map[string]string{"meta": "meta"}
+		// instance.Metadata = map[string]string{"meta": "meta"}
 		_, err = dis.Register(instance)
 		So(err, ShouldNotBeNil)
 		_ = dis.renew(context.TODO(), instance)
@@ -124,7 +126,7 @@ func TestDiscovery(t *testing.T) {
 		So(len(ins.Instances["test"]), ShouldEqual, 2)
 		So(ins.Instances["test"][0].AppID, ShouldEqual, appid)
 		rsl.Close()
-		conf.Nodes = []string{"127.0.0.1:7171"}
+		conf.Nodes = []string{"127.0.0.1:7172"}
 		dis.Reload(conf)
 		So(dis.Scheme(), ShouldEqual, "discovery")
 		dis.Close()
