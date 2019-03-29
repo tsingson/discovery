@@ -83,11 +83,12 @@ func NewInstance(arg *ArgRegister) (i *Instance) {
 		RenewTimestamp: now,
 		DirtyTimestamp: now,
 	}
-	if arg.Metadata != "" {
-		if err := json.Unmarshal([]byte(arg.Metadata), &i.Metadata); err != nil {
-			log.Errorf("json unmarshal metadata err %v", err)
-		}
-	}
+	// TODO: tsingson
+	// if arg.Metadata != "" {
+	// 	if err := json.Unmarshal([]byte(arg.Metadata), &i.Metadata); err != nil {
+	// 		log.Errorf("json unmarshal metadata err %v", err)
+	// 	}
+	// }
 	return
 }
 

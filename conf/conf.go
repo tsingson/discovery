@@ -12,6 +12,30 @@ import (
 	"github.com/tsingson/discovery/model"
 )
 
+// Config config.
+type Config struct {
+	Nodes      []string
+	Zones      map[string][]string
+	HTTPServer *ServerConfig
+	HTTPClient *http.ClientConfig
+	Env        *Env
+	// Scheduler  []byte
+	Schedulers map[string]*model.Scheduler
+}
+
+// Env is disocvery env.
+type Env struct {
+	Region    string
+	Zone      string
+	Host      string
+	DeployEnv string
+}
+
+// ServerConfig Http Servers conf.
+type ServerConfig struct {
+	Addr string
+}
+
 var (
 	confPath      string
 	schedulerPath string
@@ -36,17 +60,6 @@ func init() {
 	flag.StringVar(&schedulerPath, "scheduler", "scheduler.json", "scheduler info")
 }
 
-// Config config.
-type Config struct {
-	Nodes      []string
-	Zones      map[string][]string
-	HTTPServer *ServerConfig
-	HTTPClient *http.ClientConfig
-	Env        *Env
-	// Scheduler  []byte
-	Schedulers map[string]*model.Scheduler
-}
-
 // Fix fix env config.
 func (c *Config) Fix() (err error) {
 	if c.Env == nil {
@@ -65,19 +78,6 @@ func (c *Config) Fix() (err error) {
 		c.Env.DeployEnv = deployEnv
 	}
 	return
-}
-
-// Env is disocvery env.
-type Env struct {
-	Region    string
-	Zone      string
-	Host      string
-	DeployEnv string
-}
-
-// ServerConfig Http Servers conf.
-type ServerConfig struct {
-	Addr string
 }
 
 // Init init conf

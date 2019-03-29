@@ -10,6 +10,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/sanity-io/litter"
+
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
@@ -21,7 +23,7 @@ import (
 
 func TestMain(m *testing.M) {
 	flag.Parse()
-	go mockDiscoverySvr()
+	// go mockDiscoverySvr()
 	time.Sleep(time.Second)
 	os.Exit(m.Run())
 }
@@ -29,9 +31,9 @@ func TestMain(m *testing.M) {
 func mockDiscoverySvr() {
 	c := &conf.Config{
 		Env: &conf.Env{
-			Region:    "test",
-			Zone:      "test",
-			DeployEnv: "test",
+			Region:    "dev",
+			Zone:      "dev",
+			DeployEnv: "dev",
 			Host:      "test_server",
 		},
 		Nodes: []string{"127.0.0.1:7171"},
@@ -49,21 +51,22 @@ func mockDiscoverySvr() {
 }
 
 func TestDiscovery(t *testing.T) {
-	conf := &Config{
+	conf := &NamingConfig{
 		Nodes:  []string{"127.0.0.1:7171"},
-		Region: "test",
-		Zone:   "test",
-		Env:    "test",
-		Host:   "test-host",
+		Region: "china",
+		Zone:   "gd",
+		Env:    "dev",
+		Host:   "discovery",
 	}
-	dis := New(conf)
+
+	dis := NewClient(conf)
 	println("new")
 	appid := "test1"
 	Convey("test discovery register", t, func() {
 		instance := &Instance{
-			Region:   "test",
-			Zone:     "test",
-			Env:      "test",
+			Region:   "china",
+			Zone:     "gd",
+			Env:      "dev",
 			AppID:    appid,
 			Hostname: "test-host",
 		}
@@ -80,16 +83,16 @@ func TestDiscovery(t *testing.T) {
 		Convey("test discovery set", func() {
 			rs := dis.Build(appid)
 			inSet := &Instance{
-				Region:   "test",
-				Zone:     "test",
-				Env:      "test",
+				Region:   "china",
+				Zone:     "gd",
+				Env:      "dev",
 				AppID:    appid,
 				Hostname: "test-host",
 				Addrs: []string{
 					"grpc://127.0.0.1:8080",
 				},
 				Metadata: map[string]string{
-					"test":   "1",
+					"dev":    "1",
 					"weight": "111",
 					"color":  "blue",
 				},
@@ -99,7 +102,8 @@ func TestDiscovery(t *testing.T) {
 			ch := rs.Watch()
 			<-ch
 			ins, _ := rs.Fetch()
-			So(ins.Instances["test"][0].Metadata["weight"], ShouldResemble, "111")
+			litter.Dump(ins.Instances)
+			So(ins.Instances["gd"][0].Metadata["weight"], ShouldResemble, "111")
 		})
 	})
 	Convey("test discovery watch", t, func() {
@@ -108,12 +112,12 @@ func TestDiscovery(t *testing.T) {
 		<-ch
 		ins, ok := rsl.Fetch()
 		So(ok, ShouldBeTrue)
-		So(len(ins.Instances["test"]), ShouldEqual, 1)
-		So(ins.Instances["test"][0].AppID, ShouldEqual, appid)
+		So(len(ins.Instances["gd"]), ShouldEqual, 1)
+		So(ins.Instances["gd"][0].AppID, ShouldEqual, appid)
 		instance2 := &Instance{
-			Region:   "test",
-			Zone:     "test",
-			Env:      "test",
+			Region:   "china",
+			Zone:     "gd",
+			Env:      "dev",
 			AppID:    appid,
 			Hostname: "test-host2",
 		}
@@ -123,10 +127,10 @@ func TestDiscovery(t *testing.T) {
 		<-ch
 		ins, ok = rsl.Fetch()
 		So(ok, ShouldBeTrue)
-		So(len(ins.Instances["test"]), ShouldEqual, 2)
-		So(ins.Instances["test"][0].AppID, ShouldEqual, appid)
+		So(len(ins.Instances["gd"]), ShouldEqual, 2)
+		So(ins.Instances["gd"][0].AppID, ShouldEqual, appid)
 		rsl.Close()
-		conf.Nodes = []string{"127.0.0.1:7172"}
+		conf.Nodes = []string{"127.0.0.1:7171"}
 		dis.Reload(conf)
 		So(dis.Scheme(), ShouldEqual, "discovery")
 		dis.Close()
@@ -159,38 +163,38 @@ func TestUseScheduler(t *testing.T) {
 		insInfo := &InstancesInfo{}
 		insInfo.Instances = make(map[string][]*Instance)
 		insInfo.Instances["sh001"] = []*Instance{
-			&Instance{Zone: "sh001", Metadata: map[string]string{
+			{Zone: "sh001", Metadata: map[string]string{
 				"weight": "10",
 			}},
-			&Instance{Zone: "sh001", Metadata: map[string]string{
+			{Zone: "sh001", Metadata: map[string]string{
 				"weight": "10",
 			}},
 		}
 		insInfo.Instances["sh002"] = []*Instance{
-			&Instance{Zone: "sh002", Metadata: map[string]string{
+			{Zone: "sh002", Metadata: map[string]string{
 				"weight": "5",
 			}},
-			&Instance{Zone: "sh002", Metadata: map[string]string{
+			{Zone: "sh002", Metadata: map[string]string{
 				"weight": "2",
 			}},
 		}
 		insInfo.Instances["sh003"] = []*Instance{
-			&Instance{Zone: "sh003", Metadata: map[string]string{
+			{Zone: "sh003", Metadata: map[string]string{
 				"weight": "5",
 			}},
-			&Instance{Zone: "sh003", Metadata: map[string]string{
+			{Zone: "sh003", Metadata: map[string]string{
 				"weight": "3",
 			}},
 		}
 		insInfo.Scheduler = []Zone{
-			Zone{
+			{
 				Src: "sh001",
 				Dst: map[string]int64{
 					"sh001": 2,
 					"sh002": 1,
 				},
 			},
-			Zone{
+			{
 				Src: "sh002",
 				Dst: map[string]int64{
 					"sh001": 1,

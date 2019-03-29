@@ -101,9 +101,8 @@ func (d *Discovery) regSelf() context.CancelFunc {
 }
 
 func (d *Discovery) nodesproc() {
-	var (
-		lastTs int64
-	)
+	var lastTs int64
+
 	for {
 		arg := &model.ArgPolls{
 			AppID:           []string{model.AppID},
@@ -123,10 +122,10 @@ func (d *Discovery) nodesproc() {
 		if !ok || ins == nil {
 			return
 		}
-		var (
-			nodes []string
-			zones = make(map[string][]string)
-		)
+		//
+		var nodes []string
+		var zones = make(map[string][]string)
+		//
 		for _, ins := range ins.Instances {
 			for _, in := range ins {
 				for _, addr := range in.Addrs {
@@ -141,11 +140,14 @@ func (d *Discovery) nodesproc() {
 				}
 			}
 		}
+		//
 		lastTs = ins.LatestTimestamp
 		c := new(conf.Config)
 		*c = *d.c
+		//
 		c.Nodes = nodes
 		c.Zones = zones
+		//
 		ns := registry.NewNodes(c)
 		ns.UP()
 		d.nodes.Store(ns)

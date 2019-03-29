@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"time"
 
+	"github.com/sanity-io/litter"
+
 	"github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/model"
 
@@ -99,8 +101,10 @@ func poll(c *gin.Context) {
 		result(c, nil, errors.ParamsErr)
 		return
 	}
+	log.Info("-------------------> poll  >>")
+	litter.Dump(arg)
 
-	ch, new, err := dis.Polls(c, arg)
+	ch, news, err := dis.Polls(c, arg)
 	if err != nil && err != errors.NotModified {
 		result(c, nil, err)
 		return
@@ -110,7 +114,7 @@ func poll(c *gin.Context) {
 	select {
 	case e := <-ch:
 		result(c, resp{Data: e[arg.AppID[0]]}, nil)
-		if !new {
+		if !news {
 			dis.DelConns(arg) // broadcast will delete all connections of appid
 		}
 		return

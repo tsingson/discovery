@@ -52,6 +52,8 @@ type Config struct {
 	Host   string
 }
 
+type NamingConfig = Config
+
 type appData struct {
 	Instances map[string][]*Instance `json:"instances"`
 	LastTs    int64                  `json:"latest_timestamp"`
@@ -100,6 +102,8 @@ func fixConfig(c *Config) {
 		c.Host, _ = os.Hostname()
 	}
 }
+
+var NewClient = New
 
 // New new a discovery client.
 func New(c *Config) (d *Discovery) {
@@ -202,8 +206,10 @@ func (d *Discovery) Build(appid string) Resolver {
 			cancel()
 		}
 	}
+	//
 	app.resolver[r] = struct{}{}
 	d.mutex.Unlock()
+	//
 	if ok {
 		select {
 		case r.event <- struct{}{}:
