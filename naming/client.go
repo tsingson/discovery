@@ -79,6 +79,8 @@ type Discovery struct {
 	delete chan *appInfo
 }
 
+type NamingDiscovery = Discovery
+
 type appInfo struct {
 	resolver map[*Resolve]struct{}
 	zoneIns  atomic.Value

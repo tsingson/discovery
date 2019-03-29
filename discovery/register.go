@@ -78,8 +78,6 @@ func (d *Discovery) Fetchs(c context.Context, arg *model.ArgFetchs) (is map[stri
 
 // Polls hangs request and then write instances when that has changes, or return NotModified.
 func (d *Discovery) Polls(c context.Context, arg *model.ArgPolls) (ch chan map[string]*model.InstanceInfo, new bool, err error) {
-	// log.Info("------------------>  Discovery--> Polls call ********  ")
-	// litter.Dump(arg)
 	return d.registry.Polls(arg)
 }
 
