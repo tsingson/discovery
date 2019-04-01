@@ -3,34 +3,58 @@ package main
 import (
 	"os"
 	"os/signal"
+	"runtime"
 	"syscall"
 	"time"
 
 	log "github.com/tsingson/zaplogger"
 
-	"github.com/tsingson/discovery/lib/file"
-	"github.com/tsingson/discovery/model"
-
-	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
 )
 
 func main() {
 
-	var cfg = conf.Conf
-	path, _ := file.GetCurrentExecDir()
-	path = "/Users/qinshen/git/linksmart/bin"
-	configToml := path + "/discoveryd-config.toml"
+	runtime.MemProfileRate = 0
+	runtime.GOMAXPROCS(128)
+	var err error
 
-	cfg = conf.LoadConfig(configToml)
+	/**
+	tw = timingwheel.NewTimingWheel(time.Minute, 60)
+	tw.StartCron()
+	defer tw.StopCron()
+	*/
 
-	// litter.Dump(cfg)
+	// var cntxt = &daemon.Context{
+	// 	PidFileName: "pid-discoveryd",
+	// 	PidFilePerm: 0644,
+	// 	LogFileName: logPath + "/discoveryd-daemon.log",
+	// 	LogFilePerm: 0640,
+	// 	WorkDir:     path,
+	// 	Umask:       027,
+	// 	// 	Args:        []string{"aaa-demo"},
+	// }
+	//
+	// var d, err = cntxt.Reborn()
+	// if err != nil {
+	// 	zl.Fatal("cat's reborn ", zap.Error(err))
+	// }
+	// if d != nil {
+	// 	return
+	// }
+	// defer cntxt.Release()
+
+	log.Info("trying to start daemon")
 
 	svr, cancel := discovery.New(cfg)
-	// svr.Register(context.Background(), defRegDiscovery(), time.Now().UnixNano(), false)
-	http.Init(cfg, svr)
 
+	err = http.Init(cfg, svr)
+
+	if err != nil {
+		cancel()
+		os.Exit(-1)
+	}
+	runtime.Goexit()
 	// init signal
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
@@ -48,18 +72,5 @@ func main() {
 		default:
 			return
 		}
-	}
-}
-
-func defRegDiscovery() *model.Instance {
-	return &model.Instance{
-		Region:          "sh1",
-		AppID:           "infra.discovery",
-		Hostname:        "test-host",
-		Zone:            "sh1",
-		Env:             "dev",
-		Status:          1,
-		Addrs:           []string{"http://127.0.0.1:7171"},
-		LatestTimestamp: time.Now().UnixNano(),
 	}
 }

@@ -28,7 +28,7 @@ var (
 )
 
 // Init init http
-func Init(c *conf.Config, d *discovery.Discovery) {
+func Init(c *conf.Config, d *discovery.Discovery) error {
 	dis = d
 	gin.SetMode(gin.ReleaseMode)
 	engine := gin.New()
@@ -45,10 +45,8 @@ func Init(c *conf.Config, d *discovery.Discovery) {
 			ln.Close()
 		})
 	}
-	err := g.Run()
-	if err != nil {
-		panic(err)
-	}
+	return g.Run()
+
 }
 
 // innerRouter init local router api path.
