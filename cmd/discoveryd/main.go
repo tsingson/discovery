@@ -7,7 +7,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/sevlyar/go-daemon"
 	log "github.com/tsingson/zaplogger"
+	"go.uber.org/zap"
 
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
@@ -17,7 +19,7 @@ func main() {
 
 	runtime.MemProfileRate = 0
 	runtime.GOMAXPROCS(128)
-	var err error
+
 
 	/**
 	tw = timingwheel.NewTimingWheel(time.Minute, 60)
@@ -25,24 +27,24 @@ func main() {
 	defer tw.StopCron()
 	*/
 
-	// var cntxt = &daemon.Context{
-	// 	PidFileName: "pid-discoveryd",
-	// 	PidFilePerm: 0644,
-	// 	LogFileName: logPath + "/discoveryd-daemon.log",
-	// 	LogFilePerm: 0640,
-	// 	WorkDir:     path,
-	// 	Umask:       027,
-	// 	// 	Args:        []string{"aaa-demo"},
-	// }
-	//
-	// var d, err = cntxt.Reborn()
-	// if err != nil {
-	// 	zl.Fatal("cat's reborn ", zap.Error(err))
-	// }
-	// if d != nil {
-	// 	return
-	// }
-	// defer cntxt.Release()
+	var cntxt = &daemon.Context{
+		PidFileName: "pid-discoveryd",
+		PidFilePerm: 0644,
+		LogFileName: logPath + "/discoveryd-daemon.log",
+		LogFilePerm: 0640,
+		WorkDir:     path,
+		Umask:       027,
+		// 	Args:        []string{"aaa-demo"},
+	}
+
+	var d, err = cntxt.Reborn()
+	if err != nil {
+		log.Fatal("cat's reborn ", zap.Error(err))
+	}
+	if d != nil {
+		return
+	}
+	defer cntxt.Release()
 
 	log.Info("trying to start daemon")
 
