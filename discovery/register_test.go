@@ -9,8 +9,8 @@ import (
 
 	dc "github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/errors"
-	"github.com/tsingson/discovery/lib/http"
-	xtime "github.com/tsingson/discovery/lib/time"
+	"github.com/tsingson/discovery/lib/xhttp"
+	xtime "github.com/tsingson/discovery/lib/xtime"
 	"github.com/tsingson/discovery/model"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -69,7 +69,7 @@ var config = newConfig()
 
 func newConfig() *dc.Config {
 	c := &dc.Config{
-		HTTPClient: &http.ClientConfig{
+		HTTPClient: &xhttp.ClientConfig{
 			Dial:      xtime.Duration(time.Second),
 			KeepAlive: xtime.Duration(time.Second * 30),
 		},

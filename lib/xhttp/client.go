@@ -1,4 +1,4 @@
-package http
+package xhttp
 
 import (
 	"bytes"
@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	xtime "time"
+	"time"
 
-	"github.com/tsingson/discovery/lib/time"
+	"github.com/tsingson/discovery/lib/xtime"
 )
 
 var (
@@ -21,8 +21,8 @@ var (
 
 // ClientConfig is http client conf.
 type ClientConfig struct {
-	Dial      time.Duration
-	KeepAlive time.Duration
+	Dial      xtime.Duration
+	KeepAlive xtime.Duration
 }
 
 // Client is http client.
@@ -35,8 +35,8 @@ type Client struct {
 func NewClient(c *ClientConfig) *Client {
 	client := new(Client)
 	dialer := &net.Dialer{
-		Timeout:   xtime.Duration(c.Dial),
-		KeepAlive: xtime.Duration(c.KeepAlive),
+		Timeout:   time.Duration(c.Dial),
+		KeepAlive: time.Duration(c.KeepAlive),
 	}
 	client.transport = &http.Transport{
 		DialContext:     dialer.DialContext,

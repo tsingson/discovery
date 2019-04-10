@@ -1,6 +1,6 @@
 # note 说明
 
-fork from [https://github.com/bilibili/discovery](https://github.com/bilibili/discovery)
+fork from [https://github.com/tsingson/discovery](https://github.com/tsingson/discovery)
 
 这是一个用于学习的 fork, 用于与 goim 的配合测试,  代码修改了以下:
 
@@ -43,7 +43,7 @@ discoveryd
 # Discovery 
 
 [![Build Status](https://travis-ci.org/bilibili/discovery.svg?branch=master)](https://travis-ci.org/bilibili/discovery) 
-[![Go Report Card](https://goreportcard.com/badge/github.com/bilibili/discovery)](https://goreportcard.com/report/github.com/bilibili/discovery)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tsingson/discovery)](https://goreportcard.com/report/github.com/tsingson/discovery)
 [![codecov](https://codecov.io/gh/Bilibili/discovery/branch/master/graph/badge.svg)](https://codecov.io/gh/Bilibili/discovery)
 
 Discovery is a based service that is production-ready and primarily used at [Bilibili](https://www.bilibili.com/) for locating services for the purpose of load balancing and failover of middle-tier servers.
@@ -57,7 +57,7 @@ Discovery is a based service that is production-ready and primarily used at [Bil
 ### build
 ```shell
 cd $GOPATH/src
-git clone https://github.com/bilibili/discovery.git
+git clone https://github.com/tsingson/discovery.git
 cd discovery/cmd/discovery
 go build
 ```

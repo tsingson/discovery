@@ -15,10 +15,10 @@ import (
 	"time"
 
 	ecode "github.com/tsingson/discovery/errors"
-	"github.com/tsingson/discovery/lib/http"
-	xtime "github.com/tsingson/discovery/lib/time"
+	"github.com/tsingson/discovery/lib/xhttp"
+	xtime "github.com/tsingson/discovery/lib/xtime"
 
-	log "github.com/tsingson/zaplogger"
+	log "github.com/golang/glog"
 )
 
 const (
@@ -52,8 +52,6 @@ type Config struct {
 	Host   string
 }
 
-type NamingConfig = Config
-
 type appData struct {
 	Instances map[string][]*Instance `json:"instances"`
 	LastTs    int64                  `json:"latest_timestamp"`
@@ -65,7 +63,7 @@ type Discovery struct {
 	once       sync.Once
 	ctx        context.Context
 	cancelFunc context.CancelFunc
-	httpClient *http.Client
+	httpClient *xhttp.Client
 
 	node    atomic.Value
 	nodeIdx uint64
@@ -78,8 +76,6 @@ type Discovery struct {
 
 	delete chan *appInfo
 }
-
-type NamingDiscovery = Discovery
 
 type appInfo struct {
 	resolver map[*Resolve]struct{}
@@ -105,8 +101,6 @@ func fixConfig(c *Config) {
 	}
 }
 
-var NewClient = New
-
 // New new a discovery client.
 func New(c *Config) (d *Discovery) {
 	fixConfig(c)
@@ -120,11 +114,11 @@ func New(c *Config) (d *Discovery) {
 		delete:     make(chan *appInfo, 10),
 	}
 	// httpClient
-	cfg := &http.ClientConfig{
+	cfg := &xhttp.ClientConfig{
 		Dial:      xtime.Duration(3 * time.Second),
 		KeepAlive: xtime.Duration(40 * time.Second),
 	}
-	d.httpClient = http.NewClient(cfg)
+	d.httpClient = xhttp.NewClient(cfg)
 	// discovery self
 	resolver := d.Build(_appid)
 	event := resolver.Watch()
@@ -208,10 +202,8 @@ func (d *Discovery) Build(appid string) Resolver {
 			cancel()
 		}
 	}
-	//
 	app.resolver[r] = struct{}{}
 	d.mutex.Unlock()
-	//
 	if ok {
 		select {
 		case r.event <- struct{}{}:

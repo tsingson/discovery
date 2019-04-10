@@ -7,25 +7,23 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/sevlyar/go-daemon"
+	"github.com/sanity-io/litter"
 	log "github.com/tsingson/zaplogger"
-	"go.uber.org/zap"
 
+	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
 )
 
 func main() {
 
+	cfg = conf.Default()
+	litter.Dump( cfg )
 	runtime.MemProfileRate = 0
 	runtime.GOMAXPROCS(128)
-
-
+	// stopSignal := make(chan struct{})
 	/**
-	tw = timingwheel.NewTimingWheel(time.Minute, 60)
-	tw.StartCron()
-	defer tw.StopCron()
-	*/
+
 
 	var cntxt = &daemon.Context{
 		PidFileName: "pid-discoveryd",
@@ -45,18 +43,14 @@ func main() {
 		return
 	}
 	defer cntxt.Release()
-
+	*/
 	log.Info("trying to start daemon")
 
 	svr, cancel := discovery.New(cfg)
 
-	err = http.Init(cfg, svr)
+	http.Init(cfg, svr)
 
-	if err != nil {
-		cancel()
-		os.Exit(-1)
-	}
-	runtime.Goexit()
+	// 	runtime.Goexit()
 	// init signal
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
@@ -75,4 +69,5 @@ func main() {
 			return
 		}
 	}
+	// <- stopSignal
 }

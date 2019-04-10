@@ -7,7 +7,7 @@ import (
 
 	dc "github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/errors"
-	"github.com/tsingson/discovery/lib/http"
+	"github.com/tsingson/discovery/lib/xhttp"
 	"github.com/tsingson/discovery/model"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -17,7 +17,7 @@ import (
 func TestReplicate(t *testing.T) {
 	Convey("test replicate", t, func() {
 		i := model.NewInstance(reg)
-		nodes := NewNodes(&dc.Config{HTTPClient: &http.ClientConfig{},
+		nodes := NewNodes(&dc.Config{HTTPClient: &xhttp.ClientConfig{},
 			Env:        &dc.Env{},
 			HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"},
 			Nodes:      []string{"127.0.0.1:7172", "127.0.0.1:7173", "127.0.0.1:7171"},
@@ -37,7 +37,7 @@ func TestReplicate(t *testing.T) {
 
 func TestNodes(t *testing.T) {
 	Convey("test nodes", t, func() {
-		nodes := NewNodes(&dc.Config{HTTPClient: &http.ClientConfig{},
+		nodes := NewNodes(&dc.Config{HTTPClient: &xhttp.ClientConfig{},
 			Env:        &dc.Env{},
 			HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"},
 			Nodes:      []string{"127.0.0.1:7172", "127.0.0.1:7173", "127.0.0.1:7171"},
@@ -47,7 +47,7 @@ func TestNodes(t *testing.T) {
 		So(len(res), ShouldResemble, 3)
 	})
 	Convey("test all nodes", t, func() {
-		nodes := NewNodes(&dc.Config{HTTPClient: &http.ClientConfig{},
+		nodes := NewNodes(&dc.Config{HTTPClient: &xhttp.ClientConfig{},
 			Env:        &dc.Env{},
 			HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"},
 			Nodes:      []string{"127.0.0.1:7172", "127.0.0.1:7173", "127.0.0.1:7171"},
@@ -60,7 +60,7 @@ func TestNodes(t *testing.T) {
 
 func TestUp(t *testing.T) {
 	Convey("test up", t, func() {
-		nodes := NewNodes(&dc.Config{HTTPClient: &http.ClientConfig{},
+		nodes := NewNodes(&dc.Config{HTTPClient: &xhttp.ClientConfig{},
 			Env:        &dc.Env{},
 			HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"},
 			Nodes:      []string{"127.0.0.1:7172", "127.0.0.1:7173", "127.0.0.1:7171"},
@@ -77,7 +77,7 @@ func TestUp(t *testing.T) {
 func TestCall(t *testing.T) {
 	Convey("test call", t, func() {
 		var res *model.Instance
-		node := newNode(&dc.Config{HTTPClient: &http.ClientConfig{},
+		node := newNode(&dc.Config{HTTPClient: &xhttp.ClientConfig{},
 			HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"},
 			Nodes:      []string{"127.0.0.1:7171"}}, "127.0.0.1:7172")
 		node.client.SetTransport(gock.DefaultTransport)
@@ -92,7 +92,7 @@ func TestCall(t *testing.T) {
 func TestNodeCancel(t *testing.T) {
 	Convey("test node renew 409 error", t, func() {
 		i := model.NewInstance(reg)
-		node := newNode(&dc.Config{HTTPClient: &http.ClientConfig{}, Nodes: []string{"127.0.0.1:7171", "127.0.0.1:7172"}}, "127.0.0.1:7172")
+		node := newNode(&dc.Config{HTTPClient: &xhttp.ClientConfig{}, Nodes: []string{"127.0.0.1:7171", "127.0.0.1:7172"}}, "127.0.0.1:7172")
 		node.pRegisterURL = "http://127.0.0.1:7171/discovery/register"
 		node.client.SetTransport(gock.DefaultTransport)
 		httpMock("POST", "http://127.0.0.1:7172/discovery/cancel").Reply(200).JSON(`{"code":0}`)
@@ -104,7 +104,7 @@ func TestNodeCancel(t *testing.T) {
 func TestNodeRenew(t *testing.T) {
 	Convey("test node renew 409 error", t, func() {
 		i := model.NewInstance(reg)
-		node := newNode(&dc.Config{HTTPClient: &http.ClientConfig{}}, "127.0.0.1:7172")
+		node := newNode(&dc.Config{HTTPClient: &xhttp.ClientConfig{}}, "127.0.0.1:7172")
 		node.pRegisterURL = "http://127.0.0.1:7171/discovery/register"
 		node.client.SetTransport(gock.DefaultTransport)
 		httpMock("POST", "http://127.0.0.1:7172/discovery/renew").Reply(200).JSON(`{"code":-409,"data":{"region":"shsb","zone":"fuck","appid":"main.arch.account-service","env":"pre","hostname":"cs4sq","http":"","rpc":"0.0.0.0:18888","weight":2}}`)
@@ -117,7 +117,7 @@ func TestNodeRenew(t *testing.T) {
 func TestNodeRenew2(t *testing.T) {
 	Convey("test node renew 404 error", t, func() {
 		i := model.NewInstance(reg)
-		node := newNode(&dc.Config{HTTPClient: &http.ClientConfig{}, HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"}, Nodes: []string{"127.0.0.1:7171"}}, "127.0.0.1:7172")
+		node := newNode(&dc.Config{HTTPClient: &xhttp.ClientConfig{}, HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"}, Nodes: []string{"127.0.0.1:7171"}}, "127.0.0.1:7172")
 		node.client.SetTransport(gock.DefaultTransport)
 		httpMock("POST", "http://127.0.0.1:7172/discovery/renew").Reply(200).JSON(`{"code":-404}`)
 		httpMock("POST", "http://127.0.0.1:7172/discovery/register").Reply(200).JSON(`{"code":0}`)

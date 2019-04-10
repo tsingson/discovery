@@ -1,5 +1,5 @@
 #   configuration of Eureka / Discovery serverice daemon
-discoveryd 即 Discovery Daemon 服务发现监听程序, fork 自 [bilibili/discovery](https://github.com/bilibili/discovery),  用于代码阅读学习与个人测试
+discoveryd 即 Discovery Daemon 服务发现监听程序, fork 自 [bilibili/discovery](https://github.com/tsingson/discovery),  用于代码阅读学习与个人测试
 
 
 

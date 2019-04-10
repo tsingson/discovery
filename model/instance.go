@@ -7,7 +7,7 @@ import (
 
 	"github.com/tsingson/discovery/errors"
 
-	log "github.com/tsingson/zaplogger"
+	log "github.com/golang/glog"
 )
 
 // InstanceStatus Status of instance
@@ -83,12 +83,11 @@ func NewInstance(arg *ArgRegister) (i *Instance) {
 		RenewTimestamp: now,
 		DirtyTimestamp: now,
 	}
-	// TODO: tsingson
-	// if arg.Metadata != "" {
-	// 	if err := json.Unmarshal([]byte(arg.Metadata), &i.Metadata); err != nil {
-	// 		log.Errorf("json unmarshal metadata err %v", err)
-	// 	}
-	// }
+	if arg.Metadata != "" {
+		if err := json.Unmarshal([]byte(arg.Metadata), &i.Metadata); err != nil {
+			log.Errorf("json unmarshal metadata err %v", err)
+		}
+	}
 	return
 }
 

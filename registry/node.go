@@ -10,10 +10,10 @@ import (
 
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/errors"
-	"github.com/tsingson/discovery/lib/http"
+	"github.com/tsingson/discovery/lib/xhttp"
 	"github.com/tsingson/discovery/model"
 
-	log "github.com/tsingson/zaplogger"
+	log "github.com/golang/glog"
 )
 
 const (
@@ -31,7 +31,7 @@ type Node struct {
 	c *conf.Config
 
 	// url
-	client       *http.Client
+	client       *xhttp.Client
 	pRegisterURL string
 	registerURL  string
 	cancelURL    string
@@ -49,7 +49,7 @@ func newNode(c *conf.Config, addr string) (n *Node) {
 	n = &Node{
 		c: c,
 		// url
-		client:      http.NewClient(c.HTTPClient),
+		client:      xhttp.NewClient(c.HTTPClient),
 		registerURL: fmt.Sprintf("http://%s%s", addr, _registerURL),
 		cancelURL:   fmt.Sprintf("http://%s%s", addr, _cancelURL),
 		renewURL:    fmt.Sprintf("http://%s%s", addr, _renewURL),
