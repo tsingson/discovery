@@ -74,7 +74,7 @@ func Default() *Config {
 		},
 	}
 
-	scheduler := []byte(`[{"app_id":"test.service1","env":"uat","zones":[{"src":"sh001","dst":{"sh0001":3,"sh0002":1}},{"src":"sh002","dst":{"hs0001":1,"sh0002":3,"sh0003":4}}],"remark":"te22st"},{"app_id":"test.service2","env":"uat","zones":[{"src":"sh001","dst":{"sh0001":3,"sh0002":1}},{"src":"sh002","dst":{"hs0001":1,"sh0002":3,"sh0003":4}}],"remark":"te22st"}]`)
+	// scheduler := []byte(`[{"app_id":"test.service1","env":"uat","zones":[{"src":"sh001","dst":{"sh0001":3,"sh0002":1}},{"src":"sh002","dst":{"hs0001":1,"sh0002":3,"sh0003":4}}],"remark":"te22st"},{"app_id":"test.service2","env":"uat","zones":[{"src":"sh001","dst":{"sh0001":3,"sh0002":1}},{"src":"sh002","dst":{"hs0001":1,"sh0002":3,"sh0003":4}}],"remark":"te22st"}]`)
 
 	cfg := &Config{
 		Nodes: []string{"127.0.0.1:7171"},
@@ -94,7 +94,7 @@ func Default() *Config {
 			Host:      "logic",
 		},
 		Schedulers: schedulers,
-		Scheduler:  scheduler,
+	//	Scheduler:  scheduler,
 	}
 
 	return cfg

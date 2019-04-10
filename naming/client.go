@@ -14,7 +14,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 
 	ecode "github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/lib/xhttp"

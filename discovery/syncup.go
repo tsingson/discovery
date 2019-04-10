@@ -11,7 +11,7 @@ import (
 	"github.com/tsingson/discovery/model"
 	"github.com/tsingson/discovery/registry"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 )
 
 var (

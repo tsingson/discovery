@@ -11,7 +11,7 @@ import (
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 )
 
 func main() {
@@ -33,7 +33,7 @@ func main() {
 			cancel()
 			time.Sleep(time.Second)
 			log.Info("discovery quit !!!")
-			log.Flush()
+			// log.Flush()
 			return
 		case syscall.SIGHUP:
 		default:

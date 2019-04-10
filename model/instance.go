@@ -7,7 +7,7 @@ import (
 
 	"github.com/tsingson/discovery/errors"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 )
 
 // InstanceStatus Status of instance

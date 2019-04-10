@@ -8,9 +8,15 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/BurntSushi/toml"
+	"github.com/pelletier/go-toml"
 )
 
+func LoadToml(fh string, v interface{}) (err error) {
+
+	tree, _ := toml.LoadFile(fh)
+	return tree.Unmarshal(&v)
+
+}
 func SaveToml(v interface{}, filename string) error {
 	// currentPath+"/toml1.toml"
 	var err error
@@ -19,7 +25,7 @@ func SaveToml(v interface{}, filename string) error {
 	if err = encoder.Encode(v); err != nil {
 
 	}
-	WriteToFile(b.Bytes(), filename)
+	_ = WriteToFile(b.Bytes(), filename)
 	return err
 }
 

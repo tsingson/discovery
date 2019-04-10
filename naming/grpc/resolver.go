@@ -9,7 +9,7 @@ import (
 
 	"github.com/tsingson/discovery/naming"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 	"google.golang.org/grpc/resolver"
 )
 

@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/BurntSushi/toml"
 	"github.com/sanity-io/litter"
 	log "github.com/tsingson/zaplogger"
 	"gopkg.in/yaml.v2"
@@ -21,11 +22,23 @@ import (
 
 func main() {
 	// var err error
-	cfg = conf.Default()
+
 
 	runtime.MemProfileRate = 0
 	runtime.GOMAXPROCS(128)
 	// stopSignal := make(chan struct{})
+
+	cfg = &conf.Config{}
+	_, err := toml.DecodeFile("/Users/qinshen/go/bin/discoveryd-config.toml", cfg )
+	if err != nil {
+		os.Exit( -1 )
+	}
+	litter.Dump( cfg )
+
+	// atom := zap.NewAtomicLevel()
+	// atom.SetLevel(zap.ErrorLevel)
+
+
 	/**
 
 
@@ -50,7 +63,7 @@ func main() {
 	*/
 	log.Info("trying to start daemon")
 
-	svr, cancel := discovery.New(cfg)
+	svr, cancelFunc := discovery.New(cfg)
 
 	http.Init(cfg, svr)
 
@@ -63,7 +76,7 @@ func main() {
 		log.Infof("discovery get a signal %s", s.String())
 		switch s {
 		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
-			cancel()
+			cancelFunc()
 			time.Sleep(time.Second)
 			log.Info("discovery quit !!!")
 			// log.Flush()

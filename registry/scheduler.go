@@ -9,7 +9,7 @@ import (
 
 	"github.com/tsingson/discovery/model"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 )
 
 // Scheduler info.
@@ -43,7 +43,7 @@ func (s *scheduler) Build(schs map[string]*model.Scheduler) {
 	litter.Dump(schs)
 
 	if len(schs) == 0 {
-		log.Errorf("load scheduler  info  err %v", xerrors.New("schemuler is nil "))
+		log.Errorf("schemuler is nil: %v", xerrors.New("schemuler is nil "))
 		return
 	}
 	for _, sch := range schs {

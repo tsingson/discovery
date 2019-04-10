@@ -13,7 +13,7 @@ import (
 	"github.com/tsingson/discovery/lib/xhttp"
 	"github.com/tsingson/discovery/model"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 )
 
 const (
@@ -133,7 +133,7 @@ func (n *Node) call(c context.Context, action model.Action, i *model.Instance, u
 		Data json.RawMessage `json:"data"`
 	}
 	if err = n.client.Post(c, uri, "", params, &res); err != nil {
-		log.Errorf("node be called(%s) instance(%v) error(%v)", uri, i, err)
+		log.Errorf("----> node be called(%s) instance(%v) error(%v)", uri, i, err)
 		return
 	}
 	if res.Code != 0 {

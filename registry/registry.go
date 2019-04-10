@@ -10,7 +10,7 @@ import (
 	"github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/model"
 
-	log "github.com/golang/glog"
+	log "github.com/tsingson/zaplogger"
 )
 
 const (
@@ -50,8 +50,8 @@ func NewRegistry(conf *conf.Config) (r *Registry) {
 		gd:    new(Guard),
 	}
 	r.scheduler = newScheduler(r)
-	r.scheduler.Load(conf.Scheduler)
-	// r.scheduler.Build(conf.Schedulers)
+	// r.scheduler.Load(conf.Scheduler)
+	 r.scheduler.Build(conf.Schedulers)
 	go r.proc()
 	return
 }
