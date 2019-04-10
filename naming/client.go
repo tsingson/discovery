@@ -14,11 +14,10 @@ import (
 	"sync/atomic"
 	"time"
 
+	log "github.com/golang/glog"
+
 	ecode "github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/lib/xhttp"
-	xtime "github.com/tsingson/discovery/lib/xtime"
-
-	log "github.com/golang/glog"
 )
 
 const (
@@ -115,8 +114,8 @@ func New(c *Config) (d *Discovery) {
 	}
 	// httpClient
 	cfg := &xhttp.ClientConfig{
-		Dial:      xtime.Duration(3 * time.Second),
-		KeepAlive: xtime.Duration(40 * time.Second),
+		Dial:      time.Duration(3 * time.Second),
+		KeepAlive: time.Duration(40 * time.Second),
 	}
 	d.httpClient = xhttp.NewClient(cfg)
 	// discovery self

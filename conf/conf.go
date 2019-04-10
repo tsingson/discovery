@@ -10,34 +10,36 @@ import (
 	"github.com/imdario/mergo"
 
 	"github.com/tsingson/discovery/lib/xhttp"
-	"github.com/tsingson/discovery/lib/xtime"
 	"github.com/tsingson/discovery/model"
 )
 
 // Config config.
+//go:generate easytags $GOFILE json
 type Config struct {
-	Nodes      []string
-	Zones      map[string][]string
-	HTTPServer *ServerConfig
-	HTTPClient *xhttp.ClientConfig
-	Env        *Env
-	Scheduler  []byte
-	Schedulers map[string]*model.Scheduler
+	Nodes      []string                    `json:"nodes"`
+	Zones      map[string][]string         `json:"zones"`
+	HTTPServer *ServerConfig               `json:"http_server"`
+	HTTPClient *xhttp.ClientConfig         `json:"http_client"`
+	Env        *Env                        `json:"env"`
+	Scheduler  []byte                      `json:"scheduler"`
+	Schedulers map[string]*model.Scheduler `json:"schedulers"`
 }
 
 type DiscoveryConfig = Config
 
 // Env is disocvery env.
+//go:generate easytags $GOFILE json
 type Env struct {
-	Region    string
-	Zone      string
-	Host      string
-	DeployEnv string
+	Region    string `json:"region"`
+	Zone      string `json:"zone"`
+	Host      string `json:"host"`
+	DeployEnv string `json:"deploy_env"`
 }
 
 // ServerConfig Http Servers conf.
+//go:generate easytags $GOFILE json
 type ServerConfig struct {
-	Addr string
+	Addr string `json:"addr"`
 }
 
 var (
@@ -54,7 +56,8 @@ var (
 // Default new a config with specified defualt value.
 func Default() *Config {
 	zone := make(map[string][]string, 1)
-	zone["sh003"] = []string{"127.0.0.1:7171",}
+	zone["sh003"] = []string{"127.0.0.1:7171"}
+	zone["sh004"] = []string{"127.0.0.1:7171"}
 	dst := make(map[string]int, 1)
 	dst["sz01"] = 3
 
@@ -71,16 +74,18 @@ func Default() *Config {
 		},
 	}
 
+	scheduler := []byte(`[{"app_id":"test.service1","env":"uat","zones":[{"src":"sh001","dst":{"sh0001":3,"sh0002":1}},{"src":"sh002","dst":{"hs0001":1,"sh0002":3,"sh0003":4}}],"remark":"te22st"},{"app_id":"test.service2","env":"uat","zones":[{"src":"sh001","dst":{"sh0001":3,"sh0002":1}},{"src":"sh002","dst":{"hs0001":1,"sh0002":3,"sh0003":4}}],"remark":"te22st"}]`)
+
 	cfg := &Config{
-		Nodes: []string{"127.0.0.1:7171",},
+		Nodes: []string{"127.0.0.1:7171"},
 		HTTPServer: &ServerConfig{
 			Addr: "127.0.0.1:7171",
 		},
 		Zones: zone,
 
 		HTTPClient: &xhttp.ClientConfig{
-			Dial:      xtime.Duration(3 * time.Second),
-			KeepAlive: xtime.Duration(120 * time.Second),
+			Dial:      time.Duration(3 * time.Second),
+			KeepAlive: time.Duration(120 * time.Second),
 		},
 		Env: &Env{
 			Region:    "china",
@@ -89,6 +94,7 @@ func Default() *Config {
 			Host:      "logic",
 		},
 		Schedulers: schedulers,
+		Scheduler:  scheduler,
 	}
 
 	return cfg

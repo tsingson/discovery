@@ -11,8 +11,6 @@ import (
 	"net/url"
 	"strings"
 	"time"
-
-	"github.com/tsingson/discovery/lib/xtime"
 )
 
 var (
@@ -20,9 +18,10 @@ var (
 )
 
 // ClientConfig is http client conf.
+//go:generate easytags $GOFILE json
 type ClientConfig struct {
-	Dial      xtime.Duration
-	KeepAlive xtime.Duration
+	Dial      time.Duration `json:"dial"`
+	KeepAlive time.Duration `json:"keep_alive"`
 }
 
 // Client is http client.

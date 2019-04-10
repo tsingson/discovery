@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"sync"
 
+	"github.com/sanity-io/litter"
+	"golang.org/x/xerrors"
+
 	"github.com/tsingson/discovery/model"
 
 	log "github.com/golang/glog"
@@ -33,6 +36,20 @@ func (s *scheduler) Load(conf []byte) {
 	for _, sch := range schs {
 		s.schedulers[appsKey(sch.AppID, sch.Env)] = sch
 	}
+}
+
+// Load load scheduler info.
+func (s *scheduler) Build(schs map[string]*model.Scheduler) {
+	litter.Dump(schs)
+
+	if len(schs) == 0 {
+		log.Errorf("load scheduler  info  err %v", xerrors.New("schemuler is nil "))
+		return
+	}
+	for _, sch := range schs {
+		s.schedulers[appsKey(sch.AppID, sch.Env)] = sch
+	}
+	litter.Dump(s.schedulers)
 }
 
 // TODO:dynamic reload scheduler config.

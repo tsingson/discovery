@@ -1,14 +1,18 @@
 package main
 
 import (
+	"fmt"
+	"io/ioutil"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"runtime"
 	"syscall"
 	"time"
 
 	"github.com/sanity-io/litter"
 	log "github.com/tsingson/zaplogger"
+	"gopkg.in/yaml.v2"
 
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
@@ -16,9 +20,9 @@ import (
 )
 
 func main() {
-
+	// var err error
 	cfg = conf.Default()
-	litter.Dump( cfg )
+
 	runtime.MemProfileRate = 0
 	runtime.GOMAXPROCS(128)
 	// stopSignal := make(chan struct{})
@@ -70,4 +74,32 @@ func main() {
 		}
 	}
 	// <- stopSignal
+}
+
+func loadYaml(fh string) (cfg *conf.Config, err error) {
+	fmt.Println("--------------------------->", fh)
+	filename, _ := filepath.Abs(fh)
+	var yamlFile []byte
+	yamlFile, err = ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("------------- file not exists")
+		return
+	}
+
+	err = yaml.Unmarshal(yamlFile, &cfg)
+	return
+
+}
+
+func writeYaml(data interface{}, fh string) error {
+	fmt.Println("--------------------------->", fh)
+	s, err := yaml.Marshal(data)
+	if err != nil {
+		fmt.Println("marshall error ")
+		return err
+	}
+	litter.Dump(string(s))
+
+	return ioutil.WriteFile(fh, s, 0644)
+
 }

@@ -10,13 +10,12 @@ import (
 	"testing"
 	"time"
 
+	. "github.com/smartystreets/goconvey/convey"
+
 	"github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/discovery"
 	"github.com/tsingson/discovery/http"
-	xhttp "github.com/tsingson/discovery/lib/xhttp"
-	xtime "github.com/tsingson/discovery/lib/xtime"
-
-	. "github.com/smartystreets/goconvey/convey"
+	"github.com/tsingson/discovery/lib/xhttp"
 )
 
 func TestMain(m *testing.M) {
@@ -39,8 +38,8 @@ func mockDiscoverySvr() {
 			Addr: "127.0.0.1:7171",
 		},
 		HTTPClient: &xhttp.ClientConfig{
-			Dial:      xtime.Duration(time.Second),
-			KeepAlive: xtime.Duration(time.Second * 30),
+			Dial:      time.Duration(time.Second),
+			KeepAlive: time.Duration(time.Second * 30),
 		},
 	}
 	_ = c.Fix()
@@ -136,8 +135,8 @@ func TestDiscovery(t *testing.T) {
 
 func addNewInstance(ins *Instance) error {
 	cli := xhttp.NewClient(&xhttp.ClientConfig{
-		Dial:      xtime.Duration(time.Second),
-		KeepAlive: xtime.Duration(time.Second * 30),
+		Dial:      time.Duration(time.Second),
+		KeepAlive: time.Duration(time.Second * 30),
 	})
 	params := url.Values{}
 	params.Set("env", ins.Env)

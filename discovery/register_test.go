@@ -10,7 +10,6 @@ import (
 	dc "github.com/tsingson/discovery/conf"
 	"github.com/tsingson/discovery/errors"
 	"github.com/tsingson/discovery/lib/xhttp"
-	xtime "github.com/tsingson/discovery/lib/xtime"
 	"github.com/tsingson/discovery/model"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -70,8 +69,8 @@ var config = newConfig()
 func newConfig() *dc.Config {
 	c := &dc.Config{
 		HTTPClient: &xhttp.ClientConfig{
-			Dial:      xtime.Duration(time.Second),
-			KeepAlive: xtime.Duration(time.Second * 30),
+			Dial:      time.Duration(time.Second),
+			KeepAlive: time.Duration(time.Second * 30),
 		},
 		HTTPServer: &dc.ServerConfig{Addr: "127.0.0.1:7171"},
 		Nodes:      []string{"127.0.0.1:7171", "127.0.0.1:7172"},

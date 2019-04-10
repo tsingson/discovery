@@ -13,9 +13,10 @@ var ( // global variable
 
 	path, logPath string
 	cfg           *conf.Config
+	configToml    string
 )
 
-func init() {
+func initx() {
 	var err error
 	afs := afero.NewOsFs()
 	{ // setup path for storage of log / configuration / cache
@@ -29,16 +30,16 @@ func init() {
 
 	}
 	{ // load config for discovery daemon
-		configToml := path + "/discoveryd-config.toml"
+		configToml = path + "/discoveryd-config.toml"
 
 		cfg = conf.Conf
 		cfg, err = conf.LoadConfig(configToml)
 		if err != nil {
 			// fmt.Println("无法读取可执行程序的存储路径")
-		//	panic("无法读取可执行程序的存储路径")
+			//	panic("无法读取可执行程序的存储路径")
 			os.Exit(-1)
 		}
-		litter.Dump( cfg )
+		litter.Dump(cfg)
 
 	}
 	{
@@ -47,7 +48,7 @@ func init() {
 		if !check {
 			err = afs.MkdirAll(logPath, 0755)
 			if err != nil {
-			//	panic("mkdir log path fail")
+				//	panic("mkdir log path fail")
 				os.Exit(-1)
 			}
 		}

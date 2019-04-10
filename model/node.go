@@ -16,6 +16,7 @@ const (
 )
 
 // Node node
+//go:generate easytags $GOFILE json
 type Node struct {
 	Addr   string     `json:"addr"`
 	Status NodeStatus `json:"status"`
@@ -23,6 +24,7 @@ type Node struct {
 }
 
 // Scheduler info.
+//go:generate easytags $GOFILE json
 type Scheduler struct {
 	AppID  string `json:"app_id,omitempty"`
 	Env    string `json:"env"`
@@ -31,6 +33,7 @@ type Scheduler struct {
 }
 
 // Zone info.
+//go:generate easytags $GOFILE json
 type Zone struct {
 	Src string         `json:"src"`
 	Dst map[string]int `json:"dst"`
