@@ -29,47 +29,6 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type RespMsg struct {
-	Code                 int32    `protobuf:"varint,1,opt,name=Code,proto3" json:"Code,omitempty"`
-	Msg                  string   `protobuf:"bytes,2,opt,name=Msg,proto3" json:"Msg,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *RespMsg) Reset()         { *m = RespMsg{} }
-func (m *RespMsg) String() string { return proto.CompactTextString(m) }
-func (*RespMsg) ProtoMessage()    {}
-func (*RespMsg) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{0}
-}
-func (m *RespMsg) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *RespMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_RespMsg.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *RespMsg) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RespMsg.Merge(m, src)
-}
-func (m *RespMsg) XXX_Size() int {
-	return m.Size()
-}
-func (m *RespMsg) XXX_DiscardUnknown() {
-	xxx_messageInfo_RespMsg.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_RespMsg proto.InternalMessageInfo
-
 type Zone struct {
 	Src                  string            `protobuf:"bytes,1,opt,name=Src,proto3" json:"Src,omitempty"`
 	Dst                  map[string]uint32 `protobuf:"bytes,2,rep,name=Dst,proto3" json:"Dst,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
@@ -82,7 +41,7 @@ func (m *Zone) Reset()         { *m = Zone{} }
 func (m *Zone) String() string { return proto.CompactTextString(m) }
 func (*Zone) ProtoMessage()    {}
 func (*Zone) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{1}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{0}
 }
 func (m *Zone) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -124,7 +83,7 @@ func (m *Node) Reset()         { *m = Node{} }
 func (m *Node) String() string { return proto.CompactTextString(m) }
 func (*Node) ProtoMessage()    {}
 func (*Node) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{2}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{1}
 }
 func (m *Node) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -164,7 +123,7 @@ func (m *RespNodes) Reset()         { *m = RespNodes{} }
 func (m *RespNodes) String() string { return proto.CompactTextString(m) }
 func (*RespNodes) ProtoMessage()    {}
 func (*RespNodes) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{3}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{2}
 }
 func (m *RespNodes) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -217,7 +176,7 @@ func (m *Instance) Reset()         { *m = Instance{} }
 func (m *Instance) String() string { return proto.CompactTextString(m) }
 func (*Instance) ProtoMessage()    {}
 func (*Instance) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{4}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{3}
 }
 func (m *Instance) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -260,7 +219,7 @@ func (m *App) Reset()         { *m = App{} }
 func (m *App) String() string { return proto.CompactTextString(m) }
 func (*App) ProtoMessage()    {}
 func (*App) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{5}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{4}
 }
 func (m *App) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -301,7 +260,7 @@ func (m *Apps) Reset()         { *m = Apps{} }
 func (m *Apps) String() string { return proto.CompactTextString(m) }
 func (*Apps) ProtoMessage()    {}
 func (*Apps) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{6}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{5}
 }
 func (m *Apps) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -341,7 +300,7 @@ func (m *Instances) Reset()         { *m = Instances{} }
 func (m *Instances) String() string { return proto.CompactTextString(m) }
 func (*Instances) ProtoMessage()    {}
 func (*Instances) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{7}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{6}
 }
 func (m *Instances) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -383,7 +342,7 @@ func (m *InstanceInfo) Reset()         { *m = InstanceInfo{} }
 func (m *InstanceInfo) String() string { return proto.CompactTextString(m) }
 func (*InstanceInfo) ProtoMessage()    {}
 func (*InstanceInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_1e7ff60feb39c8d0, []int{8}
+	return fileDescriptor_1e7ff60feb39c8d0, []int{7}
 }
 func (m *InstanceInfo) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -411,6 +370,47 @@ func (m *InstanceInfo) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_InstanceInfo proto.InternalMessageInfo
+
+type RespMsg struct {
+	Code                 int32    `protobuf:"varint,1,opt,name=Code,proto3" json:"Code,omitempty"`
+	Msg                  string   `protobuf:"bytes,2,opt,name=Msg,proto3" json:"Msg,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *RespMsg) Reset()         { *m = RespMsg{} }
+func (m *RespMsg) String() string { return proto.CompactTextString(m) }
+func (*RespMsg) ProtoMessage()    {}
+func (*RespMsg) Descriptor() ([]byte, []int) {
+	return fileDescriptor_1e7ff60feb39c8d0, []int{8}
+}
+func (m *RespMsg) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *RespMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_RespMsg.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *RespMsg) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RespMsg.Merge(m, src)
+}
+func (m *RespMsg) XXX_Size() int {
+	return m.Size()
+}
+func (m *RespMsg) XXX_DiscardUnknown() {
+	xxx_messageInfo_RespMsg.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RespMsg proto.InternalMessageInfo
 
 type RespFech struct {
 	Code                 float64       `protobuf:"fixed64,1,opt,name=code,proto3" json:"code,omitempty"`
@@ -722,7 +722,7 @@ func (m *ArgFetch) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ArgFetch proto.InternalMessageInfo
 
-type ArgFetchs struct {
+type ArgFetchAll struct {
 	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
 	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
 	AppID                []string `protobuf:"bytes,3,rep,name=AppID,proto3" json:"AppID,omitempty"`
@@ -732,18 +732,18 @@ type ArgFetchs struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ArgFetchs) Reset()         { *m = ArgFetchs{} }
-func (m *ArgFetchs) String() string { return proto.CompactTextString(m) }
-func (*ArgFetchs) ProtoMessage()    {}
-func (*ArgFetchs) Descriptor() ([]byte, []int) {
+func (m *ArgFetchAll) Reset()         { *m = ArgFetchAll{} }
+func (m *ArgFetchAll) String() string { return proto.CompactTextString(m) }
+func (*ArgFetchAll) ProtoMessage()    {}
+func (*ArgFetchAll) Descriptor() ([]byte, []int) {
 	return fileDescriptor_1e7ff60feb39c8d0, []int{16}
 }
-func (m *ArgFetchs) XXX_Unmarshal(b []byte) error {
+func (m *ArgFetchAll) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ArgFetchs) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *ArgFetchAll) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ArgFetchs.Marshal(b, m, deterministic)
+		return xxx_messageInfo_ArgFetchAll.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalTo(b)
@@ -753,24 +753,23 @@ func (m *ArgFetchs) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *ArgFetchs) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ArgFetchs.Merge(m, src)
+func (m *ArgFetchAll) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ArgFetchAll.Merge(m, src)
 }
-func (m *ArgFetchs) XXX_Size() int {
+func (m *ArgFetchAll) XXX_Size() int {
 	return m.Size()
 }
-func (m *ArgFetchs) XXX_DiscardUnknown() {
-	xxx_messageInfo_ArgFetchs.DiscardUnknown(m)
+func (m *ArgFetchAll) XXX_DiscardUnknown() {
+	xxx_messageInfo_ArgFetchAll.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ArgFetchs proto.InternalMessageInfo
+var xxx_messageInfo_ArgFetchAll proto.InternalMessageInfo
 
 type ArgRoll struct {
 	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
 	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
 	AppID                string   `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             string   `protobuf:"bytes,4,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
-	LatestTimestamp      int64    `protobuf:"varint,5,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	LatestTimestamp      int64    `protobuf:"varint,4,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -813,8 +812,7 @@ type ArgRolls struct {
 	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
 	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
 	AppID                []string `protobuf:"bytes,3,rep,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             string   `protobuf:"bytes,4,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
-	LatestTimestamp      []int64  `protobuf:"varint,5,rep,packed,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	LatestTimestamp      []int64  `protobuf:"varint,4,rep,packed,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -854,17 +852,17 @@ func (m *ArgRolls) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArgRolls proto.InternalMessageInfo
 
 type ArqSet struct {
-	Zone                 string    `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string    `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string    `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             []string  `protobuf:"bytes,4,rep,name=Hostname,proto3" json:"Hostname,omitempty"`
-	Status               []float32 `protobuf:"fixed32,5,rep,packed,name=Status,proto3" json:"Status,omitempty"`
-	Metadata             []string  `protobuf:"bytes,6,rep,name=Metadata,proto3" json:"Metadata,omitempty"`
-	Replication          bool      `protobuf:"varint,7,opt,name=Replication,proto3" json:"Replication,omitempty"`
-	SetTimestamp         float64   `protobuf:"fixed64,8,opt,name=SetTimestamp,proto3" json:"SetTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string   `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	Hostname             []string `protobuf:"bytes,4,rep,name=Hostname,proto3" json:"Hostname,omitempty"`
+	Status               []uint32 `protobuf:"varint,5,rep,packed,name=Status,proto3" json:"Status,omitempty"`
+	Metadata             []string `protobuf:"bytes,6,rep,name=Metadata,proto3" json:"Metadata,omitempty"`
+	Replication          bool     `protobuf:"varint,7,opt,name=Replication,proto3" json:"Replication,omitempty"`
+	SetTimestamp         int64    `protobuf:"varint,8,opt,name=SetTimestamp,proto3" json:"SetTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ArqSet) Reset()         { *m = ArqSet{} }
@@ -901,185 +899,114 @@ func (m *ArqSet) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArqSet proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*RespMsg)(nil), "gopkg.in.srcd.proteus.v1.example.RespMsg")
-	proto.RegisterType((*Zone)(nil), "gopkg.in.srcd.proteus.v1.example.Zone")
-	proto.RegisterMapType((map[string]uint32)(nil), "gopkg.in.srcd.proteus.v1.example.Zone.DstEntry")
-	proto.RegisterType((*Node)(nil), "gopkg.in.srcd.proteus.v1.example.Node")
-	proto.RegisterType((*RespNodes)(nil), "gopkg.in.srcd.proteus.v1.example.respNodes")
-	proto.RegisterType((*Instance)(nil), "gopkg.in.srcd.proteus.v1.example.Instance")
-	proto.RegisterMapType((map[string]string)(nil), "gopkg.in.srcd.proteus.v1.example.Instance.MetadataEntry")
-	proto.RegisterType((*App)(nil), "gopkg.in.srcd.proteus.v1.example.App")
-	proto.RegisterMapType((map[string]*Instance)(nil), "gopkg.in.srcd.proteus.v1.example.App.InstancesEntry")
-	proto.RegisterType((*Apps)(nil), "gopkg.in.srcd.proteus.v1.example.Apps")
-	proto.RegisterMapType((map[string]*App)(nil), "gopkg.in.srcd.proteus.v1.example.Apps.AppsEntry")
-	proto.RegisterType((*Instances)(nil), "gopkg.in.srcd.proteus.v1.example.Instances")
-	proto.RegisterType((*InstanceInfo)(nil), "gopkg.in.srcd.proteus.v1.example.InstanceInfo")
-	proto.RegisterMapType((map[string]*Instances)(nil), "gopkg.in.srcd.proteus.v1.example.InstanceInfo.InstanceEntry")
-	proto.RegisterType((*RespFech)(nil), "gopkg.in.srcd.proteus.v1.example.RespFech")
-	proto.RegisterType((*RespFechs)(nil), "gopkg.in.srcd.proteus.v1.example.RespFechs")
-	proto.RegisterMapType((map[string]*InstanceInfo)(nil), "gopkg.in.srcd.proteus.v1.example.RespFechs.DataEntry")
-	proto.RegisterType((*RespNodes)(nil), "gopkg.in.srcd.proteus.v1.example.RespNodes")
-	proto.RegisterMapType((map[string]*Node)(nil), "gopkg.in.srcd.proteus.v1.example.RespNodes.DataEntry")
-	proto.RegisterType((*ArgRegister)(nil), "gopkg.in.srcd.proteus.v1.example.ArgRegister")
-	proto.RegisterType((*ArgRenew)(nil), "gopkg.in.srcd.proteus.v1.example.ArgRenew")
-	proto.RegisterType((*ArgCancel)(nil), "gopkg.in.srcd.proteus.v1.example.ArgCancel")
-	proto.RegisterType((*ArgFetch)(nil), "gopkg.in.srcd.proteus.v1.example.ArgFetch")
-	proto.RegisterType((*ArgFetchs)(nil), "gopkg.in.srcd.proteus.v1.example.ArgFetchs")
-	proto.RegisterType((*ArgRoll)(nil), "gopkg.in.srcd.proteus.v1.example.ArgRoll")
-	proto.RegisterType((*ArgRolls)(nil), "gopkg.in.srcd.proteus.v1.example.ArgRolls")
-	proto.RegisterType((*ArqSet)(nil), "gopkg.in.srcd.proteus.v1.example.ArqSet")
+	proto.RegisterType((*Zone)(nil), "Zone")
+	proto.RegisterMapType((map[string]uint32)(nil), "Zone.DstEntry")
+	proto.RegisterType((*Node)(nil), "Node")
+	proto.RegisterType((*RespNodes)(nil), "respNodes")
+	proto.RegisterType((*Instance)(nil), "Instance")
+	proto.RegisterMapType((map[string]string)(nil), "Instance.MetadataEntry")
+	proto.RegisterType((*App)(nil), "App")
+	proto.RegisterMapType((map[string]*Instance)(nil), "App.InstancesEntry")
+	proto.RegisterType((*Apps)(nil), "Apps")
+	proto.RegisterMapType((map[string]*App)(nil), "Apps.AppsEntry")
+	proto.RegisterType((*Instances)(nil), "Instances")
+	proto.RegisterType((*InstanceInfo)(nil), "InstanceInfo")
+	proto.RegisterMapType((map[string]*Instances)(nil), "InstanceInfo.InstanceEntry")
+	proto.RegisterType((*RespMsg)(nil), "RespMsg")
+	proto.RegisterType((*RespFech)(nil), "RespFech")
+	proto.RegisterType((*RespFechs)(nil), "RespFechs")
+	proto.RegisterMapType((map[string]*InstanceInfo)(nil), "RespFechs.DataEntry")
+	proto.RegisterType((*RespNodes)(nil), "RespNodes")
+	proto.RegisterMapType((map[string]*Node)(nil), "RespNodes.DataEntry")
+	proto.RegisterType((*ArgRegister)(nil), "ArgRegister")
+	proto.RegisterType((*ArgRenew)(nil), "ArgRenew")
+	proto.RegisterType((*ArgCancel)(nil), "ArgCancel")
+	proto.RegisterType((*ArgFetch)(nil), "ArgFetch")
+	proto.RegisterType((*ArgFetchAll)(nil), "ArgFetchAll")
+	proto.RegisterType((*ArgRoll)(nil), "ArgRoll")
+	proto.RegisterType((*ArgRolls)(nil), "ArgRolls")
+	proto.RegisterType((*ArqSet)(nil), "ArqSet")
 }
 
 func init() { proto.RegisterFile("discovery.proto", fileDescriptor_1e7ff60feb39c8d0) }
 
 var fileDescriptor_1e7ff60feb39c8d0 = []byte{
-	// 1247 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x58, 0xcd, 0x6f, 0xdc, 0x44,
-	0x14, 0xcf, 0xac, 0xbd, 0x1f, 0x7e, 0x9b, 0x0f, 0x34, 0x42, 0xc8, 0xda, 0xc3, 0xb2, 0x8a, 0x44,
-	0xb4, 0x24, 0xaa, 0x13, 0x02, 0x45, 0x55, 0x9b, 0x03, 0x6e, 0x9d, 0xaa, 0x91, 0x9a, 0x52, 0x39,
-	0x05, 0xa1, 0x20, 0xb5, 0x75, 0xd6, 0x53, 0x67, 0x95, 0x8d, 0x6d, 0x3c, 0xde, 0x84, 0x5c, 0xe1,
-	0xc2, 0x95, 0x9e, 0x40, 0x08, 0x89, 0x23, 0x67, 0x24, 0x24, 0x8e, 0x1c, 0x73, 0xe4, 0x0e, 0x87,
-	0x64, 0xf9, 0x07, 0xb8, 0x73, 0x41, 0x33, 0x9e, 0xb5, 0xd7, 0xbb, 0xde, 0xac, 0x4d, 0x5b, 0xb8,
-	0x54, 0x33, 0xd3, 0xf7, 0xf1, 0xfb, 0xfd, 0xde, 0xcc, 0xf3, 0xdb, 0xc0, 0x92, 0xdd, 0xa5, 0x1d,
-	0xef, 0x84, 0x04, 0x67, 0x9a, 0x1f, 0x78, 0xa1, 0x87, 0x5b, 0x8e, 0xe7, 0x1f, 0x39, 0x5a, 0xd7,
-	0xd5, 0x68, 0xd0, 0xb1, 0xf9, 0x21, 0xe9, 0x53, 0xed, 0xe4, 0x1d, 0x8d, 0x7c, 0x6e, 0x1d, 0xfb,
-	0x3d, 0xd2, 0xb8, 0xe6, 0x74, 0xc3, 0xc3, 0xfe, 0x81, 0xd6, 0xf1, 0x8e, 0xd7, 0x1d, 0xcf, 0xf1,
-	0xd6, 0xb9, 0xe3, 0x41, 0xff, 0x19, 0xdf, 0xf1, 0x0d, 0x5f, 0x45, 0x01, 0x97, 0xaf, 0x43, 0xd5,
-	0x24, 0xd4, 0xdf, 0xa5, 0x0e, 0xc6, 0x20, 0xdf, 0xf1, 0x6c, 0xa2, 0xa2, 0x16, 0x6a, 0x97, 0x4d,
-	0xbe, 0xc6, 0xaf, 0x81, 0xb4, 0x4b, 0x1d, 0xb5, 0xd4, 0x42, 0x6d, 0xc5, 0x64, 0xcb, 0x9b, 0xf2,
-	0x57, 0x3f, 0xbc, 0x39, 0xb7, 0xfc, 0x2d, 0x02, 0x79, 0xdf, 0x73, 0xb9, 0xc1, 0x5e, 0xd0, 0xe1,
-	0x3e, 0x8a, 0xc9, 0x96, 0x58, 0x07, 0xc9, 0xa0, 0xa1, 0x5a, 0x6a, 0x49, 0xed, 0xfa, 0xe6, 0xba,
-	0x36, 0x0b, 0xb0, 0xc6, 0xc2, 0x68, 0x06, 0x0d, 0xb7, 0xdd, 0x30, 0x38, 0x33, 0x99, 0x6f, 0xe3,
-	0x7d, 0xa8, 0x0d, 0x0f, 0x58, 0x82, 0x23, 0x72, 0x36, 0x4c, 0x70, 0x44, 0xce, 0xf0, 0xeb, 0x50,
-	0x3e, 0xb1, 0x7a, 0x7d, 0xc2, 0x51, 0x2d, 0x98, 0xd1, 0xe6, 0x66, 0xe9, 0x06, 0x12, 0xd8, 0xee,
-	0x83, 0xfc, 0x80, 0x61, 0xc7, 0x20, 0xeb, 0xb6, 0x1d, 0x08, 0x57, 0xbe, 0xc6, 0x6f, 0x40, 0x65,
-	0x2f, 0xb4, 0xc2, 0x3e, 0x15, 0xce, 0x62, 0xc7, 0x6c, 0x19, 0x0e, 0x55, 0x8a, 0x6c, 0xd9, 0x5a,
-	0x44, 0xfb, 0x10, 0x94, 0x80, 0x50, 0x9f, 0x45, 0xa4, 0x78, 0x0b, 0xca, 0x0f, 0xbc, 0x90, 0x50,
-	0x15, 0x71, 0x76, 0x2b, 0xb3, 0xd9, 0x31, 0x3f, 0x33, 0x72, 0x12, 0x01, 0xbf, 0x93, 0xa1, 0xb6,
-	0xe3, 0xd2, 0xd0, 0x72, 0x3b, 0x84, 0xe1, 0x31, 0x89, 0xd3, 0xf5, 0x5c, 0x81, 0x52, 0xec, 0x62,
-	0x3c, 0xa5, 0x04, 0x0f, 0x53, 0x62, 0xdb, 0x3d, 0x11, 0x10, 0xd9, 0x92, 0x29, 0xa1, 0xfb, 0xfe,
-	0x8e, 0xa1, 0xca, 0xfc, 0x2c, 0xda, 0xe0, 0x06, 0xd4, 0xee, 0x79, 0x34, 0x74, 0xad, 0x63, 0xa2,
-	0x96, 0xf9, 0x7f, 0xc4, 0x7b, 0xee, 0x61, 0xdb, 0x01, 0x55, 0x2b, 0x2d, 0x89, 0x7b, 0xb0, 0xcd,
-	0x88, 0x2a, 0xd5, 0x94, 0x2a, 0x2a, 0x54, 0x3f, 0x26, 0x01, 0x65, 0xf0, 0x6a, 0x3c, 0xd0, 0x70,
-	0x8b, 0x1f, 0x41, 0x6d, 0x97, 0x84, 0x96, 0x6d, 0x85, 0x96, 0xaa, 0x70, 0x2d, 0x6e, 0xcc, 0xd6,
-	0x62, 0xc8, 0x5a, 0x1b, 0xba, 0x46, 0x25, 0x8f, 0x23, 0xe1, 0x65, 0x98, 0x37, 0x89, 0xf3, 0xa8,
-	0x7b, 0x4c, 0x68, 0x68, 0x1d, 0xfb, 0x2a, 0xb4, 0x50, 0x5b, 0x32, 0x53, 0x67, 0xb8, 0x05, 0xf5,
-	0x8f, 0xfc, 0xc4, 0xa4, 0xce, 0x4d, 0x46, 0x8f, 0xf0, 0x0a, 0x2c, 0x9a, 0xc4, 0x25, 0xa7, 0x89,
-	0xd1, 0x3c, 0x37, 0x1a, 0x3b, 0x65, 0x76, 0x46, 0x37, 0x08, 0xcf, 0x12, 0xbb, 0x85, 0xc8, 0x2e,
-	0x7d, 0x8a, 0xdb, 0xb0, 0x74, 0xdf, 0x0a, 0x09, 0x0d, 0x13, 0xc3, 0x45, 0x6e, 0x38, 0x7e, 0xdc,
-	0xb8, 0x05, 0x0b, 0x29, 0x6a, 0xb3, 0x2e, 0xaf, 0x32, 0x79, 0x79, 0xbf, 0x2f, 0x81, 0xa4, 0xfb,
-	0x7e, 0x52, 0x5a, 0x34, 0x5a, 0xda, 0xac, 0x6b, 0x61, 0x82, 0xd2, 0x15, 0xc2, 0x52, 0x55, 0xe2,
-	0xb5, 0x78, 0x6f, 0x76, 0x2d, 0x74, 0xdf, 0x8f, 0xeb, 0x41, 0xa3, 0x3a, 0x24, 0x61, 0x18, 0xe5,
-	0xde, 0x18, 0x65, 0x39, 0xa2, 0x3c, 0x76, 0xdc, 0x38, 0x84, 0xc5, 0x74, 0x98, 0x0c, 0xce, 0x1f,
-	0x8c, 0x72, 0xae, 0x6f, 0xae, 0xe6, 0xbf, 0x29, 0x93, 0xfa, 0xfc, 0x81, 0x40, 0xd6, 0x7d, 0x9f,
-	0x62, 0x03, 0x64, 0xcb, 0xf7, 0x87, 0x2f, 0x71, 0x23, 0x17, 0x63, 0xca, 0xff, 0x89, 0xd8, 0x72,
-	0xef, 0x2c, 0xa2, 0xa5, 0x6c, 0xa2, 0x8f, 0x41, 0x89, 0x9d, 0x33, 0x38, 0xde, 0x4a, 0x73, 0x7c,
-	0x2b, 0x17, 0x9e, 0x49, 0x7a, 0x9f, 0x82, 0x12, 0xcb, 0x89, 0xef, 0x8d, 0x6c, 0x04, 0xcf, 0x22,
-	0xda, 0x25, 0xce, 0x22, 0xf8, 0x79, 0x09, 0xe6, 0x87, 0x67, 0x3b, 0xee, 0x33, 0x0f, 0x7f, 0x92,
-	0x74, 0x22, 0x11, 0x7f, 0x2b, 0x7f, 0x7c, 0x16, 0x21, 0xde, 0x88, 0x97, 0x1c, 0xf7, 0x35, 0x03,
-	0x94, 0xbd, 0xce, 0x21, 0xb1, 0xfb, 0x3d, 0x12, 0x88, 0x4f, 0xc1, 0x4a, 0xbe, 0x4f, 0x81, 0x99,
-	0x38, 0x66, 0xbd, 0x3c, 0x29, 0xfb, 0xe5, 0x1d, 0xc2, 0x42, 0x0a, 0x4a, 0x46, 0x85, 0xf4, 0x74,
-	0x85, 0xd6, 0xf2, 0x33, 0xa5, 0x93, 0x75, 0x7a, 0x8e, 0xa0, 0xc6, 0xbe, 0x9b, 0x77, 0x49, 0xe7,
-	0x90, 0xbd, 0xca, 0xce, 0xf0, 0xc3, 0x89, 0x4c, 0xbe, 0xc6, 0xb7, 0x41, 0x36, 0x58, 0x73, 0x8c,
-	0x92, 0x69, 0xc5, 0x64, 0x35, 0xb9, 0xef, 0x34, 0xfa, 0xf2, 0x04, 0x7d, 0x01, 0xea, 0xcb, 0x12,
-	0x28, 0x43, 0x50, 0x34, 0x13, 0xd5, 0x4e, 0x8c, 0x8a, 0x55, 0xe4, 0xfa, 0x6c, 0x54, 0x71, 0x38,
-	0xcd, 0x88, 0xfb, 0x75, 0x41, 0x70, 0x0d, 0x07, 0x14, 0xe3, 0x8a, 0x8e, 0x68, 0xa4, 0xeb, 0x52,
-	0x54, 0xaa, 0x89, 0xd2, 0xfc, 0x8d, 0x22, 0x15, 0xa2, 0x2f, 0xf6, 0x4b, 0x53, 0x81, 0x87, 0x7b,
-	0x01, 0x15, 0x9e, 0x5c, 0xad, 0xc2, 0x56, 0x5a, 0x85, 0xdc, 0x93, 0xc5, 0x38, 0xfb, 0xdf, 0x4b,
-	0x50, 0xd7, 0x03, 0x87, 0x8d, 0x11, 0x34, 0x24, 0xc1, 0x7f, 0x3e, 0x60, 0x24, 0xa3, 0x44, 0x25,
-	0x35, 0x4a, 0xc4, 0x83, 0x47, 0x75, 0x74, 0xf0, 0x98, 0x3e, 0x60, 0x34, 0x52, 0x03, 0x06, 0xcf,
-	0x11, 0x8f, 0x09, 0x2d, 0xa8, 0x9b, 0xc4, 0xef, 0x75, 0x3b, 0x56, 0xc8, 0x3c, 0xd9, 0x94, 0x50,
-	0x33, 0x47, 0x8f, 0xb2, 0xca, 0x52, 0xcf, 0x6c, 0x1c, 0x19, 0x43, 0xc0, 0x7c, 0xd6, 0x10, 0x20,
-	0xd4, 0xfd, 0x09, 0x41, 0x8d, 0xab, 0xeb, 0x92, 0xd3, 0x58, 0x42, 0x34, 0x29, 0x61, 0x29, 0x43,
-	0x42, 0x69, 0x9a, 0x84, 0xf2, 0x98, 0x84, 0x63, 0xf4, 0xca, 0x93, 0xf4, 0x26, 0x41, 0x57, 0xae,
-	0x00, 0xfd, 0x33, 0x02, 0x45, 0x0f, 0x9c, 0x3b, 0xec, 0xc9, 0xf4, 0xfe, 0x47, 0xd4, 0x19, 0x45,
-	0xa9, 0x64, 0x16, 0x45, 0xe0, 0xb6, 0xb9, 0xd6, 0x77, 0x49, 0x18, 0xb5, 0xd8, 0x7f, 0x8d, 0x3a,
-	0xb9, 0x92, 0xf2, 0xe8, 0x95, 0x14, 0x59, 0x08, 0x17, 0x87, 0x67, 0xa1, 0xc5, 0xd3, 0x48, 0x79,
-	0xd3, 0x7c, 0x8d, 0xa0, 0xca, 0x6e, 0x8e, 0xd7, 0x7b, 0x75, 0x25, 0xc8, 0x10, 0xb8, 0x7c, 0x95,
-	0xc0, 0xcf, 0xc5, 0x6d, 0xf6, 0x7a, 0xbd, 0x17, 0xa3, 0x5e, 0x18, 0x94, 0x34, 0x1d, 0xd4, 0x05,
-	0x82, 0x8a, 0x1e, 0x7c, 0xb6, 0x47, 0xc2, 0x97, 0xa8, 0x93, 0x34, 0xa5, 0x47, 0x31, 0x24, 0xa5,
-	0xb8, 0x47, 0x8d, 0xf6, 0x9c, 0xe8, 0xf7, 0xd1, 0xd4, 0x9e, 0x53, 0x9d, 0xbc, 0xde, 0xcb, 0x30,
-	0xbf, 0x47, 0x46, 0x58, 0xd6, 0xf8, 0x17, 0x27, 0x75, 0x16, 0x51, 0xdc, 0xfc, 0xa2, 0x0a, 0x4b,
-	0xdb, 0xfd, 0x80, 0x1c, 0x59, 0xc6, 0xf0, 0xe7, 0x3d, 0xb6, 0xd9, 0x3c, 0x21, 0x7a, 0xf6, 0xb5,
-	0x1c, 0xc3, 0x63, 0xd2, 0xe2, 0x1b, 0x6f, 0xe7, 0xfb, 0x80, 0xb1, 0x9f, 0xf8, 0x8f, 0xa1, 0x1c,
-	0xf5, 0xae, 0xd5, 0x9c, 0x29, 0x5c, 0x72, 0x5a, 0x24, 0xfe, 0x53, 0xa8, 0x88, 0x36, 0xb3, 0x96,
-	0x2b, 0x41, 0x64, 0x5c, 0x24, 0xc3, 0x13, 0x28, 0x47, 0x1d, 0x21, 0x1f, 0x03, 0x6e, 0xdb, 0x58,
-	0xcd, 0x3f, 0xe8, 0xb0, 0x42, 0x70, 0x27, 0xbd, 0x97, 0x97, 0x44, 0xd4, 0x3b, 0x1a, 0x6b, 0x05,
-	0xa6, 0x29, 0xfc, 0x14, 0xe4, 0x87, 0xac, 0x15, 0xbc, 0x22, 0x16, 0x1b, 0x08, 0x1f, 0x40, 0xf9,
-	0x21, 0x7f, 0xd8, 0x45, 0x52, 0x14, 0xe1, 0xb0, 0x81, 0xd8, 0x75, 0x8a, 0xa6, 0xac, 0x22, 0x39,
-	0x0a, 0x14, 0x7b, 0x1f, 0x24, 0xd6, 0x07, 0xda, 0x79, 0xa2, 0xb3, 0x8e, 0x51, 0x20, 0xf6, 0xed,
-	0x8d, 0xf3, 0xcb, 0xe6, 0xdc, 0xc5, 0x65, 0x13, 0xfd, 0x75, 0xd9, 0x44, 0x3f, 0x0e, 0x9a, 0xe8,
-	0x97, 0x41, 0x13, 0xfd, 0x3a, 0x68, 0xa2, 0xf3, 0x41, 0x13, 0xfd, 0x36, 0x68, 0xa2, 0x8b, 0x41,
-	0x13, 0x7d, 0xf3, 0x67, 0x73, 0x6e, 0xbf, 0x42, 0xf8, 0x5b, 0x3d, 0xa8, 0xf0, 0xbf, 0x98, 0xbd,
-	0xfb, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x82, 0x2d, 0xb8, 0xaa, 0x95, 0x13, 0x00, 0x00,
+	// 1166 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x57, 0xcf, 0x6f, 0xe3, 0xc4,
+	0x17, 0xef, 0xc4, 0x4e, 0x62, 0xbf, 0xa4, 0xed, 0x57, 0xfe, 0xae, 0xc0, 0x72, 0xc1, 0x1b, 0x5a,
+	0x04, 0xb9, 0xe0, 0x2d, 0x5d, 0xf1, 0x43, 0x45, 0x20, 0x85, 0x4d, 0xbb, 0x54, 0xda, 0xae, 0x56,
+	0x2e, 0x70, 0xd8, 0x9b, 0x9b, 0xcc, 0xa6, 0x51, 0x53, 0xdb, 0xeb, 0x99, 0x74, 0xc9, 0x7f, 0xc0,
+	0x9f, 0x80, 0x38, 0x71, 0xe4, 0xbc, 0x12, 0x12, 0xdc, 0xe0, 0xb6, 0x47, 0xee, 0x5c, 0xda, 0x20,
+	0xee, 0x9c, 0x39, 0xa1, 0xf9, 0x61, 0x7b, 0x1c, 0x3b, 0x65, 0xd9, 0x22, 0xb8, 0x44, 0xf3, 0xde,
+	0xbc, 0x37, 0xef, 0x7d, 0x3e, 0xf3, 0xe6, 0x3d, 0x07, 0xd6, 0x87, 0x63, 0x32, 0x88, 0xce, 0x71,
+	0x32, 0xf3, 0xe2, 0x24, 0xa2, 0x91, 0xf3, 0xd6, 0x68, 0x4c, 0x4f, 0xa6, 0xc7, 0xde, 0x20, 0x3a,
+	0xbb, 0x35, 0x8a, 0x46, 0xd1, 0x2d, 0xae, 0x3e, 0x9e, 0x3e, 0xe2, 0x12, 0x17, 0xf8, 0x4a, 0x98,
+	0x6f, 0x7e, 0x01, 0xfa, 0xc3, 0x28, 0xc4, 0xd6, 0xff, 0x40, 0x3b, 0x4a, 0x06, 0x36, 0xea, 0xa0,
+	0xae, 0xe9, 0xb3, 0xa5, 0xd5, 0x01, 0xad, 0x4f, 0xa8, 0x5d, 0xeb, 0x68, 0xdd, 0xd6, 0xce, 0x9a,
+	0xc7, 0xac, 0xbc, 0x3e, 0xa1, 0x7b, 0x21, 0x4d, 0x66, 0x3e, 0xdb, 0x72, 0xde, 0x05, 0x23, 0x55,
+	0x30, 0xff, 0x53, 0x3c, 0x4b, 0xfd, 0x4f, 0xf1, 0xcc, 0xba, 0x01, 0xf5, 0xf3, 0x60, 0x32, 0xc5,
+	0x76, 0xad, 0x83, 0xba, 0xab, 0xbe, 0x10, 0x76, 0x6b, 0xef, 0xa3, 0x5d, 0xfd, 0xcb, 0x6f, 0x6e,
+	0xae, 0x6c, 0xde, 0x03, 0xfd, 0x7e, 0x34, 0xc4, 0x96, 0x05, 0x7a, 0x6f, 0x38, 0x4c, 0xa4, 0x2b,
+	0x5f, 0x5b, 0x2f, 0x41, 0xe3, 0x88, 0x06, 0x74, 0x4a, 0xa4, 0xb3, 0x94, 0x98, 0x2d, 0xcb, 0xc3,
+	0xd6, 0x84, 0x2d, 0x5b, 0xcb, 0xd3, 0x3c, 0x30, 0x13, 0x4c, 0x62, 0x76, 0x22, 0xb1, 0x36, 0xa0,
+	0x7e, 0x3f, 0xa2, 0x98, 0xd8, 0x88, 0x27, 0x5f, 0xf7, 0x98, 0xda, 0x17, 0x3a, 0x69, 0xff, 0x87,
+	0x06, 0xc6, 0x41, 0x48, 0x68, 0x10, 0x0e, 0x30, 0x0b, 0xe7, 0xe3, 0xd1, 0x38, 0x0a, 0x65, 0x12,
+	0x52, 0xca, 0xc2, 0xd5, 0xf2, 0x70, 0x0c, 0xe8, 0x5e, 0x78, 0x2e, 0x33, 0x60, 0x4b, 0x06, 0xb4,
+	0x17, 0xc7, 0x07, 0x7d, 0x5b, 0xe7, 0x3a, 0x21, 0x58, 0x0e, 0x18, 0x9f, 0x44, 0x84, 0x86, 0xc1,
+	0x19, 0xb6, 0xeb, 0x7c, 0x23, 0x93, 0xb9, 0xc7, 0x70, 0x98, 0x10, 0xbb, 0xd1, 0xd1, 0xb8, 0x07,
+	0x13, 0x14, 0xd0, 0xcd, 0x02, 0x68, 0x1b, 0x9a, 0x9f, 0xe3, 0x84, 0xb0, 0xf4, 0x0c, 0x7e, 0x50,
+	0x2a, 0x5a, 0xb7, 0xc1, 0x38, 0xc4, 0x34, 0x18, 0x06, 0x34, 0xb0, 0x4d, 0x0e, 0xf5, 0x65, 0x2f,
+	0x05, 0xe5, 0xa5, 0x3b, 0xe2, 0xc2, 0x32, 0x43, 0x6b, 0x13, 0xda, 0x3e, 0x1e, 0x7d, 0x3a, 0x3e,
+	0xc3, 0x84, 0x06, 0x67, 0xb1, 0x0d, 0x1d, 0xd4, 0xd5, 0xfc, 0x82, 0xce, 0xea, 0x40, 0xeb, 0xb3,
+	0x38, 0x37, 0x69, 0x71, 0x13, 0x55, 0x65, 0xbd, 0x01, 0x6b, 0x3e, 0x0e, 0xf1, 0x93, 0xdc, 0xa8,
+	0xcd, 0x8d, 0x16, 0xb4, 0xcc, 0xae, 0x3f, 0x4e, 0xe8, 0x2c, 0xb7, 0x5b, 0x15, 0x76, 0x45, 0xad,
+	0xd5, 0x85, 0xf5, 0x7b, 0x01, 0xc5, 0x84, 0xe6, 0x86, 0x6b, 0xdc, 0x70, 0x51, 0xed, 0x7c, 0x00,
+	0xab, 0x05, 0x68, 0x7f, 0x55, 0x7a, 0x66, 0xb9, 0xf4, 0x7e, 0x41, 0xa0, 0xf5, 0xe2, 0x38, 0xbf,
+	0x39, 0xa4, 0xde, 0x5c, 0xd5, 0xad, 0xbf, 0x0d, 0xe6, 0x58, 0x12, 0x4b, 0x6c, 0x8d, 0x53, 0xfd,
+	0x7f, 0xaf, 0x17, 0xc7, 0x19, 0xdd, 0x44, 0xd0, 0x9c, 0x5b, 0x31, 0x44, 0x93, 0x05, 0x44, 0xba,
+	0x40, 0xb4, 0xa0, 0x76, 0xee, 0xc2, 0x5a, 0xf1, 0x98, 0x0a, 0x48, 0x37, 0x55, 0x48, 0xad, 0x1d,
+	0x33, 0x0b, 0x5c, 0x46, 0xf7, 0x35, 0x02, 0xbd, 0x17, 0xc7, 0xc4, 0xda, 0x02, 0x3d, 0x88, 0xe3,
+	0xf4, 0x15, 0xac, 0xb3, 0x7c, 0x09, 0xff, 0x11, 0xb9, 0xf2, 0xcd, 0xaa, 0x34, 0x6b, 0xd5, 0x69,
+	0x7e, 0x08, 0x66, 0xe6, 0x5c, 0x91, 0xa1, 0x53, 0xcc, 0x50, 0x67, 0x91, 0xca, 0xc9, 0xed, 0x82,
+	0x99, 0x61, 0xb5, 0xde, 0x54, 0x04, 0x99, 0xa5, 0x02, 0x2c, 0xdf, 0x93, 0xbe, 0xbf, 0x21, 0x68,
+	0xa7, 0xba, 0x83, 0xf0, 0x51, 0x64, 0xbd, 0x97, 0xbf, 0x61, 0xe9, 0xbe, 0xe1, 0xa9, 0x06, 0x99,
+	0x20, 0xdf, 0x40, 0xf6, 0xe0, 0xb7, 0xc0, 0x3c, 0x1a, 0x9c, 0xe0, 0xe1, 0x74, 0x82, 0x13, 0xd9,
+	0xe1, 0xea, 0xbc, 0xc3, 0xf9, 0xb9, 0xbe, 0xaa, 0x24, 0xb5, 0xea, 0x92, 0xbc, 0x0b, 0xab, 0x85,
+	0x48, 0x15, 0xec, 0x74, 0x8a, 0xec, 0x40, 0x5e, 0x38, 0x65, 0x8e, 0xde, 0x81, 0xa6, 0x8f, 0x49,
+	0x7c, 0x48, 0x46, 0xac, 0x16, 0xef, 0x44, 0x43, 0xcc, 0x4f, 0xaa, 0xfb, 0x7c, 0xcd, 0x0e, 0x3f,
+	0x24, 0x23, 0x59, 0x9e, 0x6c, 0x29, 0xdd, 0x1e, 0x83, 0xc1, 0xdc, 0xf6, 0xf1, 0xe0, 0x84, 0xf9,
+	0x0d, 0x52, 0x3f, 0xe4, 0xf3, 0xb5, 0xf5, 0x1a, 0xe8, 0x7d, 0xd6, 0x29, 0x44, 0x06, 0xab, 0x05,
+	0xa6, 0x7c, 0xbe, 0xb5, 0x0c, 0xb2, 0x5e, 0x82, 0x2c, 0x43, 0xfe, 0x84, 0xc0, 0x4c, 0x63, 0x92,
+	0xca, 0xa0, 0xdd, 0x2c, 0x28, 0x23, 0xf9, 0x86, 0x97, 0x59, 0x7b, 0xfd, 0xac, 0x37, 0xfd, 0xcd,
+	0xd8, 0xce, 0x3e, 0x98, 0xfd, 0x2b, 0x5e, 0xff, 0x56, 0x91, 0xea, 0x05, 0xa0, 0x25, 0xb6, 0x7f,
+	0x90, 0x18, 0xc4, 0xe8, 0x78, 0x5e, 0x0c, 0xdc, 0xfa, 0x1a, 0x18, 0x3e, 0xba, 0x1a, 0xc3, 0x46,
+	0x11, 0x43, 0x3a, 0xc1, 0x4a, 0x8d, 0xac, 0x06, 0xad, 0x5e, 0x32, 0x62, 0xe3, 0x8a, 0x50, 0x9c,
+	0xfc, 0xeb, 0x83, 0x2c, 0x1f, 0x59, 0x8d, 0xc2, 0xc8, 0xca, 0x06, 0x5c, 0x53, 0x1d, 0x70, 0xcb,
+	0x07, 0x99, 0x53, 0x18, 0x64, 0x3c, 0x46, 0x36, 0xaf, 0x3a, 0xd0, 0xf2, 0x71, 0x3c, 0x19, 0x0f,
+	0x02, 0xca, 0x3c, 0xd9, 0xb8, 0x32, 0x7c, 0x55, 0x55, 0xc5, 0x7a, 0xab, 0xf2, 0xa1, 0x56, 0x4c,
+	0xa3, 0x76, 0xd5, 0x34, 0x92, 0xec, 0x3e, 0x45, 0x60, 0x70, 0x76, 0x43, 0xfc, 0x24, 0xa3, 0x10,
+	0x95, 0x29, 0xac, 0x55, 0x50, 0xa8, 0x2d, 0xa3, 0x50, 0x5f, 0xa0, 0x70, 0x01, 0x5e, 0xbd, 0x0c,
+	0xaf, 0x9c, 0x74, 0xe3, 0x8a, 0xa4, 0xbf, 0x43, 0x60, 0xf6, 0x92, 0xd1, 0x1d, 0x56, 0xf0, 0x93,
+	0xff, 0x30, 0xeb, 0x8a, 0x4b, 0x69, 0x54, 0x5e, 0x8a, 0xcc, 0x7b, 0xc8, 0xb9, 0xde, 0xc7, 0x54,
+	0x74, 0xaf, 0x17, 0xce, 0x3a, 0x2f, 0x49, 0x5d, 0x2d, 0x49, 0x19, 0x65, 0xc4, 0xdf, 0x0b, 0x8f,
+	0xd2, 0x9b, 0xbc, 0x00, 0x3d, 0xda, 0xf3, 0x06, 0x9a, 0x42, 0x93, 0x95, 0x4e, 0x34, 0xb9, 0xde,
+	0x1d, 0x54, 0xb0, 0xa8, 0x5f, 0xc5, 0xe2, 0xb9, 0xa8, 0xd8, 0x68, 0x32, 0x21, 0xd7, 0x02, 0x57,
+	0x19, 0x57, 0x5b, 0x1e, 0xf7, 0x02, 0x41, 0xa3, 0x97, 0x3c, 0x3e, 0xc2, 0xf4, 0x1f, 0x2c, 0x39,
+	0x6d, 0x49, 0xaf, 0xa9, 0x77, 0x34, 0xa5, 0xd7, 0xa8, 0xbd, 0x43, 0x7c, 0x4f, 0x2f, 0xed, 0x1d,
+	0xcd, 0x72, 0x99, 0x6e, 0x42, 0xfb, 0x08, 0x2b, 0x28, 0x0d, 0xf1, 0x35, 0xac, 0xea, 0x04, 0xc4,
+	0x9d, 0xa7, 0x35, 0x58, 0xdf, 0x9b, 0x26, 0xf8, 0x34, 0xe8, 0xa7, 0x7f, 0xb9, 0xac, 0x4d, 0x36,
+	0x72, 0x65, 0xef, 0x6d, 0x7b, 0x4a, 0x27, 0x76, 0x0c, 0x2f, 0x1d, 0xe1, 0xaf, 0x40, 0x5d, 0x74,
+	0x10, 0xd3, 0x4b, 0x9b, 0x89, 0xb2, 0xeb, 0x42, 0x43, 0x3e, 0x55, 0xf0, 0xb2, 0x67, 0xab, 0xec,
+	0xbf, 0x0a, 0x75, 0xf1, 0x26, 0xb8, 0x37, 0x5f, 0x3a, 0x66, 0x36, 0x45, 0xad, 0xd7, 0xc1, 0xc8,
+	0x8a, 0xb9, 0xed, 0x29, 0xa5, 0xed, 0x40, 0x3e, 0x6a, 0x2d, 0x17, 0xf4, 0x07, 0xac, 0x12, 0x2b,
+	0xcf, 0xd8, 0x46, 0xec, 0xe3, 0xe4, 0x01, 0x2f, 0x19, 0xc5, 0x40, 0xf1, 0xdf, 0x46, 0x0c, 0x84,
+	0x98, 0x8f, 0x8a, 0x45, 0x9e, 0xa4, 0x0d, 0x1a, 0xbb, 0xf9, 0xa6, 0x27, 0x4a, 0x20, 0xdf, 0xf9,
+	0x78, 0xfb, 0xd9, 0xa5, 0xbb, 0x72, 0x71, 0xe9, 0xa2, 0xdf, 0x2f, 0x5d, 0xf4, 0xed, 0xdc, 0x45,
+	0xdf, 0xcf, 0x5d, 0xf4, 0xe3, 0xdc, 0x45, 0xcf, 0xe6, 0x2e, 0xfa, 0x79, 0xee, 0xa2, 0x8b, 0xb9,
+	0x8b, 0xbe, 0xfa, 0xd5, 0x5d, 0x79, 0xd8, 0xc0, 0x9c, 0xdb, 0xe3, 0x06, 0xff, 0x5f, 0x7a, 0xfb,
+	0xcf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xb6, 0x0d, 0x13, 0x84, 0xd9, 0x0e, 0x00, 0x00,
 }
 
-func (this *RespMsg) VerboseEqual(that interface{}) error {
-	if that == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that == nil && this != nil")
-	}
-
-	that1, ok := that.(*RespMsg)
-	if !ok {
-		that2, ok := that.(RespMsg)
-		if ok {
-			that1 = &that2
-		} else {
-			return fmt.Errorf("that is not of type *RespMsg")
-		}
-	}
-	if that1 == nil {
-		if this == nil {
-			return nil
-		}
-		return fmt.Errorf("that is type *RespMsg but is nil && this != nil")
-	} else if this == nil {
-		return fmt.Errorf("that is type *RespMsg but is not nil && this == nil")
-	}
-	if this.Code != that1.Code {
-		return fmt.Errorf("Code this(%v) Not Equal that(%v)", this.Code, that1.Code)
-	}
-	if this.Msg != that1.Msg {
-		return fmt.Errorf("Msg this(%v) Not Equal that(%v)", this.Msg, that1.Msg)
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
-	}
-	return nil
-}
-func (this *RespMsg) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*RespMsg)
-	if !ok {
-		that2, ok := that.(RespMsg)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	if this.Code != that1.Code {
-		return false
-	}
-	if this.Msg != that1.Msg {
-		return false
-	}
-	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
-		return false
-	}
-	return true
-}
 func (this *Zone) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -1782,6 +1709,72 @@ func (this *InstanceInfo) Equal(that interface{}) bool {
 	}
 	return true
 }
+func (this *RespMsg) VerboseEqual(that interface{}) error {
+	if that == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that == nil && this != nil")
+	}
+
+	that1, ok := that.(*RespMsg)
+	if !ok {
+		that2, ok := that.(RespMsg)
+		if ok {
+			that1 = &that2
+		} else {
+			return fmt.Errorf("that is not of type *RespMsg")
+		}
+	}
+	if that1 == nil {
+		if this == nil {
+			return nil
+		}
+		return fmt.Errorf("that is type *RespMsg but is nil && this != nil")
+	} else if this == nil {
+		return fmt.Errorf("that is type *RespMsg but is not nil && this == nil")
+	}
+	if this.Code != that1.Code {
+		return fmt.Errorf("Code this(%v) Not Equal that(%v)", this.Code, that1.Code)
+	}
+	if this.Msg != that1.Msg {
+		return fmt.Errorf("Msg this(%v) Not Equal that(%v)", this.Msg, that1.Msg)
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
+	}
+	return nil
+}
+func (this *RespMsg) Equal(that interface{}) bool {
+	if that == nil {
+		return this == nil
+	}
+
+	that1, ok := that.(*RespMsg)
+	if !ok {
+		that2, ok := that.(RespMsg)
+		if ok {
+			that1 = &that2
+		} else {
+			return false
+		}
+	}
+	if that1 == nil {
+		return this == nil
+	} else if this == nil {
+		return false
+	}
+	if this.Code != that1.Code {
+		return false
+	}
+	if this.Msg != that1.Msg {
+		return false
+	}
+	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
+		return false
+	}
+	return true
+}
 func (this *RespFech) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
@@ -2412,7 +2405,7 @@ func (this *ArgFetch) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ArgFetchs) VerboseEqual(that interface{}) error {
+func (this *ArgFetchAll) VerboseEqual(that interface{}) error {
 	if that == nil {
 		if this == nil {
 			return nil
@@ -2420,22 +2413,22 @@ func (this *ArgFetchs) VerboseEqual(that interface{}) error {
 		return fmt.Errorf("that == nil && this != nil")
 	}
 
-	that1, ok := that.(*ArgFetchs)
+	that1, ok := that.(*ArgFetchAll)
 	if !ok {
-		that2, ok := that.(ArgFetchs)
+		that2, ok := that.(ArgFetchAll)
 		if ok {
 			that1 = &that2
 		} else {
-			return fmt.Errorf("that is not of type *ArgFetchs")
+			return fmt.Errorf("that is not of type *ArgFetchAll")
 		}
 	}
 	if that1 == nil {
 		if this == nil {
 			return nil
 		}
-		return fmt.Errorf("that is type *ArgFetchs but is nil && this != nil")
+		return fmt.Errorf("that is type *ArgFetchAll but is nil && this != nil")
 	} else if this == nil {
-		return fmt.Errorf("that is type *ArgFetchs but is not nil && this == nil")
+		return fmt.Errorf("that is type *ArgFetchAll but is not nil && this == nil")
 	}
 	if this.Zone != that1.Zone {
 		return fmt.Errorf("Zone this(%v) Not Equal that(%v)", this.Zone, that1.Zone)
@@ -2459,14 +2452,14 @@ func (this *ArgFetchs) VerboseEqual(that interface{}) error {
 	}
 	return nil
 }
-func (this *ArgFetchs) Equal(that interface{}) bool {
+func (this *ArgFetchAll) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ArgFetchs)
+	that1, ok := that.(*ArgFetchAll)
 	if !ok {
-		that2, ok := that.(ArgFetchs)
+		that2, ok := that.(ArgFetchAll)
 		if ok {
 			that1 = &that2
 		} else {
@@ -2534,9 +2527,6 @@ func (this *ArgRoll) VerboseEqual(that interface{}) error {
 	if this.AppID != that1.AppID {
 		return fmt.Errorf("AppID this(%v) Not Equal that(%v)", this.AppID, that1.AppID)
 	}
-	if this.Hostname != that1.Hostname {
-		return fmt.Errorf("Hostname this(%v) Not Equal that(%v)", this.Hostname, that1.Hostname)
-	}
 	if this.LatestTimestamp != that1.LatestTimestamp {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
@@ -2571,9 +2561,6 @@ func (this *ArgRoll) Equal(that interface{}) bool {
 		return false
 	}
 	if this.AppID != that1.AppID {
-		return false
-	}
-	if this.Hostname != that1.Hostname {
 		return false
 	}
 	if this.LatestTimestamp != that1.LatestTimestamp {
@@ -2623,9 +2610,6 @@ func (this *ArgRolls) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("AppID this[%v](%v) Not Equal that[%v](%v)", i, this.AppID[i], i, that1.AppID[i])
 		}
 	}
-	if this.Hostname != that1.Hostname {
-		return fmt.Errorf("Hostname this(%v) Not Equal that(%v)", this.Hostname, that1.Hostname)
-	}
 	if len(this.LatestTimestamp) != len(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", len(this.LatestTimestamp), len(that1.LatestTimestamp))
 	}
@@ -2671,9 +2655,6 @@ func (this *ArgRolls) Equal(that interface{}) bool {
 		if this.AppID[i] != that1.AppID[i] {
 			return false
 		}
-	}
-	if this.Hostname != that1.Hostname {
-		return false
 	}
 	if len(this.LatestTimestamp) != len(that1.LatestTimestamp) {
 		return false
@@ -2819,20 +2800,6 @@ func (this *ArqSet) Equal(that interface{}) bool {
 		return false
 	}
 	return true
-}
-func (this *RespMsg) GoString() string {
-	if this == nil {
-		return "nil"
-	}
-	s := make([]string, 0, 6)
-	s = append(s, "&eureka.RespMsg{")
-	s = append(s, "Code: "+fmt.Sprintf("%#v", this.Code)+",\n")
-	s = append(s, "Msg: "+fmt.Sprintf("%#v", this.Msg)+",\n")
-	if this.XXX_unrecognized != nil {
-		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
-	}
-	s = append(s, "}")
-	return strings.Join(s, "")
 }
 func (this *Zone) GoString() string {
 	if this == nil {
@@ -3026,6 +2993,20 @@ func (this *InstanceInfo) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
+func (this *RespMsg) GoString() string {
+	if this == nil {
+		return "nil"
+	}
+	s := make([]string, 0, 6)
+	s = append(s, "&eureka.RespMsg{")
+	s = append(s, "Code: "+fmt.Sprintf("%#v", this.Code)+",\n")
+	s = append(s, "Msg: "+fmt.Sprintf("%#v", this.Msg)+",\n")
+	if this.XXX_unrecognized != nil {
+		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
+	}
+	s = append(s, "}")
+	return strings.Join(s, "")
+}
 func (this *RespFech) GoString() string {
 	if this == nil {
 		return "nil"
@@ -3173,12 +3154,12 @@ func (this *ArgFetch) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ArgFetchs) GoString() string {
+func (this *ArgFetchAll) GoString() string {
 	if this == nil {
 		return "nil"
 	}
 	s := make([]string, 0, 8)
-	s = append(s, "&eureka.ArgFetchs{")
+	s = append(s, "&eureka.ArgFetchAll{")
 	s = append(s, "Zone: "+fmt.Sprintf("%#v", this.Zone)+",\n")
 	s = append(s, "Env: "+fmt.Sprintf("%#v", this.Env)+",\n")
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
@@ -3193,12 +3174,11 @@ func (this *ArgRoll) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 9)
+	s := make([]string, 0, 8)
 	s = append(s, "&eureka.ArgRoll{")
 	s = append(s, "Zone: "+fmt.Sprintf("%#v", this.Zone)+",\n")
 	s = append(s, "Env: "+fmt.Sprintf("%#v", this.Env)+",\n")
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
-	s = append(s, "Hostname: "+fmt.Sprintf("%#v", this.Hostname)+",\n")
 	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
@@ -3210,12 +3190,11 @@ func (this *ArgRolls) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 9)
+	s := make([]string, 0, 8)
 	s = append(s, "&eureka.ArgRolls{")
 	s = append(s, "Zone: "+fmt.Sprintf("%#v", this.Zone)+",\n")
 	s = append(s, "Env: "+fmt.Sprintf("%#v", this.Env)+",\n")
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
-	s = append(s, "Hostname: "+fmt.Sprintf("%#v", this.Hostname)+",\n")
 	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
@@ -3268,7 +3247,7 @@ type EurekaDiscoveryClient interface {
 	Renew(ctx context.Context, in *ArgRenew, opts ...grpc.CallOption) (*RespMsg, error)
 	Cancel(ctx context.Context, in *ArgCancel, opts ...grpc.CallOption) (*RespMsg, error)
 	Fetch(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (*RespFech, error)
-	FetchAll(ctx context.Context, in *ArgFetchs, opts ...grpc.CallOption) (*RespFechs, error)
+	FetchAll(ctx context.Context, in *ArgFetchAll, opts ...grpc.CallOption) (*RespFechs, error)
 	Poll(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (EurekaDiscovery_PollClient, error)
 	Polls(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (EurekaDiscovery_PollsClient, error)
 	Nodes(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (*RespMsg, error)
@@ -3285,7 +3264,7 @@ func NewEurekaDiscoveryClient(cc *grpc.ClientConn) EurekaDiscoveryClient {
 
 func (c *eurekaDiscoveryClient) Register(ctx context.Context, in *ArgRegister, opts ...grpc.CallOption) (*RespMsg, error) {
 	out := new(RespMsg)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Register", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3294,7 +3273,7 @@ func (c *eurekaDiscoveryClient) Register(ctx context.Context, in *ArgRegister, o
 
 func (c *eurekaDiscoveryClient) Renew(ctx context.Context, in *ArgRenew, opts ...grpc.CallOption) (*RespMsg, error) {
 	out := new(RespMsg)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Renew", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/Renew", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3303,7 +3282,7 @@ func (c *eurekaDiscoveryClient) Renew(ctx context.Context, in *ArgRenew, opts ..
 
 func (c *eurekaDiscoveryClient) Cancel(ctx context.Context, in *ArgCancel, opts ...grpc.CallOption) (*RespMsg, error) {
 	out := new(RespMsg)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Cancel", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/Cancel", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3312,16 +3291,16 @@ func (c *eurekaDiscoveryClient) Cancel(ctx context.Context, in *ArgCancel, opts 
 
 func (c *eurekaDiscoveryClient) Fetch(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (*RespFech, error) {
 	out := new(RespFech)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Fetch", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/Fetch", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *eurekaDiscoveryClient) FetchAll(ctx context.Context, in *ArgFetchs, opts ...grpc.CallOption) (*RespFechs, error) {
+func (c *eurekaDiscoveryClient) FetchAll(ctx context.Context, in *ArgFetchAll, opts ...grpc.CallOption) (*RespFechs, error) {
 	out := new(RespFechs)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/FetchAll", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/FetchAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3329,7 +3308,7 @@ func (c *eurekaDiscoveryClient) FetchAll(ctx context.Context, in *ArgFetchs, opt
 }
 
 func (c *eurekaDiscoveryClient) Poll(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (EurekaDiscovery_PollClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_EurekaDiscovery_serviceDesc.Streams[0], "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Poll", opts...)
+	stream, err := c.cc.NewStream(ctx, &_EurekaDiscovery_serviceDesc.Streams[0], "/EurekaDiscovery/Poll", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3361,7 +3340,7 @@ func (x *eurekaDiscoveryPollClient) Recv() (*RespFech, error) {
 }
 
 func (c *eurekaDiscoveryClient) Polls(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (EurekaDiscovery_PollsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_EurekaDiscovery_serviceDesc.Streams[1], "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Polls", opts...)
+	stream, err := c.cc.NewStream(ctx, &_EurekaDiscovery_serviceDesc.Streams[1], "/EurekaDiscovery/Polls", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3394,7 +3373,7 @@ func (x *eurekaDiscoveryPollsClient) Recv() (*RespFechs, error) {
 
 func (c *eurekaDiscoveryClient) Nodes(ctx context.Context, in *ArgFetch, opts ...grpc.CallOption) (*RespMsg, error) {
 	out := new(RespMsg)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Nodes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/Nodes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3403,7 +3382,7 @@ func (c *eurekaDiscoveryClient) Nodes(ctx context.Context, in *ArgFetch, opts ..
 
 func (c *eurekaDiscoveryClient) Set(ctx context.Context, in *ArqSet, opts ...grpc.CallOption) (*RespMsg, error) {
 	out := new(RespMsg)
-	err := c.cc.Invoke(ctx, "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Set", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/EurekaDiscovery/Set", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3416,7 +3395,7 @@ type EurekaDiscoveryServer interface {
 	Renew(context.Context, *ArgRenew) (*RespMsg, error)
 	Cancel(context.Context, *ArgCancel) (*RespMsg, error)
 	Fetch(context.Context, *ArgFetch) (*RespFech, error)
-	FetchAll(context.Context, *ArgFetchs) (*RespFechs, error)
+	FetchAll(context.Context, *ArgFetchAll) (*RespFechs, error)
 	Poll(*ArgFetch, EurekaDiscovery_PollServer) error
 	Polls(*ArgFetch, EurekaDiscovery_PollsServer) error
 	Nodes(context.Context, *ArgFetch) (*RespMsg, error)
@@ -3437,7 +3416,7 @@ func _EurekaDiscovery_Register_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Register",
+		FullMethod: "/EurekaDiscovery/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EurekaDiscoveryServer).Register(ctx, req.(*ArgRegister))
@@ -3455,7 +3434,7 @@ func _EurekaDiscovery_Renew_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Renew",
+		FullMethod: "/EurekaDiscovery/Renew",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EurekaDiscoveryServer).Renew(ctx, req.(*ArgRenew))
@@ -3473,7 +3452,7 @@ func _EurekaDiscovery_Cancel_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Cancel",
+		FullMethod: "/EurekaDiscovery/Cancel",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EurekaDiscoveryServer).Cancel(ctx, req.(*ArgCancel))
@@ -3491,7 +3470,7 @@ func _EurekaDiscovery_Fetch_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Fetch",
+		FullMethod: "/EurekaDiscovery/Fetch",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EurekaDiscoveryServer).Fetch(ctx, req.(*ArgFetch))
@@ -3500,7 +3479,7 @@ func _EurekaDiscovery_Fetch_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _EurekaDiscovery_FetchAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ArgFetchs)
+	in := new(ArgFetchAll)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3509,10 +3488,10 @@ func _EurekaDiscovery_FetchAll_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/FetchAll",
+		FullMethod: "/EurekaDiscovery/FetchAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EurekaDiscoveryServer).FetchAll(ctx, req.(*ArgFetchs))
+		return srv.(EurekaDiscoveryServer).FetchAll(ctx, req.(*ArgFetchAll))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3569,7 +3548,7 @@ func _EurekaDiscovery_Nodes_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Nodes",
+		FullMethod: "/EurekaDiscovery/Nodes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EurekaDiscoveryServer).Nodes(ctx, req.(*ArgFetch))
@@ -3587,7 +3566,7 @@ func _EurekaDiscovery_Set_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/gopkg.in.srcd.proteus.v1.example.EurekaDiscovery/Set",
+		FullMethod: "/EurekaDiscovery/Set",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EurekaDiscoveryServer).Set(ctx, req.(*ArqSet))
@@ -3596,7 +3575,7 @@ func _EurekaDiscovery_Set_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 var _EurekaDiscovery_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "gopkg.in.srcd.proteus.v1.example.EurekaDiscovery",
+	ServiceName: "EurekaDiscovery",
 	HandlerType: (*EurekaDiscoveryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3641,38 +3620,6 @@ var _EurekaDiscovery_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Metadata: "discovery.proto",
-}
-
-func (m *RespMsg) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalTo(dAtA)
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *RespMsg) MarshalTo(dAtA []byte) (int, error) {
-	var i int
-	_ = i
-	var l int
-	_ = l
-	if m.Code != 0 {
-		dAtA[i] = 0x8
-		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.Code))
-	}
-	if len(m.Msg) > 0 {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.Msg)))
-		i += copy(dAtA[i:], m.Msg)
-	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return i, nil
 }
 
 func (m *Zone) Marshal() (dAtA []byte, err error) {
@@ -4127,6 +4074,38 @@ func (m *InstanceInfo) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+func (m *RespMsg) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *RespMsg) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Code != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.Code))
+	}
+	if len(m.Msg) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.Msg)))
+		i += copy(dAtA[i:], m.Msg)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
 func (m *RespFech) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -4556,7 +4535,7 @@ func (m *ArgFetch) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
-func (m *ArgFetchs) Marshal() (dAtA []byte, err error) {
+func (m *ArgFetchAll) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -4566,7 +4545,7 @@ func (m *ArgFetchs) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ArgFetchs) MarshalTo(dAtA []byte) (int, error) {
+func (m *ArgFetchAll) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -4642,14 +4621,8 @@ func (m *ArgRoll) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.AppID)))
 		i += copy(dAtA[i:], m.AppID)
 	}
-	if len(m.Hostname) > 0 {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.Hostname)))
-		i += copy(dAtA[i:], m.Hostname)
-	}
 	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x28
+		dAtA[i] = 0x20
 		i++
 		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
 	}
@@ -4701,12 +4674,6 @@ func (m *ArgRolls) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], s)
 		}
 	}
-	if len(m.Hostname) > 0 {
-		dAtA[i] = 0x22
-		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.Hostname)))
-		i += copy(dAtA[i:], m.Hostname)
-	}
 	if len(m.LatestTimestamp) > 0 {
 		dAtA8 := make([]byte, len(m.LatestTimestamp)*10)
 		var j7 int
@@ -4720,7 +4687,7 @@ func (m *ArgRolls) MarshalTo(dAtA []byte) (int, error) {
 			dAtA8[j7] = uint8(num)
 			j7++
 		}
-		dAtA[i] = 0x2a
+		dAtA[i] = 0x22
 		i++
 		i = encodeVarintDiscovery(dAtA, i, uint64(j7))
 		i += copy(dAtA[i:], dAtA8[:j7])
@@ -4780,14 +4747,21 @@ func (m *ArqSet) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if len(m.Status) > 0 {
+		dAtA10 := make([]byte, len(m.Status)*10)
+		var j9 int
+		for _, num := range m.Status {
+			for num >= 1<<7 {
+				dAtA10[j9] = uint8(uint64(num)&0x7f | 0x80)
+				num >>= 7
+				j9++
+			}
+			dAtA10[j9] = uint8(num)
+			j9++
+		}
 		dAtA[i] = 0x2a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.Status)*4))
-		for _, num := range m.Status {
-			f9 := math.Float32bits(float32(num))
-			encoding_binary.LittleEndian.PutUint32(dAtA[i:], uint32(f9))
-			i += 4
-		}
+		i = encodeVarintDiscovery(dAtA, i, uint64(j9))
+		i += copy(dAtA[i:], dAtA10[:j9])
 	}
 	if len(m.Metadata) > 0 {
 		for _, s := range m.Metadata {
@@ -4815,10 +4789,9 @@ func (m *ArqSet) MarshalTo(dAtA []byte) (int, error) {
 		i++
 	}
 	if m.SetTimestamp != 0 {
-		dAtA[i] = 0x41
+		dAtA[i] = 0x40
 		i++
-		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.SetTimestamp))))
-		i += 8
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.SetTimestamp))
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4835,25 +4808,6 @@ func encodeVarintDiscovery(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return offset + 1
 }
-func (m *RespMsg) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Code != 0 {
-		n += 1 + sovDiscovery(uint64(m.Code))
-	}
-	l = len(m.Msg)
-	if l > 0 {
-		n += 1 + l + sovDiscovery(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
-
 func (m *Zone) Size() (n int) {
 	if m == nil {
 		return 0
@@ -5103,6 +5057,25 @@ func (m *InstanceInfo) Size() (n int) {
 	return n
 }
 
+func (m *RespMsg) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Code != 0 {
+		n += 1 + sovDiscovery(uint64(m.Code))
+	}
+	l = len(m.Msg)
+	if l > 0 {
+		n += 1 + l + sovDiscovery(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
 func (m *RespFech) Size() (n int) {
 	if m == nil {
 		return 0
@@ -5340,7 +5313,7 @@ func (m *ArgFetch) Size() (n int) {
 	return n
 }
 
-func (m *ArgFetchs) Size() (n int) {
+func (m *ArgFetchAll) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -5387,10 +5360,6 @@ func (m *ArgRoll) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	l = len(m.Hostname)
-	if l > 0 {
-		n += 1 + l + sovDiscovery(uint64(l))
-	}
 	if m.LatestTimestamp != 0 {
 		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
 	}
@@ -5419,10 +5388,6 @@ func (m *ArgRolls) Size() (n int) {
 			l = len(s)
 			n += 1 + l + sovDiscovery(uint64(l))
 		}
-	}
-	l = len(m.Hostname)
-	if l > 0 {
-		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if len(m.LatestTimestamp) > 0 {
 		l = 0
@@ -5462,7 +5427,11 @@ func (m *ArqSet) Size() (n int) {
 		}
 	}
 	if len(m.Status) > 0 {
-		n += 1 + sovDiscovery(uint64(len(m.Status)*4)) + len(m.Status)*4
+		l = 0
+		for _, e := range m.Status {
+			l += sovDiscovery(uint64(e))
+		}
+		n += 1 + sovDiscovery(uint64(l)) + l
 	}
 	if len(m.Metadata) > 0 {
 		for _, s := range m.Metadata {
@@ -5474,7 +5443,7 @@ func (m *ArqSet) Size() (n int) {
 		n += 2
 	}
 	if m.SetTimestamp != 0 {
-		n += 9
+		n += 1 + sovDiscovery(uint64(m.SetTimestamp))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5494,111 +5463,6 @@ func sovDiscovery(x uint64) (n int) {
 }
 func sozDiscovery(x uint64) (n int) {
 	return sovDiscovery(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *RespMsg) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowDiscovery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: RespMsg: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RespMsg: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Code", wireType)
-			}
-			m.Code = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDiscovery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Code |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Msg", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDiscovery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Msg = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipDiscovery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
 }
 func (m *Zone) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
@@ -7335,6 +7199,111 @@ func (m *InstanceInfo) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *RespMsg) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowDiscovery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: RespMsg: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: RespMsg: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Code", wireType)
+			}
+			m.Code = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiscovery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Code |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Msg", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiscovery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Msg = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipDiscovery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *RespFech) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -8879,7 +8848,7 @@ func (m *ArgFetch) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ArgFetchs) Unmarshal(dAtA []byte) error {
+func (m *ArgFetchAll) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -8902,10 +8871,10 @@ func (m *ArgFetchs) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ArgFetchs: wiretype end group for non-group")
+			return fmt.Errorf("proto: ArgFetchAll: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ArgFetchs: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ArgFetchAll: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -9174,38 +9143,6 @@ func (m *ArgRoll) Unmarshal(dAtA []byte) error {
 			m.AppID = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hostname", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDiscovery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Hostname = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
@@ -9375,38 +9312,6 @@ func (m *ArgRolls) Unmarshal(dAtA []byte) error {
 			m.AppID = append(m.AppID, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Hostname", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowDiscovery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthDiscovery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Hostname = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
 			if wireType == 0 {
 				var v int64
 				for shift := uint(0); ; shift += 7 {
@@ -9665,15 +9570,23 @@ func (m *ArqSet) Unmarshal(dAtA []byte) error {
 			m.Hostname = append(m.Hostname, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 5:
-			if wireType == 5 {
+			if wireType == 0 {
 				var v uint32
-				if (iNdEx + 4) > l {
-					return io.ErrUnexpectedEOF
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return ErrIntOverflowDiscovery
+					}
+					if iNdEx >= l {
+						return io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					v |= uint32(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
 				}
-				v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-				iNdEx += 4
-				v2 := float32(math.Float32frombits(v))
-				m.Status = append(m.Status, v2)
+				m.Status = append(m.Status, v)
 			} else if wireType == 2 {
 				var packedLen int
 				for shift := uint(0); ; shift += 7 {
@@ -9701,19 +9614,33 @@ func (m *ArqSet) Unmarshal(dAtA []byte) error {
 					return io.ErrUnexpectedEOF
 				}
 				var elementCount int
-				elementCount = packedLen / 4
+				var count int
+				for _, integer := range dAtA[iNdEx:postIndex] {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
 				if elementCount != 0 && len(m.Status) == 0 {
-					m.Status = make([]float32, 0, elementCount)
+					m.Status = make([]uint32, 0, elementCount)
 				}
 				for iNdEx < postIndex {
 					var v uint32
-					if (iNdEx + 4) > l {
-						return io.ErrUnexpectedEOF
+					for shift := uint(0); ; shift += 7 {
+						if shift >= 64 {
+							return ErrIntOverflowDiscovery
+						}
+						if iNdEx >= l {
+							return io.ErrUnexpectedEOF
+						}
+						b := dAtA[iNdEx]
+						iNdEx++
+						v |= uint32(b&0x7F) << shift
+						if b < 0x80 {
+							break
+						}
 					}
-					v = uint32(encoding_binary.LittleEndian.Uint32(dAtA[iNdEx:]))
-					iNdEx += 4
-					v2 := float32(math.Float32frombits(v))
-					m.Status = append(m.Status, v2)
+					m.Status = append(m.Status, v)
 				}
 			} else {
 				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
@@ -9771,16 +9698,24 @@ func (m *ArqSet) Unmarshal(dAtA []byte) error {
 			}
 			m.Replication = bool(v != 0)
 		case 8:
-			if wireType != 1 {
+			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SetTimestamp", wireType)
 			}
-			var v uint64
-			if (iNdEx + 8) > l {
-				return io.ErrUnexpectedEOF
+			m.SetTimestamp = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiscovery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SetTimestamp |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
 			}
-			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
-			iNdEx += 8
-			m.SetTimestamp = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])

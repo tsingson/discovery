@@ -94,7 +94,7 @@ func Default() *Config {
 			Host:      "logic",
 		},
 		Schedulers: schedulers,
-	//	Scheduler:  scheduler,
+		//	Scheduler:  scheduler,
 	}
 
 	return cfg

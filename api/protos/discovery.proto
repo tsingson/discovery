@@ -1,5 +1,4 @@
 syntax = "proto3";
-package gopkg.in.srcd.proteus.v1.example;
 
 option go_package = "eureka";
 
@@ -13,23 +12,14 @@ option (gogoproto.verbose_equal_all) = true;
 // option (gogoproto.goproto_stringer_all) = false;
 // option (gogoproto.stringer_all) =  true;
 // option (gogoproto.populate_all) = true;
- option (gogoproto.testgen_all) = true;
- option (gogoproto.benchgen_all) = true;
+option (gogoproto.testgen_all) = true;
+option (gogoproto.benchgen_all) = true;
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.goproto_getters_all) = false;
 
 
-
-
-
-
-message RespMsg {
-    option (gogoproto.goproto_getters) = false;
-    int32 Code = 1;
-    string Msg = 2;
-}
 
 
 message Zone {
@@ -96,6 +86,13 @@ message InstanceInfo {
     int64 LatestTimestamp = 3;
 }
 
+message RespMsg {
+    option (gogoproto.goproto_getters) = false;
+    int32 Code = 1;
+    string Msg = 2;
+}
+
+
 message RespFech {
     option (gogoproto.goproto_getters) = false;
     double code = 1;
@@ -155,6 +152,7 @@ message ArgCancel {
 
 message ArgFetch {
     option (gogoproto.goproto_getters) = false;
+
     string Zone = 1;
     string Env = 2;
     string AppID = 3;
@@ -162,8 +160,9 @@ message ArgFetch {
 }
 
 
-message ArgFetchs {
+message ArgFetchAll {
     option (gogoproto.goproto_getters) = false;
+
     string Zone = 1;
     string Env = 2;
     repeated string AppID = 3;
@@ -173,11 +172,12 @@ message ArgFetchs {
 
 message ArgRoll {
     option (gogoproto.goproto_getters) = false;
+
     string Zone = 1;
     string Env = 2;
     string AppID = 3;
-    string Hostname = 4;
-    int64 LatestTimestamp = 5;
+    int64 LatestTimestamp = 4;
+    //    string Hostname = 5;
 }
 
 message ArgRolls {
@@ -185,20 +185,21 @@ message ArgRolls {
     string Zone = 1;
     string Env = 2;
     repeated string AppID = 3;
-    string Hostname = 4;
-    repeated int64 LatestTimestamp = 5;
+    repeated int64 LatestTimestamp = 4;
+    //    string Hostname = 5;
 }
 
 message ArqSet {
     option (gogoproto.goproto_getters) = false;
+
     string Zone = 1;
     string Env = 2;
     string AppID = 3;
     repeated string Hostname = 4;
-    repeated float Status = 5;
+    repeated uint32 Status = 5;
     repeated string Metadata = 6;
     bool Replication = 7;
-    double SetTimestamp = 8;
+    int64 SetTimestamp = 8;
 }
 
 
@@ -209,7 +210,7 @@ service EurekaDiscovery {
     rpc Cancel (ArgCancel) returns (RespMsg);
 
     rpc Fetch (ArgFetch) returns (RespFech);
-    rpc FetchAll (ArgFetchs) returns (RespFechs);
+    rpc FetchAll (ArgFetchAll) returns (RespFechs);
     rpc Poll (ArgFetch) returns (stream RespFech);
     rpc Polls (ArgFetch) returns (stream RespFechs);
     rpc Nodes (ArgFetch) returns (RespMsg);

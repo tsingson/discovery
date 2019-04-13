@@ -23,21 +23,19 @@ import (
 func main() {
 	// var err error
 
-
 	runtime.MemProfileRate = 0
 	runtime.GOMAXPROCS(128)
 	// stopSignal := make(chan struct{})
 
 	cfg = &conf.Config{}
-	_, err := toml.DecodeFile("/Users/qinshen/go/bin/discoveryd-config.toml", cfg )
+	_, err := toml.DecodeFile("/Users/qinshen/go/bin/discoveryd-config.toml", cfg)
 	if err != nil {
-		os.Exit( -1 )
+		os.Exit(-1)
 	}
-	litter.Dump( cfg )
+	litter.Dump(cfg)
 
 	// atom := zap.NewAtomicLevel()
 	// atom.SetLevel(zap.ErrorLevel)
-
 
 	/**
 
