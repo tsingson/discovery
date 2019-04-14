@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = "eureka";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-//import "google/protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 //import "google/protobuf/duration.proto";
 
 option (gogoproto.gostring_all) = true;
@@ -54,25 +54,25 @@ message Instance {
 
     map<string, string> Metadata = 9;
 
-    int64 RegTimestamp = 10;
-    int64 UpTimestamp = 11;
-    int64 RenewTimestamp = 12;
+    google.protobuf.Timestamp RegTimestamp = 10;
+    google.protobuf.Timestamp UpTimestamp = 11;
+    google.protobuf.Timestamp RenewTimestamp = 12;
 
-    int64 DirtyTimestamp = 13;
-    int64 LatestTimestamp = 14;
+    google.protobuf.Timestamp DirtyTimestamp = 13;
+    google.protobuf.Timestamp LatestTimestamp = 14;
 }
 message App {
     option (gogoproto.goproto_getters) = false;
     string AppID = 1;
     string Zone = 2;
     map<string, Instance> instances = 3;
-    int64 latestTimestamp = 4;
+    google.protobuf.Timestamp latestTimestamp = 4;
 }
 
 message Apps {
     option (gogoproto.goproto_getters) = false;
     map<string, App> apps = 1;
-    int64 latestTimestamp = 2;
+    google.protobuf.Timestamp latestTimestamp = 2;
 }
 message Instances {
     option (gogoproto.goproto_getters) = false;
@@ -83,7 +83,7 @@ message InstanceInfo {
     option (gogoproto.goproto_getters) = false;
     map<string, Instances> Instance = 1;
     repeated Zone Scheduler = 2;
-    int64 LatestTimestamp = 3;
+    google.protobuf.Timestamp LatestTimestamp = 3;
 }
 
 message RespMsg {
@@ -97,19 +97,19 @@ message RespFech {
     option (gogoproto.goproto_getters) = false;
     double code = 1;
     InstanceInfo Data = 2;
-    uint64 LatestTimestamp = 3;
+    google.protobuf.Timestamp LatestTimestamp = 3;
 }
 message RespFechs {
     option (gogoproto.goproto_getters) = false;
     double code = 1;
     map<string, InstanceInfo> Data = 2;
-    uint64 LatestTimestamp = 3;
+    google.protobuf.Timestamp LatestTimestamp = 3;
 }
 message RespNodes {
     option (gogoproto.goproto_getters) = false;
     double code = 1;
     map<string, Node> Data = 2;
-    uint64 LatestTimestamp = 3;
+    google.protobuf.Timestamp LatestTimestamp = 3;
 }
 
 
@@ -125,8 +125,8 @@ message ArgRegister {
     string Version = 8;
     string Metadata = 9;
     bool Replication = 10;
-    int64 LatestTimestamp = 11;
-    int64 DirtyTimestamp = 12;
+    google.protobuf.Timestamp LatestTimestamp = 11;
+    google.protobuf.Timestamp DirtyTimestamp = 12;
 }
 
 
@@ -137,7 +137,7 @@ message ArgRenew {
     string AppID = 3;
     string Hostname = 4;
     bool Replication = 5;
-    int64 DirtyTimestamp = 6;
+    google.protobuf.Timestamp DirtyTimestamp = 6;
 }
 
 message ArgCancel {
@@ -147,7 +147,7 @@ message ArgCancel {
     string AppID = 3;
     string Hostname = 4;
     bool Replication = 5;
-    int64 LatestTimestamp = 6;
+    google.protobuf.Timestamp LatestTimestamp = 6;
 }
 
 message ArgFetch {
@@ -176,7 +176,7 @@ message ArgRoll {
     string Zone = 1;
     string Env = 2;
     string AppID = 3;
-    int64 LatestTimestamp = 4;
+    google.protobuf.Timestamp LatestTimestamp = 4;
     //    string Hostname = 5;
 }
 
@@ -185,7 +185,7 @@ message ArgRolls {
     string Zone = 1;
     string Env = 2;
     repeated string AppID = 3;
-    repeated int64 LatestTimestamp = 4;
+    google.protobuf.Timestamp  LatestTimestamp = 4;
     //    string Hostname = 5;
 }
 
@@ -199,7 +199,7 @@ message ArqSet {
     repeated uint32 Status = 5;
     repeated string Metadata = 6;
     bool Replication = 7;
-    int64 SetTimestamp = 8;
+    google.protobuf.Timestamp SetTimestamp = 8;
 }
 
 

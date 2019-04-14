@@ -9,6 +9,7 @@ import (
 	github_com_gogo_protobuf_jsonpb "github.com/gogo/protobuf/jsonpb"
 	github_com_golang_protobuf_proto "github.com/golang/protobuf/proto"
 	proto "github.com/golang/protobuf/proto"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	go_parser "go/parser"
 	math "math"
 	math_rand "math/rand"

@@ -11,6 +11,7 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	github_com_gogo_protobuf_sortkeys "github.com/gogo/protobuf/sortkeys"
 	proto "github.com/golang/protobuf/proto"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	io "io"
 	math "math"
@@ -153,23 +154,23 @@ func (m *RespNodes) XXX_DiscardUnknown() {
 var xxx_messageInfo_RespNodes proto.InternalMessageInfo
 
 type Instance struct {
-	Region               string            `protobuf:"bytes,1,opt,name=Region,proto3" json:"Region,omitempty"`
-	Zone                 string            `protobuf:"bytes,2,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string            `protobuf:"bytes,3,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string            `protobuf:"bytes,4,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             string            `protobuf:"bytes,5,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
-	Addrs                []string          `protobuf:"bytes,6,rep,name=Addrs,proto3" json:"Addrs,omitempty"`
-	Status               uint32            `protobuf:"varint,7,opt,name=Status,proto3" json:"Status,omitempty"`
-	Version              string            `protobuf:"bytes,8,opt,name=Version,proto3" json:"Version,omitempty"`
-	Metadata             map[string]string `protobuf:"bytes,9,rep,name=Metadata,proto3" json:"Metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	RegTimestamp         int64             `protobuf:"varint,10,opt,name=RegTimestamp,proto3" json:"RegTimestamp,omitempty"`
-	UpTimestamp          int64             `protobuf:"varint,11,opt,name=UpTimestamp,proto3" json:"UpTimestamp,omitempty"`
-	RenewTimestamp       int64             `protobuf:"varint,12,opt,name=RenewTimestamp,proto3" json:"RenewTimestamp,omitempty"`
-	DirtyTimestamp       int64             `protobuf:"varint,13,opt,name=DirtyTimestamp,proto3" json:"DirtyTimestamp,omitempty"`
-	LatestTimestamp      int64             `protobuf:"varint,14,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
-	XXX_unrecognized     []byte            `json:"-"`
-	XXX_sizecache        int32             `json:"-"`
+	Region               string               `protobuf:"bytes,1,opt,name=Region,proto3" json:"Region,omitempty"`
+	Zone                 string               `protobuf:"bytes,2,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,3,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string               `protobuf:"bytes,4,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	Hostname             string               `protobuf:"bytes,5,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
+	Addrs                []string             `protobuf:"bytes,6,rep,name=Addrs,proto3" json:"Addrs,omitempty"`
+	Status               uint32               `protobuf:"varint,7,opt,name=Status,proto3" json:"Status,omitempty"`
+	Version              string               `protobuf:"bytes,8,opt,name=Version,proto3" json:"Version,omitempty"`
+	Metadata             map[string]string    `protobuf:"bytes,9,rep,name=Metadata,proto3" json:"Metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	RegTimestamp         *timestamp.Timestamp `protobuf:"bytes,10,opt,name=RegTimestamp,proto3" json:"RegTimestamp,omitempty"`
+	UpTimestamp          *timestamp.Timestamp `protobuf:"bytes,11,opt,name=UpTimestamp,proto3" json:"UpTimestamp,omitempty"`
+	RenewTimestamp       *timestamp.Timestamp `protobuf:"bytes,12,opt,name=RenewTimestamp,proto3" json:"RenewTimestamp,omitempty"`
+	DirtyTimestamp       *timestamp.Timestamp `protobuf:"bytes,13,opt,name=DirtyTimestamp,proto3" json:"DirtyTimestamp,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,14,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *Instance) Reset()         { *m = Instance{} }
@@ -209,7 +210,7 @@ type App struct {
 	AppID                string               `protobuf:"bytes,1,opt,name=AppID,proto3" json:"AppID,omitempty"`
 	Zone                 string               `protobuf:"bytes,2,opt,name=Zone,proto3" json:"Zone,omitempty"`
 	Instances            map[string]*Instance `protobuf:"bytes,3,rep,name=instances,proto3" json:"instances,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	LatestTimestamp      int64                `protobuf:"varint,4,opt,name=latestTimestamp,proto3" json:"latestTimestamp,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,4,opt,name=latestTimestamp,proto3" json:"latestTimestamp,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
 	XXX_unrecognized     []byte               `json:"-"`
 	XXX_sizecache        int32                `json:"-"`
@@ -249,11 +250,11 @@ func (m *App) XXX_DiscardUnknown() {
 var xxx_messageInfo_App proto.InternalMessageInfo
 
 type Apps struct {
-	Apps                 map[string]*App `protobuf:"bytes,1,rep,name=apps,proto3" json:"apps,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	LatestTimestamp      int64           `protobuf:"varint,2,opt,name=latestTimestamp,proto3" json:"latestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
+	Apps                 map[string]*App      `protobuf:"bytes,1,rep,name=apps,proto3" json:"apps,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,2,opt,name=latestTimestamp,proto3" json:"latestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *Apps) Reset()         { *m = Apps{} }
@@ -332,7 +333,7 @@ var xxx_messageInfo_Instances proto.InternalMessageInfo
 type InstanceInfo struct {
 	Instance             map[string]*Instances `protobuf:"bytes,1,rep,name=Instance,proto3" json:"Instance,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	Scheduler            []*Zone               `protobuf:"bytes,2,rep,name=Scheduler,proto3" json:"Scheduler,omitempty"`
-	LatestTimestamp      int64                 `protobuf:"varint,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp  `protobuf:"bytes,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
 	XXX_sizecache        int32                 `json:"-"`
@@ -413,12 +414,12 @@ func (m *RespMsg) XXX_DiscardUnknown() {
 var xxx_messageInfo_RespMsg proto.InternalMessageInfo
 
 type RespFech struct {
-	Code                 float64       `protobuf:"fixed64,1,opt,name=code,proto3" json:"code,omitempty"`
-	Data                 *InstanceInfo `protobuf:"bytes,2,opt,name=Data,proto3" json:"Data,omitempty"`
-	LatestTimestamp      uint64        `protobuf:"varint,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
-	XXX_unrecognized     []byte        `json:"-"`
-	XXX_sizecache        int32         `json:"-"`
+	Code                 float64              `protobuf:"fixed64,1,opt,name=code,proto3" json:"code,omitempty"`
+	Data                 *InstanceInfo        `protobuf:"bytes,2,opt,name=Data,proto3" json:"Data,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *RespFech) Reset()         { *m = RespFech{} }
@@ -457,7 +458,7 @@ var xxx_messageInfo_RespFech proto.InternalMessageInfo
 type RespFechs struct {
 	Code                 float64                  `protobuf:"fixed64,1,opt,name=code,proto3" json:"code,omitempty"`
 	Data                 map[string]*InstanceInfo `protobuf:"bytes,2,rep,name=Data,proto3" json:"Data,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	LatestTimestamp      uint64                   `protobuf:"varint,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp     `protobuf:"bytes,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
 	XXX_unrecognized     []byte                   `json:"-"`
 	XXX_sizecache        int32                    `json:"-"`
@@ -497,12 +498,12 @@ func (m *RespFechs) XXX_DiscardUnknown() {
 var xxx_messageInfo_RespFechs proto.InternalMessageInfo
 
 type RespNodes struct {
-	Code                 float64          `protobuf:"fixed64,1,opt,name=code,proto3" json:"code,omitempty"`
-	Data                 map[string]*Node `protobuf:"bytes,2,rep,name=Data,proto3" json:"Data,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	LatestTimestamp      uint64           `protobuf:"varint,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `json:"-"`
-	XXX_sizecache        int32            `json:"-"`
+	Code                 float64              `protobuf:"fixed64,1,opt,name=code,proto3" json:"code,omitempty"`
+	Data                 map[string]*Node     `protobuf:"bytes,2,rep,name=Data,proto3" json:"Data,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,3,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *RespNodes) Reset()         { *m = RespNodes{} }
@@ -539,21 +540,21 @@ func (m *RespNodes) XXX_DiscardUnknown() {
 var xxx_messageInfo_RespNodes proto.InternalMessageInfo
 
 type ArgRegister struct {
-	Region               string   `protobuf:"bytes,1,opt,name=Region,proto3" json:"Region,omitempty"`
-	Zone                 string   `protobuf:"bytes,2,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string   `protobuf:"bytes,3,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string   `protobuf:"bytes,4,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             string   `protobuf:"bytes,5,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
-	Status               uint32   `protobuf:"varint,6,opt,name=Status,proto3" json:"Status,omitempty"`
-	Addrs                []string `protobuf:"bytes,7,rep,name=Addrs,proto3" json:"Addrs,omitempty"`
-	Version              string   `protobuf:"bytes,8,opt,name=Version,proto3" json:"Version,omitempty"`
-	Metadata             string   `protobuf:"bytes,9,opt,name=Metadata,proto3" json:"Metadata,omitempty"`
-	Replication          bool     `protobuf:"varint,10,opt,name=Replication,proto3" json:"Replication,omitempty"`
-	LatestTimestamp      int64    `protobuf:"varint,11,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	DirtyTimestamp       int64    `protobuf:"varint,12,opt,name=DirtyTimestamp,proto3" json:"DirtyTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Region               string               `protobuf:"bytes,1,opt,name=Region,proto3" json:"Region,omitempty"`
+	Zone                 string               `protobuf:"bytes,2,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,3,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string               `protobuf:"bytes,4,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	Hostname             string               `protobuf:"bytes,5,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
+	Status               uint32               `protobuf:"varint,6,opt,name=Status,proto3" json:"Status,omitempty"`
+	Addrs                []string             `protobuf:"bytes,7,rep,name=Addrs,proto3" json:"Addrs,omitempty"`
+	Version              string               `protobuf:"bytes,8,opt,name=Version,proto3" json:"Version,omitempty"`
+	Metadata             string               `protobuf:"bytes,9,opt,name=Metadata,proto3" json:"Metadata,omitempty"`
+	Replication          bool                 `protobuf:"varint,10,opt,name=Replication,proto3" json:"Replication,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,11,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	DirtyTimestamp       *timestamp.Timestamp `protobuf:"bytes,12,opt,name=DirtyTimestamp,proto3" json:"DirtyTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ArgRegister) Reset()         { *m = ArgRegister{} }
@@ -590,15 +591,15 @@ func (m *ArgRegister) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArgRegister proto.InternalMessageInfo
 
 type ArgRenew struct {
-	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string   `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             string   `protobuf:"bytes,4,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
-	Replication          bool     `protobuf:"varint,5,opt,name=Replication,proto3" json:"Replication,omitempty"`
-	DirtyTimestamp       int64    `protobuf:"varint,6,opt,name=DirtyTimestamp,proto3" json:"DirtyTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Zone                 string               `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string               `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	Hostname             string               `protobuf:"bytes,4,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
+	Replication          bool                 `protobuf:"varint,5,opt,name=Replication,proto3" json:"Replication,omitempty"`
+	DirtyTimestamp       *timestamp.Timestamp `protobuf:"bytes,6,opt,name=DirtyTimestamp,proto3" json:"DirtyTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ArgRenew) Reset()         { *m = ArgRenew{} }
@@ -635,15 +636,15 @@ func (m *ArgRenew) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArgRenew proto.InternalMessageInfo
 
 type ArgCancel struct {
-	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string   `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             string   `protobuf:"bytes,4,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
-	Replication          bool     `protobuf:"varint,5,opt,name=Replication,proto3" json:"Replication,omitempty"`
-	LatestTimestamp      int64    `protobuf:"varint,6,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Zone                 string               `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string               `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	Hostname             string               `protobuf:"bytes,4,opt,name=Hostname,proto3" json:"Hostname,omitempty"`
+	Replication          bool                 `protobuf:"varint,5,opt,name=Replication,proto3" json:"Replication,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,6,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ArgCancel) Reset()         { *m = ArgCancel{} }
@@ -766,13 +767,13 @@ func (m *ArgFetchAll) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArgFetchAll proto.InternalMessageInfo
 
 type ArgRoll struct {
-	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string   `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	LatestTimestamp      int64    `protobuf:"varint,4,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Zone                 string               `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string               `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,4,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ArgRoll) Reset()         { *m = ArgRoll{} }
@@ -809,13 +810,13 @@ func (m *ArgRoll) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArgRoll proto.InternalMessageInfo
 
 type ArgRolls struct {
-	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                []string `protobuf:"bytes,3,rep,name=AppID,proto3" json:"AppID,omitempty"`
-	LatestTimestamp      []int64  `protobuf:"varint,4,rep,packed,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Zone                 string               `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                []string             `protobuf:"bytes,3,rep,name=AppID,proto3" json:"AppID,omitempty"`
+	LatestTimestamp      *timestamp.Timestamp `protobuf:"bytes,4,opt,name=LatestTimestamp,proto3" json:"LatestTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ArgRolls) Reset()         { *m = ArgRolls{} }
@@ -852,17 +853,17 @@ func (m *ArgRolls) XXX_DiscardUnknown() {
 var xxx_messageInfo_ArgRolls proto.InternalMessageInfo
 
 type ArqSet struct {
-	Zone                 string   `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
-	Env                  string   `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
-	AppID                string   `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
-	Hostname             []string `protobuf:"bytes,4,rep,name=Hostname,proto3" json:"Hostname,omitempty"`
-	Status               []uint32 `protobuf:"varint,5,rep,packed,name=Status,proto3" json:"Status,omitempty"`
-	Metadata             []string `protobuf:"bytes,6,rep,name=Metadata,proto3" json:"Metadata,omitempty"`
-	Replication          bool     `protobuf:"varint,7,opt,name=Replication,proto3" json:"Replication,omitempty"`
-	SetTimestamp         int64    `protobuf:"varint,8,opt,name=SetTimestamp,proto3" json:"SetTimestamp,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Zone                 string               `protobuf:"bytes,1,opt,name=Zone,proto3" json:"Zone,omitempty"`
+	Env                  string               `protobuf:"bytes,2,opt,name=Env,proto3" json:"Env,omitempty"`
+	AppID                string               `protobuf:"bytes,3,opt,name=AppID,proto3" json:"AppID,omitempty"`
+	Hostname             []string             `protobuf:"bytes,4,rep,name=Hostname,proto3" json:"Hostname,omitempty"`
+	Status               []uint32             `protobuf:"varint,5,rep,packed,name=Status,proto3" json:"Status,omitempty"`
+	Metadata             []string             `protobuf:"bytes,6,rep,name=Metadata,proto3" json:"Metadata,omitempty"`
+	Replication          bool                 `protobuf:"varint,7,opt,name=Replication,proto3" json:"Replication,omitempty"`
+	SetTimestamp         *timestamp.Timestamp `protobuf:"bytes,8,opt,name=SetTimestamp,proto3" json:"SetTimestamp,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
 }
 
 func (m *ArqSet) Reset()         { *m = ArqSet{} }
@@ -931,80 +932,83 @@ func init() {
 func init() { proto.RegisterFile("discovery.proto", fileDescriptor_1e7ff60feb39c8d0) }
 
 var fileDescriptor_1e7ff60feb39c8d0 = []byte{
-	// 1166 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x57, 0xcf, 0x6f, 0xe3, 0xc4,
-	0x17, 0xef, 0xc4, 0x4e, 0x62, 0xbf, 0xa4, 0xed, 0x57, 0xfe, 0xae, 0xc0, 0x72, 0xc1, 0x1b, 0x5a,
-	0x04, 0xb9, 0xe0, 0x2d, 0x5d, 0xf1, 0x43, 0x45, 0x20, 0x85, 0x4d, 0xbb, 0x54, 0xda, 0xae, 0x56,
-	0x2e, 0x70, 0xd8, 0x9b, 0x9b, 0xcc, 0xa6, 0x51, 0x53, 0xdb, 0xeb, 0x99, 0x74, 0xc9, 0x7f, 0xc0,
-	0x9f, 0x80, 0x38, 0x71, 0xe4, 0xbc, 0x12, 0x12, 0xdc, 0xe0, 0xb6, 0x47, 0xee, 0x5c, 0xda, 0x20,
-	0xee, 0x9c, 0x39, 0xa1, 0xf9, 0x61, 0x7b, 0x1c, 0x3b, 0x65, 0xd9, 0x22, 0xb8, 0x44, 0xf3, 0xde,
-	0xbc, 0x37, 0xef, 0x7d, 0x3e, 0xf3, 0xe6, 0x3d, 0x07, 0xd6, 0x87, 0x63, 0x32, 0x88, 0xce, 0x71,
-	0x32, 0xf3, 0xe2, 0x24, 0xa2, 0x91, 0xf3, 0xd6, 0x68, 0x4c, 0x4f, 0xa6, 0xc7, 0xde, 0x20, 0x3a,
-	0xbb, 0x35, 0x8a, 0x46, 0xd1, 0x2d, 0xae, 0x3e, 0x9e, 0x3e, 0xe2, 0x12, 0x17, 0xf8, 0x4a, 0x98,
-	0x6f, 0x7e, 0x01, 0xfa, 0xc3, 0x28, 0xc4, 0xd6, 0xff, 0x40, 0x3b, 0x4a, 0x06, 0x36, 0xea, 0xa0,
-	0xae, 0xe9, 0xb3, 0xa5, 0xd5, 0x01, 0xad, 0x4f, 0xa8, 0x5d, 0xeb, 0x68, 0xdd, 0xd6, 0xce, 0x9a,
-	0xc7, 0xac, 0xbc, 0x3e, 0xa1, 0x7b, 0x21, 0x4d, 0x66, 0x3e, 0xdb, 0x72, 0xde, 0x05, 0x23, 0x55,
-	0x30, 0xff, 0x53, 0x3c, 0x4b, 0xfd, 0x4f, 0xf1, 0xcc, 0xba, 0x01, 0xf5, 0xf3, 0x60, 0x32, 0xc5,
-	0x76, 0xad, 0x83, 0xba, 0xab, 0xbe, 0x10, 0x76, 0x6b, 0xef, 0xa3, 0x5d, 0xfd, 0xcb, 0x6f, 0x6e,
-	0xae, 0x6c, 0xde, 0x03, 0xfd, 0x7e, 0x34, 0xc4, 0x96, 0x05, 0x7a, 0x6f, 0x38, 0x4c, 0xa4, 0x2b,
-	0x5f, 0x5b, 0x2f, 0x41, 0xe3, 0x88, 0x06, 0x74, 0x4a, 0xa4, 0xb3, 0x94, 0x98, 0x2d, 0xcb, 0xc3,
-	0xd6, 0x84, 0x2d, 0x5b, 0xcb, 0xd3, 0x3c, 0x30, 0x13, 0x4c, 0x62, 0x76, 0x22, 0xb1, 0x36, 0xa0,
-	0x7e, 0x3f, 0xa2, 0x98, 0xd8, 0x88, 0x27, 0x5f, 0xf7, 0x98, 0xda, 0x17, 0x3a, 0x69, 0xff, 0x87,
-	0x06, 0xc6, 0x41, 0x48, 0x68, 0x10, 0x0e, 0x30, 0x0b, 0xe7, 0xe3, 0xd1, 0x38, 0x0a, 0x65, 0x12,
-	0x52, 0xca, 0xc2, 0xd5, 0xf2, 0x70, 0x0c, 0xe8, 0x5e, 0x78, 0x2e, 0x33, 0x60, 0x4b, 0x06, 0xb4,
-	0x17, 0xc7, 0x07, 0x7d, 0x5b, 0xe7, 0x3a, 0x21, 0x58, 0x0e, 0x18, 0x9f, 0x44, 0x84, 0x86, 0xc1,
-	0x19, 0xb6, 0xeb, 0x7c, 0x23, 0x93, 0xb9, 0xc7, 0x70, 0x98, 0x10, 0xbb, 0xd1, 0xd1, 0xb8, 0x07,
-	0x13, 0x14, 0xd0, 0xcd, 0x02, 0x68, 0x1b, 0x9a, 0x9f, 0xe3, 0x84, 0xb0, 0xf4, 0x0c, 0x7e, 0x50,
-	0x2a, 0x5a, 0xb7, 0xc1, 0x38, 0xc4, 0x34, 0x18, 0x06, 0x34, 0xb0, 0x4d, 0x0e, 0xf5, 0x65, 0x2f,
-	0x05, 0xe5, 0xa5, 0x3b, 0xe2, 0xc2, 0x32, 0x43, 0x6b, 0x13, 0xda, 0x3e, 0x1e, 0x7d, 0x3a, 0x3e,
-	0xc3, 0x84, 0x06, 0x67, 0xb1, 0x0d, 0x1d, 0xd4, 0xd5, 0xfc, 0x82, 0xce, 0xea, 0x40, 0xeb, 0xb3,
-	0x38, 0x37, 0x69, 0x71, 0x13, 0x55, 0x65, 0xbd, 0x01, 0x6b, 0x3e, 0x0e, 0xf1, 0x93, 0xdc, 0xa8,
-	0xcd, 0x8d, 0x16, 0xb4, 0xcc, 0xae, 0x3f, 0x4e, 0xe8, 0x2c, 0xb7, 0x5b, 0x15, 0x76, 0x45, 0xad,
-	0xd5, 0x85, 0xf5, 0x7b, 0x01, 0xc5, 0x84, 0xe6, 0x86, 0x6b, 0xdc, 0x70, 0x51, 0xed, 0x7c, 0x00,
-	0xab, 0x05, 0x68, 0x7f, 0x55, 0x7a, 0x66, 0xb9, 0xf4, 0x7e, 0x41, 0xa0, 0xf5, 0xe2, 0x38, 0xbf,
-	0x39, 0xa4, 0xde, 0x5c, 0xd5, 0xad, 0xbf, 0x0d, 0xe6, 0x58, 0x12, 0x4b, 0x6c, 0x8d, 0x53, 0xfd,
-	0x7f, 0xaf, 0x17, 0xc7, 0x19, 0xdd, 0x44, 0xd0, 0x9c, 0x5b, 0x31, 0x44, 0x93, 0x05, 0x44, 0xba,
-	0x40, 0xb4, 0xa0, 0x76, 0xee, 0xc2, 0x5a, 0xf1, 0x98, 0x0a, 0x48, 0x37, 0x55, 0x48, 0xad, 0x1d,
-	0x33, 0x0b, 0x5c, 0x46, 0xf7, 0x35, 0x02, 0xbd, 0x17, 0xc7, 0xc4, 0xda, 0x02, 0x3d, 0x88, 0xe3,
-	0xf4, 0x15, 0xac, 0xb3, 0x7c, 0x09, 0xff, 0x11, 0xb9, 0xf2, 0xcd, 0xaa, 0x34, 0x6b, 0xd5, 0x69,
-	0x7e, 0x08, 0x66, 0xe6, 0x5c, 0x91, 0xa1, 0x53, 0xcc, 0x50, 0x67, 0x91, 0xca, 0xc9, 0xed, 0x82,
-	0x99, 0x61, 0xb5, 0xde, 0x54, 0x04, 0x99, 0xa5, 0x02, 0x2c, 0xdf, 0x93, 0xbe, 0xbf, 0x21, 0x68,
-	0xa7, 0xba, 0x83, 0xf0, 0x51, 0x64, 0xbd, 0x97, 0xbf, 0x61, 0xe9, 0xbe, 0xe1, 0xa9, 0x06, 0x99,
-	0x20, 0xdf, 0x40, 0xf6, 0xe0, 0xb7, 0xc0, 0x3c, 0x1a, 0x9c, 0xe0, 0xe1, 0x74, 0x82, 0x13, 0xd9,
-	0xe1, 0xea, 0xbc, 0xc3, 0xf9, 0xb9, 0xbe, 0xaa, 0x24, 0xb5, 0xea, 0x92, 0xbc, 0x0b, 0xab, 0x85,
-	0x48, 0x15, 0xec, 0x74, 0x8a, 0xec, 0x40, 0x5e, 0x38, 0x65, 0x8e, 0xde, 0x81, 0xa6, 0x8f, 0x49,
-	0x7c, 0x48, 0x46, 0xac, 0x16, 0xef, 0x44, 0x43, 0xcc, 0x4f, 0xaa, 0xfb, 0x7c, 0xcd, 0x0e, 0x3f,
-	0x24, 0x23, 0x59, 0x9e, 0x6c, 0x29, 0xdd, 0x1e, 0x83, 0xc1, 0xdc, 0xf6, 0xf1, 0xe0, 0x84, 0xf9,
-	0x0d, 0x52, 0x3f, 0xe4, 0xf3, 0xb5, 0xf5, 0x1a, 0xe8, 0x7d, 0xd6, 0x29, 0x44, 0x06, 0xab, 0x05,
-	0xa6, 0x7c, 0xbe, 0xb5, 0x0c, 0xb2, 0x5e, 0x82, 0x2c, 0x43, 0xfe, 0x84, 0xc0, 0x4c, 0x63, 0x92,
-	0xca, 0xa0, 0xdd, 0x2c, 0x28, 0x23, 0xf9, 0x86, 0x97, 0x59, 0x7b, 0xfd, 0xac, 0x37, 0xfd, 0xcd,
-	0xd8, 0xce, 0x3e, 0x98, 0xfd, 0x2b, 0x5e, 0xff, 0x56, 0x91, 0xea, 0x05, 0xa0, 0x25, 0xb6, 0x7f,
-	0x90, 0x18, 0xc4, 0xe8, 0x78, 0x5e, 0x0c, 0xdc, 0xfa, 0x1a, 0x18, 0x3e, 0xba, 0x1a, 0xc3, 0x46,
-	0x11, 0x43, 0x3a, 0xc1, 0x4a, 0x8d, 0xac, 0x06, 0xad, 0x5e, 0x32, 0x62, 0xe3, 0x8a, 0x50, 0x9c,
-	0xfc, 0xeb, 0x83, 0x2c, 0x1f, 0x59, 0x8d, 0xc2, 0xc8, 0xca, 0x06, 0x5c, 0x53, 0x1d, 0x70, 0xcb,
-	0x07, 0x99, 0x53, 0x18, 0x64, 0x3c, 0x46, 0x36, 0xaf, 0x3a, 0xd0, 0xf2, 0x71, 0x3c, 0x19, 0x0f,
-	0x02, 0xca, 0x3c, 0xd9, 0xb8, 0x32, 0x7c, 0x55, 0x55, 0xc5, 0x7a, 0xab, 0xf2, 0xa1, 0x56, 0x4c,
-	0xa3, 0x76, 0xd5, 0x34, 0x92, 0xec, 0x3e, 0x45, 0x60, 0x70, 0x76, 0x43, 0xfc, 0x24, 0xa3, 0x10,
-	0x95, 0x29, 0xac, 0x55, 0x50, 0xa8, 0x2d, 0xa3, 0x50, 0x5f, 0xa0, 0x70, 0x01, 0x5e, 0xbd, 0x0c,
-	0xaf, 0x9c, 0x74, 0xe3, 0x8a, 0xa4, 0xbf, 0x43, 0x60, 0xf6, 0x92, 0xd1, 0x1d, 0x56, 0xf0, 0x93,
-	0xff, 0x30, 0xeb, 0x8a, 0x4b, 0x69, 0x54, 0x5e, 0x8a, 0xcc, 0x7b, 0xc8, 0xb9, 0xde, 0xc7, 0x54,
-	0x74, 0xaf, 0x17, 0xce, 0x3a, 0x2f, 0x49, 0x5d, 0x2d, 0x49, 0x19, 0x65, 0xc4, 0xdf, 0x0b, 0x8f,
-	0xd2, 0x9b, 0xbc, 0x00, 0x3d, 0xda, 0xf3, 0x06, 0x9a, 0x42, 0x93, 0x95, 0x4e, 0x34, 0xb9, 0xde,
-	0x1d, 0x54, 0xb0, 0xa8, 0x5f, 0xc5, 0xe2, 0xb9, 0xa8, 0xd8, 0x68, 0x32, 0x21, 0xd7, 0x02, 0x57,
-	0x19, 0x57, 0x5b, 0x1e, 0xf7, 0x02, 0x41, 0xa3, 0x97, 0x3c, 0x3e, 0xc2, 0xf4, 0x1f, 0x2c, 0x39,
-	0x6d, 0x49, 0xaf, 0xa9, 0x77, 0x34, 0xa5, 0xd7, 0xa8, 0xbd, 0x43, 0x7c, 0x4f, 0x2f, 0xed, 0x1d,
-	0xcd, 0x72, 0x99, 0x6e, 0x42, 0xfb, 0x08, 0x2b, 0x28, 0x0d, 0xf1, 0x35, 0xac, 0xea, 0x04, 0xc4,
-	0x9d, 0xa7, 0x35, 0x58, 0xdf, 0x9b, 0x26, 0xf8, 0x34, 0xe8, 0xa7, 0x7f, 0xb9, 0xac, 0x4d, 0x36,
-	0x72, 0x65, 0xef, 0x6d, 0x7b, 0x4a, 0x27, 0x76, 0x0c, 0x2f, 0x1d, 0xe1, 0xaf, 0x40, 0x5d, 0x74,
-	0x10, 0xd3, 0x4b, 0x9b, 0x89, 0xb2, 0xeb, 0x42, 0x43, 0x3e, 0x55, 0xf0, 0xb2, 0x67, 0xab, 0xec,
-	0xbf, 0x0a, 0x75, 0xf1, 0x26, 0xb8, 0x37, 0x5f, 0x3a, 0x66, 0x36, 0x45, 0xad, 0xd7, 0xc1, 0xc8,
-	0x8a, 0xb9, 0xed, 0x29, 0xa5, 0xed, 0x40, 0x3e, 0x6a, 0x2d, 0x17, 0xf4, 0x07, 0xac, 0x12, 0x2b,
-	0xcf, 0xd8, 0x46, 0xec, 0xe3, 0xe4, 0x01, 0x2f, 0x19, 0xc5, 0x40, 0xf1, 0xdf, 0x46, 0x0c, 0x84,
-	0x98, 0x8f, 0x8a, 0x45, 0x9e, 0xa4, 0x0d, 0x1a, 0xbb, 0xf9, 0xa6, 0x27, 0x4a, 0x20, 0xdf, 0xf9,
-	0x78, 0xfb, 0xd9, 0xa5, 0xbb, 0x72, 0x71, 0xe9, 0xa2, 0xdf, 0x2f, 0x5d, 0xf4, 0xed, 0xdc, 0x45,
-	0xdf, 0xcf, 0x5d, 0xf4, 0xe3, 0xdc, 0x45, 0xcf, 0xe6, 0x2e, 0xfa, 0x79, 0xee, 0xa2, 0x8b, 0xb9,
-	0x8b, 0xbe, 0xfa, 0xd5, 0x5d, 0x79, 0xd8, 0xc0, 0x9c, 0xdb, 0xe3, 0x06, 0xff, 0x5f, 0x7a, 0xfb,
-	0xcf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xb6, 0x0d, 0x13, 0x84, 0xd9, 0x0e, 0x00, 0x00,
+	// 1202 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x57, 0xbf, 0x6f, 0xe4, 0xc4,
+	0x17, 0xcf, 0xac, 0xbd, 0xbb, 0xf6, 0xdb, 0x4d, 0xf2, 0x95, 0xbf, 0x27, 0xb0, 0x1c, 0x70, 0x96,
+	0x04, 0x89, 0x34, 0xcc, 0x85, 0x9c, 0xf8, 0xa1, 0x00, 0x91, 0xf6, 0x6e, 0x93, 0x23, 0xd2, 0xe5,
+	0x74, 0x72, 0x80, 0xe2, 0x3a, 0x67, 0x77, 0xce, 0x59, 0x65, 0xb3, 0x36, 0x9e, 0xd9, 0x1c, 0x29,
+	0x69, 0x10, 0x0d, 0x05, 0xd0, 0x50, 0x52, 0x52, 0x53, 0x20, 0x4a, 0xca, 0xab, 0x10, 0x14, 0x94,
+	0x48, 0x97, 0xe5, 0x1f, 0xa0, 0xa3, 0xa1, 0x40, 0x33, 0x1e, 0xdb, 0xe3, 0x5d, 0xe7, 0xf6, 0x92,
+	0x0b, 0xd0, 0x58, 0xf3, 0x66, 0xde, 0x7b, 0xf3, 0x3e, 0xef, 0xe7, 0x18, 0x16, 0x7b, 0x7d, 0xda,
+	0x0d, 0x4f, 0x48, 0x7c, 0x8a, 0xa3, 0x38, 0x64, 0xa1, 0xf3, 0x6a, 0xd0, 0x67, 0x87, 0xa3, 0x03,
+	0xdc, 0x0d, 0x8f, 0xaf, 0x07, 0x61, 0x10, 0x5e, 0x17, 0xdb, 0x07, 0xa3, 0x07, 0x82, 0x12, 0x84,
+	0x58, 0x49, 0xf6, 0xe5, 0x20, 0x0c, 0x83, 0x01, 0xc9, 0xb9, 0x58, 0xff, 0x98, 0x50, 0xe6, 0x1f,
+	0x47, 0x09, 0xc3, 0xca, 0xc7, 0xa0, 0xdf, 0x0f, 0x87, 0xc4, 0xfa, 0x1f, 0x68, 0xfb, 0x71, 0xd7,
+	0x46, 0x2d, 0xb4, 0x66, 0x7a, 0x7c, 0x69, 0xb5, 0x40, 0xeb, 0x50, 0x66, 0x57, 0x5a, 0xda, 0x5a,
+	0x63, 0x63, 0x01, 0x73, 0x2e, 0xdc, 0xa1, 0x6c, 0x7b, 0xc8, 0xe2, 0x53, 0x8f, 0x1f, 0x39, 0x6f,
+	0x80, 0x91, 0x6e, 0x70, 0xf9, 0x23, 0x72, 0x9a, 0xca, 0x1f, 0x91, 0x53, 0xeb, 0x1a, 0x54, 0x4f,
+	0xfc, 0xc1, 0x88, 0xd8, 0x95, 0x16, 0x5a, 0x9b, 0xf7, 0x12, 0x62, 0xb3, 0xf2, 0x16, 0xda, 0xd4,
+	0x3f, 0xfb, 0x66, 0x79, 0x6e, 0xe5, 0x0e, 0xe8, 0x77, 0xc3, 0x1e, 0xb1, 0x2c, 0xd0, 0xdb, 0xbd,
+	0x5e, 0x2c, 0x45, 0xc5, 0xda, 0x7a, 0x0e, 0x6a, 0xfb, 0xcc, 0x67, 0x23, 0x2a, 0x85, 0x25, 0xc5,
+	0x79, 0xb9, 0x1d, 0xb6, 0x96, 0xf0, 0xf2, 0xb5, 0xd4, 0x86, 0xc1, 0x8c, 0x09, 0x8d, 0xb8, 0x46,
+	0x6a, 0x2d, 0x41, 0xf5, 0x6e, 0xc8, 0x08, 0xb5, 0x91, 0x30, 0xbe, 0x8a, 0xf9, 0xb6, 0x97, 0xec,
+	0x49, 0xfe, 0x4f, 0xab, 0x60, 0xec, 0x0e, 0x29, 0xf3, 0x87, 0x5d, 0xc2, 0xaf, 0xf3, 0x48, 0xd0,
+	0x0f, 0x87, 0xd2, 0x08, 0x49, 0x65, 0xd7, 0x55, 0xf2, 0xeb, 0x38, 0xd0, 0xed, 0xe1, 0x89, 0xb4,
+	0x80, 0x2f, 0x39, 0xd0, 0x76, 0x14, 0xed, 0x76, 0x6c, 0x5d, 0xec, 0x25, 0x84, 0xe5, 0x80, 0xf1,
+	0x5e, 0x48, 0xd9, 0xd0, 0x3f, 0x26, 0x76, 0x55, 0x1c, 0x64, 0xb4, 0x90, 0xe8, 0xf5, 0x62, 0x6a,
+	0xd7, 0x5a, 0x9a, 0x90, 0xe0, 0x84, 0x02, 0xba, 0x5e, 0x00, 0x6d, 0x43, 0xfd, 0x43, 0x12, 0x53,
+	0x6e, 0x9e, 0x21, 0x14, 0xa5, 0xa4, 0x75, 0x03, 0x8c, 0x3d, 0xc2, 0xfc, 0x9e, 0xcf, 0x7c, 0xdb,
+	0x14, 0x50, 0x9f, 0xc7, 0x29, 0x28, 0x9c, 0x9e, 0x24, 0x01, 0xcb, 0x18, 0xad, 0x2d, 0x68, 0x7a,
+	0x24, 0x78, 0x3f, 0xcd, 0x03, 0x1b, 0x5a, 0x68, 0xad, 0xb1, 0xe1, 0xe0, 0x24, 0x53, 0x70, 0x9a,
+	0x29, 0x38, 0xe3, 0xf0, 0x0a, 0xfc, 0xd6, 0x3b, 0xd0, 0xf8, 0x20, 0xca, 0xc5, 0x1b, 0x33, 0xc5,
+	0x55, 0x76, 0xeb, 0x26, 0x2c, 0x78, 0x64, 0x48, 0x1e, 0xe6, 0x0a, 0x9a, 0x33, 0x15, 0x4c, 0x48,
+	0x70, 0x1d, 0x9d, 0x7e, 0xcc, 0x4e, 0x73, 0x1d, 0xf3, 0xb3, 0x75, 0x14, 0x25, 0xac, 0x0e, 0x2c,
+	0xde, 0xf1, 0x19, 0xa1, 0x2c, 0x57, 0xb2, 0x30, 0x53, 0xc9, 0xa4, 0x88, 0xf3, 0x36, 0xcc, 0x17,
+	0xdc, 0x3c, 0xab, 0x0c, 0xcc, 0xe9, 0x32, 0xf8, 0x13, 0x81, 0xd6, 0x8e, 0xa2, 0x3c, 0x8b, 0x90,
+	0x9a, 0x45, 0x65, 0x19, 0xf8, 0x1a, 0x98, 0x7d, 0x19, 0x64, 0x6a, 0x6b, 0x22, 0xec, 0xff, 0xc7,
+	0xed, 0x28, 0xca, 0x42, 0x4f, 0x93, 0x90, 0xe7, 0x5c, 0x1c, 0xed, 0x60, 0x02, 0xad, 0x3e, 0x1b,
+	0xed, 0x84, 0x88, 0x73, 0x1b, 0x16, 0x8a, 0x57, 0x94, 0xc0, 0x5d, 0x56, 0xe1, 0x36, 0x36, 0xcc,
+	0xcc, 0xa8, 0x69, 0xe4, 0xdf, 0x23, 0xd0, 0xdb, 0x51, 0x44, 0xad, 0x55, 0xd0, 0xfd, 0x28, 0x4a,
+	0xab, 0x75, 0x91, 0x63, 0xa1, 0xe2, 0x93, 0xe0, 0x10, 0x87, 0x65, 0x10, 0x2a, 0x17, 0x87, 0xf0,
+	0x2e, 0x98, 0x99, 0xe2, 0x12, 0xeb, 0x9d, 0xa2, 0xf5, 0x3a, 0xb7, 0x62, 0xda, 0xf0, 0x4d, 0x30,
+	0x33, 0x3f, 0x58, 0xaf, 0x28, 0x84, 0x44, 0xa0, 0x80, 0xce, 0xcf, 0xa4, 0xec, 0x27, 0x15, 0x68,
+	0xa6, 0x7b, 0xbb, 0xc3, 0x07, 0xa1, 0xf5, 0x66, 0xde, 0x87, 0xa4, 0xf8, 0x12, 0x56, 0x19, 0x32,
+	0x42, 0xd6, 0x71, 0xd6, 0xb4, 0x56, 0xc1, 0xdc, 0xef, 0x1e, 0x92, 0xde, 0x68, 0x40, 0x62, 0xd9,
+	0xa5, 0xab, 0xa2, 0x4b, 0x7b, 0xf9, 0x7e, 0x59, 0x9a, 0x6b, 0x17, 0x4f, 0xf3, 0xdb, 0x30, 0x5f,
+	0xb0, 0xa2, 0xc4, 0x73, 0xad, 0xa2, 0xe7, 0x20, 0x4f, 0xc6, 0x69, 0xff, 0xbd, 0x0e, 0x75, 0x8f,
+	0xd0, 0x68, 0x8f, 0x06, 0x3c, 0xbf, 0x6f, 0x85, 0x3d, 0x22, 0x34, 0x55, 0x3d, 0xb1, 0xe6, 0xca,
+	0xf7, 0x68, 0x20, 0x53, 0x9e, 0x2f, 0xa5, 0xd8, 0xe7, 0x08, 0x0c, 0x2e, 0xb7, 0x43, 0xba, 0x87,
+	0x5c, 0xb0, 0x9b, 0x0a, 0x22, 0x4f, 0xac, 0xad, 0x97, 0x40, 0xef, 0xf0, 0x56, 0x98, 0x98, 0x30,
+	0x5f, 0x70, 0xa3, 0x27, 0x8e, 0xae, 0xc6, 0x1f, 0xd2, 0x9e, 0xdf, 0x10, 0x98, 0xa9, 0x3d, 0xb4,
+	0xd4, 0xa0, 0xb5, 0xcc, 0x20, 0x1e, 0x9d, 0x6b, 0x38, 0xe3, 0xc6, 0x9d, 0xac, 0x31, 0x5f, 0xa1,
+	0x5d, 0xce, 0x0e, 0x98, 0x9d, 0x27, 0xb4, 0xa2, 0xd5, 0x62, 0x8c, 0x26, 0x1c, 0x34, 0x15, 0xa6,
+	0x5f, 0x25, 0xbe, 0x64, 0xa6, 0x3e, 0x2d, 0x3e, 0xc1, 0xfd, 0x0f, 0xe1, 0xdb, 0x7a, 0x32, 0xbe,
+	0xa5, 0x22, 0xbe, 0x74, 0xec, 0x4f, 0xe2, 0xfa, 0x4a, 0x83, 0x46, 0x3b, 0x0e, 0xf8, 0x8c, 0xa7,
+	0x8c, 0xc4, 0xff, 0xfa, 0xf4, 0xcf, 0xe7, 0x7c, 0xad, 0x30, 0xe7, 0xb3, 0x57, 0x41, 0x5d, 0x7d,
+	0x15, 0x9c, 0x3f, 0xfd, 0x9d, 0xc2, 0xf4, 0x17, 0x77, 0x64, 0x43, 0xbe, 0x05, 0x0d, 0x8f, 0x44,
+	0x83, 0x7e, 0xd7, 0x67, 0x5c, 0x92, 0xcf, 0x78, 0xc3, 0x53, 0xb7, 0xca, 0x22, 0xd2, 0xb8, 0x70,
+	0x44, 0x4a, 0x46, 0x71, 0xf3, 0xa2, 0xa3, 0x58, 0x46, 0xe5, 0x27, 0x04, 0x86, 0x88, 0xca, 0x90,
+	0x3c, 0xcc, 0x5c, 0x8f, 0xa6, 0x5d, 0x5f, 0x29, 0x71, 0xbd, 0x76, 0x9e, 0xeb, 0xf5, 0x09, 0xd7,
+	0x4f, 0xb8, 0xa5, 0x3a, 0xed, 0x96, 0x69, 0x40, 0xb5, 0x4b, 0x02, 0xfa, 0x05, 0x81, 0xd9, 0x8e,
+	0x83, 0x5b, 0xbc, 0xc0, 0x06, 0xff, 0x21, 0xa2, 0x92, 0x40, 0xd7, 0x2e, 0xdb, 0xf2, 0x7a, 0x22,
+	0x46, 0x3b, 0x84, 0x25, 0x1d, 0xf8, 0xd2, 0x88, 0xf2, 0x12, 0xd0, 0xd5, 0x12, 0x90, 0xb7, 0x04,
+	0xa2, 0x3e, 0xc5, 0x2d, 0xed, 0xc1, 0x25, 0x5c, 0xa7, 0x3d, 0xed, 0x45, 0x5f, 0x20, 0xa8, 0xf3,
+	0x9c, 0x0b, 0x07, 0xcf, 0x16, 0xa0, 0x12, 0x17, 0xeb, 0x97, 0x75, 0xf1, 0x97, 0xb2, 0x0e, 0xc2,
+	0xc1, 0x80, 0x3e, 0x13, 0xf4, 0xab, 0x34, 0xea, 0x2f, 0x04, 0xb5, 0x76, 0xfc, 0xd1, 0x3e, 0x61,
+	0x57, 0x98, 0xc8, 0xda, 0x39, 0x5d, 0xb1, 0xda, 0xd2, 0x94, 0xae, 0xa8, 0x76, 0xb9, 0xe4, 0x77,
+	0xe9, 0xdc, 0x2e, 0x57, 0x9f, 0x4e, 0xfe, 0x2d, 0x68, 0xee, 0x13, 0xc5, 0x03, 0xc6, 0xec, 0x9f,
+	0x1d, 0x95, 0x3f, 0x81, 0xbf, 0xf1, 0x5d, 0x05, 0x16, 0xb7, 0x47, 0x31, 0x39, 0xf2, 0x3b, 0xe9,
+	0xef, 0xb8, 0xb5, 0xc2, 0x1f, 0x23, 0x72, 0x82, 0x34, 0xb1, 0x32, 0x4f, 0x1c, 0x03, 0xa7, 0xaf,
+	0x9b, 0x17, 0xa0, 0x9a, 0xf4, 0x33, 0x13, 0xa7, 0xad, 0x4d, 0x39, 0x75, 0xa1, 0x26, 0x9b, 0x03,
+	0xe0, 0xac, 0x51, 0x28, 0xe7, 0x2f, 0x42, 0x35, 0xa9, 0x34, 0x21, 0x2d, 0x96, 0x8e, 0x99, 0xbd,
+	0x21, 0xac, 0x97, 0xc1, 0xc8, 0x4a, 0xa4, 0x89, 0x95, 0x82, 0x71, 0x20, 0x7f, 0x68, 0x58, 0x2e,
+	0xe8, 0xf7, 0x78, 0x7a, 0x97, 0xea, 0x58, 0x47, 0xfc, 0xdd, 0x76, 0x4f, 0xa4, 0x9a, 0xc2, 0xa0,
+	0xc8, 0xaf, 0x23, 0x0e, 0x22, 0x79, 0x01, 0x28, 0x1c, 0xb9, 0x91, 0x36, 0x68, 0x3c, 0x2b, 0xea,
+	0x38, 0x49, 0x8f, 0xfc, 0xe4, 0xe6, 0xfa, 0xa3, 0x33, 0x77, 0xee, 0xf1, 0x99, 0x8b, 0xfe, 0x38,
+	0x73, 0xd1, 0xb7, 0x63, 0x17, 0xfd, 0x30, 0x76, 0xd1, 0x8f, 0x63, 0x17, 0x3d, 0x1a, 0xbb, 0xe8,
+	0xe7, 0xb1, 0x8b, 0x1e, 0x8f, 0x5d, 0xf4, 0xf5, 0xef, 0xee, 0xdc, 0xfd, 0x1a, 0x11, 0xbe, 0x3d,
+	0xa8, 0x89, 0x70, 0xdc, 0xf8, 0x3b, 0x00, 0x00, 0xff, 0xff, 0x40, 0xbc, 0xc3, 0x1e, 0xf5, 0x10,
+	0x00, 0x00,
 }
 
 func (this *Zone) VerboseEqual(that interface{}) error {
@@ -1287,19 +1291,19 @@ func (this *Instance) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Metadata this[%v](%v) Not Equal that[%v](%v)", i, this.Metadata[i], i, that1.Metadata[i])
 		}
 	}
-	if this.RegTimestamp != that1.RegTimestamp {
+	if !this.RegTimestamp.Equal(that1.RegTimestamp) {
 		return fmt.Errorf("RegTimestamp this(%v) Not Equal that(%v)", this.RegTimestamp, that1.RegTimestamp)
 	}
-	if this.UpTimestamp != that1.UpTimestamp {
+	if !this.UpTimestamp.Equal(that1.UpTimestamp) {
 		return fmt.Errorf("UpTimestamp this(%v) Not Equal that(%v)", this.UpTimestamp, that1.UpTimestamp)
 	}
-	if this.RenewTimestamp != that1.RenewTimestamp {
+	if !this.RenewTimestamp.Equal(that1.RenewTimestamp) {
 		return fmt.Errorf("RenewTimestamp this(%v) Not Equal that(%v)", this.RenewTimestamp, that1.RenewTimestamp)
 	}
-	if this.DirtyTimestamp != that1.DirtyTimestamp {
+	if !this.DirtyTimestamp.Equal(that1.DirtyTimestamp) {
 		return fmt.Errorf("DirtyTimestamp this(%v) Not Equal that(%v)", this.DirtyTimestamp, that1.DirtyTimestamp)
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1363,19 +1367,19 @@ func (this *Instance) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if this.RegTimestamp != that1.RegTimestamp {
+	if !this.RegTimestamp.Equal(that1.RegTimestamp) {
 		return false
 	}
-	if this.UpTimestamp != that1.UpTimestamp {
+	if !this.UpTimestamp.Equal(that1.UpTimestamp) {
 		return false
 	}
-	if this.RenewTimestamp != that1.RenewTimestamp {
+	if !this.RenewTimestamp.Equal(that1.RenewTimestamp) {
 		return false
 	}
-	if this.DirtyTimestamp != that1.DirtyTimestamp {
+	if !this.DirtyTimestamp.Equal(that1.DirtyTimestamp) {
 		return false
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1422,7 +1426,7 @@ func (this *App) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Instances this[%v](%v) Not Equal that[%v](%v)", i, this.Instances[i], i, that1.Instances[i])
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1463,7 +1467,7 @@ func (this *App) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1504,7 +1508,7 @@ func (this *Apps) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Apps this[%v](%v) Not Equal that[%v](%v)", i, this.Apps[i], i, that1.Apps[i])
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1539,7 +1543,7 @@ func (this *Apps) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1658,7 +1662,7 @@ func (this *InstanceInfo) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Scheduler this[%v](%v) Not Equal that[%v](%v)", i, this.Scheduler[i], i, that1.Scheduler[i])
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1701,7 +1705,7 @@ func (this *InstanceInfo) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1806,7 +1810,7 @@ func (this *RespFech) VerboseEqual(that interface{}) error {
 	if !this.Data.Equal(that1.Data) {
 		return fmt.Errorf("Data this(%v) Not Equal that(%v)", this.Data, that1.Data)
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1839,7 +1843,7 @@ func (this *RespFech) Equal(that interface{}) bool {
 	if !this.Data.Equal(that1.Data) {
 		return false
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1883,7 +1887,7 @@ func (this *RespFechs) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Data this[%v](%v) Not Equal that[%v](%v)", i, this.Data[i], i, that1.Data[i])
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1921,7 +1925,7 @@ func (this *RespFechs) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -1965,7 +1969,7 @@ func (this *RespNodes) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("Data this[%v](%v) Not Equal that[%v](%v)", i, this.Data[i], i, that1.Data[i])
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2003,7 +2007,7 @@ func (this *RespNodes) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2071,10 +2075,10 @@ func (this *ArgRegister) VerboseEqual(that interface{}) error {
 	if this.Replication != that1.Replication {
 		return fmt.Errorf("Replication this(%v) Not Equal that(%v)", this.Replication, that1.Replication)
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
-	if this.DirtyTimestamp != that1.DirtyTimestamp {
+	if !this.DirtyTimestamp.Equal(that1.DirtyTimestamp) {
 		return fmt.Errorf("DirtyTimestamp this(%v) Not Equal that(%v)", this.DirtyTimestamp, that1.DirtyTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2136,10 +2140,10 @@ func (this *ArgRegister) Equal(that interface{}) bool {
 	if this.Replication != that1.Replication {
 		return false
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
-	if this.DirtyTimestamp != that1.DirtyTimestamp {
+	if !this.DirtyTimestamp.Equal(that1.DirtyTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2187,7 +2191,7 @@ func (this *ArgRenew) VerboseEqual(that interface{}) error {
 	if this.Replication != that1.Replication {
 		return fmt.Errorf("Replication this(%v) Not Equal that(%v)", this.Replication, that1.Replication)
 	}
-	if this.DirtyTimestamp != that1.DirtyTimestamp {
+	if !this.DirtyTimestamp.Equal(that1.DirtyTimestamp) {
 		return fmt.Errorf("DirtyTimestamp this(%v) Not Equal that(%v)", this.DirtyTimestamp, that1.DirtyTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2229,7 +2233,7 @@ func (this *ArgRenew) Equal(that interface{}) bool {
 	if this.Replication != that1.Replication {
 		return false
 	}
-	if this.DirtyTimestamp != that1.DirtyTimestamp {
+	if !this.DirtyTimestamp.Equal(that1.DirtyTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2277,7 +2281,7 @@ func (this *ArgCancel) VerboseEqual(that interface{}) error {
 	if this.Replication != that1.Replication {
 		return fmt.Errorf("Replication this(%v) Not Equal that(%v)", this.Replication, that1.Replication)
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2319,7 +2323,7 @@ func (this *ArgCancel) Equal(that interface{}) bool {
 	if this.Replication != that1.Replication {
 		return false
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2527,7 +2531,7 @@ func (this *ArgRoll) VerboseEqual(that interface{}) error {
 	if this.AppID != that1.AppID {
 		return fmt.Errorf("AppID this(%v) Not Equal that(%v)", this.AppID, that1.AppID)
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2563,7 +2567,7 @@ func (this *ArgRoll) Equal(that interface{}) bool {
 	if this.AppID != that1.AppID {
 		return false
 	}
-	if this.LatestTimestamp != that1.LatestTimestamp {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2610,13 +2614,8 @@ func (this *ArgRolls) VerboseEqual(that interface{}) error {
 			return fmt.Errorf("AppID this[%v](%v) Not Equal that[%v](%v)", i, this.AppID[i], i, that1.AppID[i])
 		}
 	}
-	if len(this.LatestTimestamp) != len(that1.LatestTimestamp) {
-		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", len(this.LatestTimestamp), len(that1.LatestTimestamp))
-	}
-	for i := range this.LatestTimestamp {
-		if this.LatestTimestamp[i] != that1.LatestTimestamp[i] {
-			return fmt.Errorf("LatestTimestamp this[%v](%v) Not Equal that[%v](%v)", i, this.LatestTimestamp[i], i, that1.LatestTimestamp[i])
-		}
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
+		return fmt.Errorf("LatestTimestamp this(%v) Not Equal that(%v)", this.LatestTimestamp, that1.LatestTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return fmt.Errorf("XXX_unrecognized this(%v) Not Equal that(%v)", this.XXX_unrecognized, that1.XXX_unrecognized)
@@ -2656,13 +2655,8 @@ func (this *ArgRolls) Equal(that interface{}) bool {
 			return false
 		}
 	}
-	if len(this.LatestTimestamp) != len(that1.LatestTimestamp) {
+	if !this.LatestTimestamp.Equal(that1.LatestTimestamp) {
 		return false
-	}
-	for i := range this.LatestTimestamp {
-		if this.LatestTimestamp[i] != that1.LatestTimestamp[i] {
-			return false
-		}
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
 		return false
@@ -2730,7 +2724,7 @@ func (this *ArqSet) VerboseEqual(that interface{}) error {
 	if this.Replication != that1.Replication {
 		return fmt.Errorf("Replication this(%v) Not Equal that(%v)", this.Replication, that1.Replication)
 	}
-	if this.SetTimestamp != that1.SetTimestamp {
+	if !this.SetTimestamp.Equal(that1.SetTimestamp) {
 		return fmt.Errorf("SetTimestamp this(%v) Not Equal that(%v)", this.SetTimestamp, that1.SetTimestamp)
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2793,7 +2787,7 @@ func (this *ArqSet) Equal(that interface{}) bool {
 	if this.Replication != that1.Replication {
 		return false
 	}
-	if this.SetTimestamp != that1.SetTimestamp {
+	if !this.SetTimestamp.Equal(that1.SetTimestamp) {
 		return false
 	}
 	if !bytes.Equal(this.XXX_unrecognized, that1.XXX_unrecognized) {
@@ -2884,11 +2878,21 @@ func (this *Instance) GoString() string {
 	if this.Metadata != nil {
 		s = append(s, "Metadata: "+mapStringForMetadata+",\n")
 	}
-	s = append(s, "RegTimestamp: "+fmt.Sprintf("%#v", this.RegTimestamp)+",\n")
-	s = append(s, "UpTimestamp: "+fmt.Sprintf("%#v", this.UpTimestamp)+",\n")
-	s = append(s, "RenewTimestamp: "+fmt.Sprintf("%#v", this.RenewTimestamp)+",\n")
-	s = append(s, "DirtyTimestamp: "+fmt.Sprintf("%#v", this.DirtyTimestamp)+",\n")
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.RegTimestamp != nil {
+		s = append(s, "RegTimestamp: "+fmt.Sprintf("%#v", this.RegTimestamp)+",\n")
+	}
+	if this.UpTimestamp != nil {
+		s = append(s, "UpTimestamp: "+fmt.Sprintf("%#v", this.UpTimestamp)+",\n")
+	}
+	if this.RenewTimestamp != nil {
+		s = append(s, "RenewTimestamp: "+fmt.Sprintf("%#v", this.RenewTimestamp)+",\n")
+	}
+	if this.DirtyTimestamp != nil {
+		s = append(s, "DirtyTimestamp: "+fmt.Sprintf("%#v", this.DirtyTimestamp)+",\n")
+	}
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -2916,7 +2920,9 @@ func (this *App) GoString() string {
 	if this.Instances != nil {
 		s = append(s, "Instances: "+mapStringForInstances+",\n")
 	}
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -2942,7 +2948,9 @@ func (this *Apps) GoString() string {
 	if this.Apps != nil {
 		s = append(s, "Apps: "+mapStringForApps+",\n")
 	}
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -2986,7 +2994,9 @@ func (this *InstanceInfo) GoString() string {
 	if this.Scheduler != nil {
 		s = append(s, "Scheduler: "+fmt.Sprintf("%#v", this.Scheduler)+",\n")
 	}
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3017,7 +3027,9 @@ func (this *RespFech) GoString() string {
 	if this.Data != nil {
 		s = append(s, "Data: "+fmt.Sprintf("%#v", this.Data)+",\n")
 	}
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3044,7 +3056,9 @@ func (this *RespFechs) GoString() string {
 	if this.Data != nil {
 		s = append(s, "Data: "+mapStringForData+",\n")
 	}
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3071,7 +3085,9 @@ func (this *RespNodes) GoString() string {
 	if this.Data != nil {
 		s = append(s, "Data: "+mapStringForData+",\n")
 	}
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3094,8 +3110,12 @@ func (this *ArgRegister) GoString() string {
 	s = append(s, "Version: "+fmt.Sprintf("%#v", this.Version)+",\n")
 	s = append(s, "Metadata: "+fmt.Sprintf("%#v", this.Metadata)+",\n")
 	s = append(s, "Replication: "+fmt.Sprintf("%#v", this.Replication)+",\n")
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
-	s = append(s, "DirtyTimestamp: "+fmt.Sprintf("%#v", this.DirtyTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
+	if this.DirtyTimestamp != nil {
+		s = append(s, "DirtyTimestamp: "+fmt.Sprintf("%#v", this.DirtyTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3113,7 +3133,9 @@ func (this *ArgRenew) GoString() string {
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
 	s = append(s, "Hostname: "+fmt.Sprintf("%#v", this.Hostname)+",\n")
 	s = append(s, "Replication: "+fmt.Sprintf("%#v", this.Replication)+",\n")
-	s = append(s, "DirtyTimestamp: "+fmt.Sprintf("%#v", this.DirtyTimestamp)+",\n")
+	if this.DirtyTimestamp != nil {
+		s = append(s, "DirtyTimestamp: "+fmt.Sprintf("%#v", this.DirtyTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3131,7 +3153,9 @@ func (this *ArgCancel) GoString() string {
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
 	s = append(s, "Hostname: "+fmt.Sprintf("%#v", this.Hostname)+",\n")
 	s = append(s, "Replication: "+fmt.Sprintf("%#v", this.Replication)+",\n")
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3179,7 +3203,9 @@ func (this *ArgRoll) GoString() string {
 	s = append(s, "Zone: "+fmt.Sprintf("%#v", this.Zone)+",\n")
 	s = append(s, "Env: "+fmt.Sprintf("%#v", this.Env)+",\n")
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3195,7 +3221,9 @@ func (this *ArgRolls) GoString() string {
 	s = append(s, "Zone: "+fmt.Sprintf("%#v", this.Zone)+",\n")
 	s = append(s, "Env: "+fmt.Sprintf("%#v", this.Env)+",\n")
 	s = append(s, "AppID: "+fmt.Sprintf("%#v", this.AppID)+",\n")
-	s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	if this.LatestTimestamp != nil {
+		s = append(s, "LatestTimestamp: "+fmt.Sprintf("%#v", this.LatestTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3215,7 +3243,9 @@ func (this *ArqSet) GoString() string {
 	s = append(s, "Status: "+fmt.Sprintf("%#v", this.Status)+",\n")
 	s = append(s, "Metadata: "+fmt.Sprintf("%#v", this.Metadata)+",\n")
 	s = append(s, "Replication: "+fmt.Sprintf("%#v", this.Replication)+",\n")
-	s = append(s, "SetTimestamp: "+fmt.Sprintf("%#v", this.SetTimestamp)+",\n")
+	if this.SetTimestamp != nil {
+		s = append(s, "SetTimestamp: "+fmt.Sprintf("%#v", this.SetTimestamp)+",\n")
+	}
 	if this.XXX_unrecognized != nil {
 		s = append(s, "XXX_unrecognized:"+fmt.Sprintf("%#v", this.XXX_unrecognized)+",\n")
 	}
@@ -3824,30 +3854,55 @@ func (m *Instance) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], v)
 		}
 	}
-	if m.RegTimestamp != 0 {
-		dAtA[i] = 0x50
+	if m.RegTimestamp != nil {
+		dAtA[i] = 0x52
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.RegTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.RegTimestamp.Size()))
+		n1, err := m.RegTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n1
 	}
-	if m.UpTimestamp != 0 {
-		dAtA[i] = 0x58
+	if m.UpTimestamp != nil {
+		dAtA[i] = 0x5a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.UpTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.UpTimestamp.Size()))
+		n2, err := m.UpTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n2
 	}
-	if m.RenewTimestamp != 0 {
-		dAtA[i] = 0x60
+	if m.RenewTimestamp != nil {
+		dAtA[i] = 0x62
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.RenewTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.RenewTimestamp.Size()))
+		n3, err := m.RenewTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n3
 	}
-	if m.DirtyTimestamp != 0 {
-		dAtA[i] = 0x68
+	if m.DirtyTimestamp != nil {
+		dAtA[i] = 0x6a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.DirtyTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.DirtyTimestamp.Size()))
+		n4, err := m.DirtyTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n4
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x70
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x72
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n5, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -3902,18 +3957,23 @@ func (m *App) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintDiscovery(dAtA, i, uint64(v.Size()))
-				n1, err := v.MarshalTo(dAtA[i:])
+				n6, err := v.MarshalTo(dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n1
+				i += n6
 			}
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x20
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x22
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n7, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n7
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -3956,18 +4016,23 @@ func (m *Apps) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintDiscovery(dAtA, i, uint64(v.Size()))
-				n2, err := v.MarshalTo(dAtA[i:])
+				n8, err := v.MarshalTo(dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n2
+				i += n8
 			}
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x10
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x12
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n9, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n9
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4043,11 +4108,11 @@ func (m *InstanceInfo) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintDiscovery(dAtA, i, uint64(v.Size()))
-				n3, err := v.MarshalTo(dAtA[i:])
+				n10, err := v.MarshalTo(dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n3
+				i += n10
 			}
 		}
 	}
@@ -4063,10 +4128,15 @@ func (m *InstanceInfo) MarshalTo(dAtA []byte) (int, error) {
 			i += n
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x18
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x1a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n11, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n11
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4131,16 +4201,21 @@ func (m *RespFech) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x12
 		i++
 		i = encodeVarintDiscovery(dAtA, i, uint64(m.Data.Size()))
-		n4, err := m.Data.MarshalTo(dAtA[i:])
+		n12, err := m.Data.MarshalTo(dAtA[i:])
 		if err != nil {
 			return 0, err
 		}
-		i += n4
+		i += n12
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x18
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x1a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n13, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n13
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4189,18 +4264,23 @@ func (m *RespFechs) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintDiscovery(dAtA, i, uint64(v.Size()))
-				n5, err := v.MarshalTo(dAtA[i:])
+				n14, err := v.MarshalTo(dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n5
+				i += n14
 			}
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x18
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x1a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n15, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n15
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4249,18 +4329,23 @@ func (m *RespNodes) MarshalTo(dAtA []byte) (int, error) {
 				dAtA[i] = 0x12
 				i++
 				i = encodeVarintDiscovery(dAtA, i, uint64(v.Size()))
-				n6, err := v.MarshalTo(dAtA[i:])
+				n16, err := v.MarshalTo(dAtA[i:])
 				if err != nil {
 					return 0, err
 				}
-				i += n6
+				i += n16
 			}
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x18
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x1a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n17, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n17
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4355,15 +4440,25 @@ func (m *ArgRegister) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x58
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x5a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n18, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n18
 	}
-	if m.DirtyTimestamp != 0 {
-		dAtA[i] = 0x60
+	if m.DirtyTimestamp != nil {
+		dAtA[i] = 0x62
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.DirtyTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.DirtyTimestamp.Size()))
+		n19, err := m.DirtyTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n19
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4420,10 +4515,15 @@ func (m *ArgRenew) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
-	if m.DirtyTimestamp != 0 {
-		dAtA[i] = 0x30
+	if m.DirtyTimestamp != nil {
+		dAtA[i] = 0x32
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.DirtyTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.DirtyTimestamp.Size()))
+		n20, err := m.DirtyTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n20
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4480,10 +4580,15 @@ func (m *ArgCancel) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x30
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x32
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n21, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n21
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4621,10 +4726,15 @@ func (m *ArgRoll) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintDiscovery(dAtA, i, uint64(len(m.AppID)))
 		i += copy(dAtA[i:], m.AppID)
 	}
-	if m.LatestTimestamp != 0 {
-		dAtA[i] = 0x20
+	if m.LatestTimestamp != nil {
+		dAtA[i] = 0x22
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n22, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n22
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4674,23 +4784,15 @@ func (m *ArgRolls) MarshalTo(dAtA []byte) (int, error) {
 			i += copy(dAtA[i:], s)
 		}
 	}
-	if len(m.LatestTimestamp) > 0 {
-		dAtA8 := make([]byte, len(m.LatestTimestamp)*10)
-		var j7 int
-		for _, num1 := range m.LatestTimestamp {
-			num := uint64(num1)
-			for num >= 1<<7 {
-				dAtA8[j7] = uint8(uint64(num)&0x7f | 0x80)
-				num >>= 7
-				j7++
-			}
-			dAtA8[j7] = uint8(num)
-			j7++
-		}
+	if m.LatestTimestamp != nil {
 		dAtA[i] = 0x22
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(j7))
-		i += copy(dAtA[i:], dAtA8[:j7])
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.LatestTimestamp.Size()))
+		n23, err := m.LatestTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n23
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4747,21 +4849,21 @@ func (m *ArqSet) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if len(m.Status) > 0 {
-		dAtA10 := make([]byte, len(m.Status)*10)
-		var j9 int
+		dAtA25 := make([]byte, len(m.Status)*10)
+		var j24 int
 		for _, num := range m.Status {
 			for num >= 1<<7 {
-				dAtA10[j9] = uint8(uint64(num)&0x7f | 0x80)
+				dAtA25[j24] = uint8(uint64(num)&0x7f | 0x80)
 				num >>= 7
-				j9++
+				j24++
 			}
-			dAtA10[j9] = uint8(num)
-			j9++
+			dAtA25[j24] = uint8(num)
+			j24++
 		}
 		dAtA[i] = 0x2a
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(j9))
-		i += copy(dAtA[i:], dAtA10[:j9])
+		i = encodeVarintDiscovery(dAtA, i, uint64(j24))
+		i += copy(dAtA[i:], dAtA25[:j24])
 	}
 	if len(m.Metadata) > 0 {
 		for _, s := range m.Metadata {
@@ -4788,10 +4890,15 @@ func (m *ArqSet) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i++
 	}
-	if m.SetTimestamp != 0 {
-		dAtA[i] = 0x40
+	if m.SetTimestamp != nil {
+		dAtA[i] = 0x42
 		i++
-		i = encodeVarintDiscovery(dAtA, i, uint64(m.SetTimestamp))
+		i = encodeVarintDiscovery(dAtA, i, uint64(m.SetTimestamp.Size()))
+		n26, err := m.SetTimestamp.MarshalTo(dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n26
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -4920,20 +5027,25 @@ func (m *Instance) Size() (n int) {
 			n += mapEntrySize + 1 + sovDiscovery(uint64(mapEntrySize))
 		}
 	}
-	if m.RegTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.RegTimestamp))
+	if m.RegTimestamp != nil {
+		l = m.RegTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.UpTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.UpTimestamp))
+	if m.UpTimestamp != nil {
+		l = m.UpTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.RenewTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.RenewTimestamp))
+	if m.RenewTimestamp != nil {
+		l = m.RenewTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.DirtyTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.DirtyTimestamp))
+	if m.DirtyTimestamp != nil {
+		l = m.DirtyTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -4968,8 +5080,9 @@ func (m *App) Size() (n int) {
 			n += mapEntrySize + 1 + sovDiscovery(uint64(mapEntrySize))
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -4996,8 +5109,9 @@ func (m *Apps) Size() (n int) {
 			n += mapEntrySize + 1 + sovDiscovery(uint64(mapEntrySize))
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5048,8 +5162,9 @@ func (m *InstanceInfo) Size() (n int) {
 			n += 1 + l + sovDiscovery(uint64(l))
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5089,8 +5204,9 @@ func (m *RespFech) Size() (n int) {
 		l = m.Data.Size()
 		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5120,8 +5236,9 @@ func (m *RespFechs) Size() (n int) {
 			n += mapEntrySize + 1 + sovDiscovery(uint64(mapEntrySize))
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5151,8 +5268,9 @@ func (m *RespNodes) Size() (n int) {
 			n += mapEntrySize + 1 + sovDiscovery(uint64(mapEntrySize))
 		}
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5206,11 +5324,13 @@ func (m *ArgRegister) Size() (n int) {
 	if m.Replication {
 		n += 2
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.DirtyTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.DirtyTimestamp))
+	if m.DirtyTimestamp != nil {
+		l = m.DirtyTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5243,8 +5363,9 @@ func (m *ArgRenew) Size() (n int) {
 	if m.Replication {
 		n += 2
 	}
-	if m.DirtyTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.DirtyTimestamp))
+	if m.DirtyTimestamp != nil {
+		l = m.DirtyTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5277,8 +5398,9 @@ func (m *ArgCancel) Size() (n int) {
 	if m.Replication {
 		n += 2
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5360,8 +5482,9 @@ func (m *ArgRoll) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovDiscovery(uint64(l))
 	}
-	if m.LatestTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.LatestTimestamp))
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5389,12 +5512,9 @@ func (m *ArgRolls) Size() (n int) {
 			n += 1 + l + sovDiscovery(uint64(l))
 		}
 	}
-	if len(m.LatestTimestamp) > 0 {
-		l = 0
-		for _, e := range m.LatestTimestamp {
-			l += sovDiscovery(uint64(e))
-		}
-		n += 1 + sovDiscovery(uint64(l)) + l
+	if m.LatestTimestamp != nil {
+		l = m.LatestTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -5442,8 +5562,9 @@ func (m *ArqSet) Size() (n int) {
 	if m.Replication {
 		n += 2
 	}
-	if m.SetTimestamp != 0 {
-		n += 1 + sovDiscovery(uint64(m.SetTimestamp))
+	if m.SetTimestamp != nil {
+		l = m.SetTimestamp.Size()
+		n += 1 + l + sovDiscovery(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -6288,10 +6409,10 @@ func (m *Instance) Unmarshal(dAtA []byte) error {
 			m.Metadata[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 10:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field RegTimestamp", wireType)
 			}
-			m.RegTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6301,16 +6422,33 @@ func (m *Instance) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.RegTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.RegTimestamp == nil {
+				m.RegTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.RegTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 11:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field UpTimestamp", wireType)
 			}
-			m.UpTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6320,16 +6458,33 @@ func (m *Instance) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.UpTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.UpTimestamp == nil {
+				m.UpTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.UpTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 12:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field RenewTimestamp", wireType)
 			}
-			m.RenewTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6339,16 +6494,33 @@ func (m *Instance) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.RenewTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.RenewTimestamp == nil {
+				m.RenewTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.RenewTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 13:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field DirtyTimestamp", wireType)
 			}
-			m.DirtyTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6358,16 +6530,33 @@ func (m *Instance) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.DirtyTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DirtyTimestamp == nil {
+				m.DirtyTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.DirtyTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 14:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6377,11 +6566,28 @@ func (m *Instance) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -6630,10 +6836,10 @@ func (m *App) Unmarshal(dAtA []byte) error {
 			m.Instances[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 4:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6643,11 +6849,28 @@ func (m *App) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -6832,10 +7055,10 @@ func (m *Apps) Unmarshal(dAtA []byte) error {
 			m.Apps[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 2:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -6845,11 +7068,28 @@ func (m *Apps) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -7156,10 +7396,10 @@ func (m *InstanceInfo) Unmarshal(dAtA []byte) error {
 			}
 			iNdEx = postIndex
 		case 3:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -7169,11 +7409,28 @@ func (m *InstanceInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -7381,10 +7638,10 @@ func (m *RespFech) Unmarshal(dAtA []byte) error {
 			}
 			iNdEx = postIndex
 		case 3:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -7394,11 +7651,28 @@ func (m *RespFech) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -7594,10 +7868,10 @@ func (m *RespFechs) Unmarshal(dAtA []byte) error {
 			m.Data[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 3:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -7607,11 +7881,28 @@ func (m *RespFechs) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -7807,10 +8098,10 @@ func (m *RespNodes) Unmarshal(dAtA []byte) error {
 			m.Data[mapkey] = mapvalue
 			iNdEx = postIndex
 		case 3:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -7820,11 +8111,28 @@ func (m *RespNodes) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -8175,10 +8483,10 @@ func (m *ArgRegister) Unmarshal(dAtA []byte) error {
 			}
 			m.Replication = bool(v != 0)
 		case 11:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -8188,16 +8496,33 @@ func (m *ArgRegister) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 12:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field DirtyTimestamp", wireType)
 			}
-			m.DirtyTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -8207,11 +8532,28 @@ func (m *ArgRegister) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.DirtyTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DirtyTimestamp == nil {
+				m.DirtyTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.DirtyTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -8415,10 +8757,10 @@ func (m *ArgRenew) Unmarshal(dAtA []byte) error {
 			}
 			m.Replication = bool(v != 0)
 		case 6:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field DirtyTimestamp", wireType)
 			}
-			m.DirtyTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -8428,11 +8770,28 @@ func (m *ArgRenew) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.DirtyTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.DirtyTimestamp == nil {
+				m.DirtyTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.DirtyTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -8636,10 +8995,10 @@ func (m *ArgCancel) Unmarshal(dAtA []byte) error {
 			}
 			m.Replication = bool(v != 0)
 		case 6:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -8649,11 +9008,28 @@ func (m *ArgCancel) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -9143,10 +9519,10 @@ func (m *ArgRoll) Unmarshal(dAtA []byte) error {
 			m.AppID = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 4:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
-			m.LatestTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -9156,11 +9532,28 @@ func (m *ArgRoll) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LatestTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -9312,81 +9705,41 @@ func (m *ArgRolls) Unmarshal(dAtA []byte) error {
 			m.AppID = append(m.AppID, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		case 4:
-			if wireType == 0 {
-				var v int64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowDiscovery
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					v |= int64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				m.LatestTimestamp = append(m.LatestTimestamp, v)
-			} else if wireType == 2 {
-				var packedLen int
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return ErrIntOverflowDiscovery
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					packedLen |= int(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				if packedLen < 0 {
-					return ErrInvalidLengthDiscovery
-				}
-				postIndex := iNdEx + packedLen
-				if postIndex < 0 {
-					return ErrInvalidLengthDiscovery
-				}
-				if postIndex > l {
-					return io.ErrUnexpectedEOF
-				}
-				var elementCount int
-				var count int
-				for _, integer := range dAtA[iNdEx:postIndex] {
-					if integer < 128 {
-						count++
-					}
-				}
-				elementCount = count
-				if elementCount != 0 && len(m.LatestTimestamp) == 0 {
-					m.LatestTimestamp = make([]int64, 0, elementCount)
-				}
-				for iNdEx < postIndex {
-					var v int64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return ErrIntOverflowDiscovery
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						v |= int64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					m.LatestTimestamp = append(m.LatestTimestamp, v)
-				}
-			} else {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field LatestTimestamp", wireType)
 			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowDiscovery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.LatestTimestamp == nil {
+				m.LatestTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.LatestTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
@@ -9698,10 +10051,10 @@ func (m *ArqSet) Unmarshal(dAtA []byte) error {
 			}
 			m.Replication = bool(v != 0)
 		case 8:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SetTimestamp", wireType)
 			}
-			m.SetTimestamp = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDiscovery
@@ -9711,11 +10064,28 @@ func (m *ArqSet) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.SetTimestamp |= int64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDiscovery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.SetTimestamp == nil {
+				m.SetTimestamp = &timestamp.Timestamp{}
+			}
+			if err := m.SetTimestamp.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipDiscovery(dAtA[iNdEx:])
