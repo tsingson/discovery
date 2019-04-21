@@ -438,7 +438,7 @@ curl 'http://127.0.0.1:7171/discovery/polls?zone=sh1&env=test&appid=provider&app
 
 *HTTP*
 
-GET http://HOST/discovery/nodes
+GET http://127.0.0.1:7171/discovery/nodes
 
 *请求参数*
 
@@ -490,7 +490,7 @@ POST http://HOST/discovery/set
 | hostname | true  | []string            | 主机名                           |
 | status   | false | []int               | 状态，1表示接收流量，2表示不接收 |
 | color    | false | []string            | 灰度或集群标识                   |
-| metadata | false | []string | 业务自定义信息         string 必须为map[strinng]string 的json格式   |      
+| metadata | false | []string | 业务自定义信息         string 必须为map[strinng]string 的json格式   |
 
 *返回结果*
 
