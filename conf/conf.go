@@ -16,8 +16,9 @@ import (
 // Config config.
 //go:generate easytags $GOFILE json
 type Config struct {
-	Nodes      []string                    `json:"nodes"`
-	Zones      map[string][]string         `json:"zones"`
+	Nodes []string            `json:"nodes"`
+	Zones map[string][]string `json:"zones"`
+	// 
 	HTTPServer *ServerConfig               `json:"http_server"`
 	HTTPClient *xhttp.ClientConfig         `json:"http_client"`
 	Env        *Env                        `json:"env"`

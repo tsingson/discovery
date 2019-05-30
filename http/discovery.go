@@ -23,8 +23,8 @@ func register(c *gin.Context) {
 		result(c, nil, errors.ParamsErr)
 		return
 	}
-	i := model.NewInstance(arg)
-	if i.Status == 0 || i.Status > 2 {
+	instance := model.NewInstance(arg)
+	if instance.Status == 0 || instance.Status > 2 {
 		result(c, nil, errors.ParamsErr)
 		log.Errorf("register params status invalid")
 		return
@@ -39,10 +39,10 @@ func register(c *gin.Context) {
 	}
 	// register replication
 	if arg.DirtyTimestamp > 0 {
-		i.DirtyTimestamp = arg.DirtyTimestamp
+		instance.DirtyTimestamp = arg.DirtyTimestamp
 	}
 
-	dis.Register(c, i, arg.LatestTimestamp, arg.Replication)
+	dis.Register(c, instance, arg.LatestTimestamp, arg.Replication)
 
 	result(c, nil, nil)
 }

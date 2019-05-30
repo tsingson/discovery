@@ -609,7 +609,7 @@ func (d *Discovery) newParams(c *Config) url.Values {
 	return params
 }
 
-var r = rand.New(rand.NewSource(time.Now().UnixNano()))
+var randSeed = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // shuffle pseudo-randomizes the order of elements.
 // n is the number of elements. Shuffle panics if n < 0.
@@ -627,11 +627,11 @@ func shuffle(n int, swap func(i, j int)) {
 	// Nevertheless, the right API signature accepts an int n, so handle it as best we can.
 	i := n - 1
 	for ; i > 1<<31-1-1; i-- {
-		j := int(r.Int63n(int64(i + 1)))
+		j := int(randSeed.Int63n(int64(i + 1)))
 		swap(i, j)
 	}
 	for ; i > 0; i-- {
-		j := int(r.Int31n(int32(i + 1)))
+		j := int(randSeed.Int31n(int32(i + 1)))
 		swap(i, j)
 	}
 }
